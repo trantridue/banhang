@@ -565,7 +565,7 @@ class FGMembersite
         "username:".$user_rec['username']."\r\n".
         "password:$new_password\r\n".
         "\r\n".
-        "Login here: ".$this->GetAbsoluteURLFolder()."/login.php\r\n".
+        "Login here: ".$this->GetAbsoluteURLFolder()."/index.php\r\n".
         "\r\n".
         "Regards,\r\n".
         "Webmaster\r\n".

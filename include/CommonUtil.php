@@ -34,13 +34,14 @@ class CommonUtil {
 		for($i = 0; $i < count ( $colums ); $i ++) {
 			$qry = $qry . $colums [$i] . "`,`";
 		}
-		// remove two last characters ','
+		// remove two last characters ",`"
 		$qry = substr ( $qry, 0, - 2 ) . ") values ('";
 		
 		// list columns value
 		for($i = 0; $i < count ( $values ); $i ++) {
 			$qry = $qry . $values [$i] . "','";
 		}
+		// remove two last characters ",'"
 		$qry = substr ( $qry, 0, - 2 ) . ")";
 		
 		return $qry;

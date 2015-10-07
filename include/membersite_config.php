@@ -1,10 +1,5 @@
 <?PHP
-
 require_once ("constant.php");
-
-require_once ("model/User.php");
-require_once ("model/Configuration.php");
-
 
 require_once ("fg_membersite.php");
 require_once ("CommonUtil.php");

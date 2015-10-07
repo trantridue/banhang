@@ -1,4 +1,6 @@
 <?php
+require 'constant/table_column.php';
+require 'constant/label.php';
 //DB configuration
 define('hostname', 'localhost');
 define('username', 'zabuzachaule');

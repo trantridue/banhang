@@ -9,6 +9,9 @@ class CommonUtil {
 	function getCurrentDateFormat_YYYYMMDD() {
 		return date ( 'Y-m-d' );
 	}
+	function getCurrentDateFormat_YYYYMMDD_HHMISS() {
+		return date ( 'Y-m-d H:i:s' );
+	}
 	
 	function getResultByQuery($qry) {
 		$items = array ();
@@ -25,7 +28,8 @@ class CommonUtil {
 	}
 	
 	function addRows($table, $colums, $values) {
-	
+		$qry = $this->buildInsertQrys ( $table, $colums, $values );
+		return $this->executeQuery ( $qry );
 	}
 	
 	function buildInsertQry($table, $colums, $values) {
@@ -39,7 +43,7 @@ class CommonUtil {
 		
 		// list columns value
 		for($i = 0; $i < count ( $values ); $i ++) {
-			$qry = $qry . $values [$colums[$i]] . "','";
+			$qry = $qry . $values [$colums [$i]] . "','";
 		}
 		// remove two last characters ",'"
 		$qry = substr ( $qry, 0, - 2 ) . ")";
@@ -53,11 +57,15 @@ class CommonUtil {
 			$qry = $qry . $colums [$i] . "`,`";
 		}
 		// remove two last characters ",`"
-		$qry = substr ( $qry, 0, - 2 ) . ") values ('";
+		$qry = substr ( $qry, 0, - 2 ) . ") values ";
 		
 		// list columns value
 		for($i = 0; $i < count ( $values ); $i ++) {
-			$qry = $qry . $values [$i] . "','";
+			$qry = $qry . "('";
+			for($j = 0; $j < count ( $colums ); $j ++) {
+				$qry = $qry . $values [$i] [$colums [$j]] . "','";
+			}
+			$qry = substr ( $qry, 0, - 2 ) . "),";
 		}
 		// remove two last characters ",'"
 		$qry = substr ( $qry, 0, - 2 ) . ")";
@@ -76,6 +84,8 @@ class CommonUtil {
 			mysql_query ( "ROLLBACK" );
 		}
 	}
-
+	function getStringToArray($table_name) {
+		return explode ( ';', $table_name );
+	}
 }
 ?>

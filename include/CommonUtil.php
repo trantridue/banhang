@@ -87,5 +87,9 @@ class CommonUtil {
 	function getStringToArray($table_name) {
 		return explode ( ';', $table_name );
 	}
+	function addTime($date,$nbr,$type) {
+		
+		return date ( 'Y-m-d h:i:s A', strtotime($date) + 3600 * $nbr );
+	}
 }
 ?>

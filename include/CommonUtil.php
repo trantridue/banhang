@@ -4,7 +4,6 @@ class CommonUtil {
 	
 	function CommonUtil($connection) {
 		$this->connection = $connection;
-		mysql_query ( "BEGIN" );
 	}
 	
 	function getCurrentDateFormat_YYYYMMDD() {
@@ -22,7 +21,7 @@ class CommonUtil {
 	
 	function addRow($table, $colums, $values) {
 		$qry = $this->buildInsertQry ( $table, $colums, $values );
-		echo $qry;
+		return $this->executeQuery ( $qry );
 	}
 	
 	function addRows($table, $colums, $values) {
@@ -30,7 +29,6 @@ class CommonUtil {
 	}
 	
 	function buildInsertQry($table, $colums, $values) {
-		
 		$qry = "insert into " . $table . "(`";
 		// list columns name
 		for($i = 0; $i < count ( $colums ); $i ++) {
@@ -54,14 +52,14 @@ class CommonUtil {
 	function executeQuery($qry) {
 		return mysql_query ( $qry, $this->connection );
 	}
-	
-	function commitOrRollback($success) {
-		if ($flag == false) {
+	function commitTransaction($flag) {
+		if ($flag) {
+			mysql_query ( "COMMIT" );
+		} else {
 			echo mysql_error ( $this->connection );
 			mysql_query ( "ROLLBACK" );
-		} else {
-			mysql_query ( "COMMIT" );
 		}
 	}
+
 }
 ?>

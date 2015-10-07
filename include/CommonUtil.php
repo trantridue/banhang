@@ -39,7 +39,7 @@ class CommonUtil {
 		
 		// list columns value
 		for($i = 0; $i < count ( $values ); $i ++) {
-			$qry = $qry . $values [$i] . "','";
+			$qry = $qry . $values [$colums[$i]] . "','";
 		}
 		// remove two last characters ",'"
 		$qry = substr ( $qry, 0, - 2 ) . ")";
@@ -47,7 +47,22 @@ class CommonUtil {
 		return $qry;
 	}
 	function buildInsertQrys($table, $colums, $values) {
-	
+		$qry = "insert into " . $table . "(`";
+		// list columns name
+		for($i = 0; $i < count ( $colums ); $i ++) {
+			$qry = $qry . $colums [$i] . "`,`";
+		}
+		// remove two last characters ",`"
+		$qry = substr ( $qry, 0, - 2 ) . ") values ('";
+		
+		// list columns value
+		for($i = 0; $i < count ( $values ); $i ++) {
+			$qry = $qry . $values [$i] . "','";
+		}
+		// remove two last characters ",'"
+		$qry = substr ( $qry, 0, - 2 ) . ")";
+		
+		return $qry;
 	}
 	
 	function executeQuery($qry) {

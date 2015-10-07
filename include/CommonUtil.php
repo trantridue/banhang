@@ -1,16 +1,21 @@
 <?php
 class CommonUtil {
 	var $connection;
+	var $dateLongFormat = 'Y-m-d H:i:s';
+	var $dateShortFormat = 'Y-m-d';
+	//	var $StrPadLeftLength = 4;
+	//	var $StrPadLeftReplace = '0';
 	
+
 	function CommonUtil($connection) {
 		$this->connection = $connection;
 	}
 	
-	function getCurrentDateFormat_YYYYMMDD() {
-		return date ( 'Y-m-d' );
+	function getShortTime() {
+		return date ( $this->dateShortFormat );
 	}
-	function getCurrentDateFormat_YYYYMMDD_HHMISS() {
-		return date ( 'Y-m-d H:i:s' );
+	function getLongTime() {
+		return date ( $this->dateLongFormat );
 	}
 	
 	function getResultByQuery($qry) {
@@ -87,9 +92,34 @@ class CommonUtil {
 	function getStringToArray($table_name) {
 		return explode ( ';', $table_name );
 	}
-	function addTime($date,$nbr,$type) {
-		
-		return date ( 'Y-m-d h:i:s A', strtotime($date) + 3600 * $nbr );
+	function addLongTimeInputDate($date, $nbr, $type) {
+		$expression = '+' . $nbr . ' ' . $type;
+		return date ( $this->dateLongFormat, strtotime ( $expression, strtotime ( $date ) ) );
+	}
+	function addLongTime($nbr, $type) {
+		$expression = '+' . $nbr . ' ' . $type;
+		return date ( $this->dateLongFormat, strtotime ( $expression, strtotime ( $this->getLongTime () ) ) );
+	}
+	
+	function addShortTimeInputDate($date, $nbr, $type) {
+		$expression = '+' . $nbr . ' ' . $type;
+		return date ( $this->dateShortFormat, strtotime ( $expression, strtotime ( $date ) ) );
+	}
+	function addShortTime($nbr, $type) {
+		$expression = '+' . $nbr . ' ' . $type;
+		return date ( $this->dateShortFormat, strtotime ( $expression, strtotime ( $this->getShortTime () ) ) );
+	}
+	function displayInt($number) {
+		return number_format ( $number, 0, '.', ' ' );
+	}
+	function displayFloat($number) {
+		return number_format ( $number, 2, '.', ' ' );
+	}
+	function displayStrPadLeftInput($value, $lenght, $replace) {
+		return str_pad ( $value, $lenght, $replace, STR_PAD_LEFT );
+	}
+	function displayStrPadLeft($value) {
+		return $this->displayStrPadLeftInput ( $value, StrPadLeftLength, StrPadLeftReplace );
 	}
 }
 ?>

@@ -1,21 +1,16 @@
 <?php
 class CommonUtil {
 	var $connection;
-	var $dateLongFormat = 'Y-m-d H:i:s';
-	var $dateShortFormat = 'Y-m-d';
-	//	var $StrPadLeftLength = 4;
-	//	var $StrPadLeftReplace = '0';
-	
 
 	function CommonUtil($connection) {
 		$this->connection = $connection;
 	}
 	
 	function getShortTime() {
-		return date ( $this->dateShortFormat );
+		return date ( dateShortFormat );
 	}
 	function getLongTime() {
-		return date ( $this->dateLongFormat );
+		return date ( dateLongFormat );
 	}
 	
 	function getResultByQuery($qry) {
@@ -94,20 +89,20 @@ class CommonUtil {
 	}
 	function addLongTimeInputDate($date, $nbr, $type) {
 		$expression = '+' . $nbr . ' ' . $type;
-		return date ( $this->dateLongFormat, strtotime ( $expression, strtotime ( $date ) ) );
+		return date ( dateLongFormat, strtotime ( $expression, strtotime ( $date ) ) );
 	}
 	function addLongTime($nbr, $type) {
 		$expression = '+' . $nbr . ' ' . $type;
-		return date ( $this->dateLongFormat, strtotime ( $expression, strtotime ( $this->getLongTime () ) ) );
+		return date ( dateLongFormat, strtotime ( $expression, strtotime ( $this->getLongTime () ) ) );
 	}
 	
 	function addShortTimeInputDate($date, $nbr, $type) {
 		$expression = '+' . $nbr . ' ' . $type;
-		return date ( $this->dateShortFormat, strtotime ( $expression, strtotime ( $date ) ) );
+		return date ( dateShortFormat, strtotime ( $expression, strtotime ( $date ) ) );
 	}
 	function addShortTime($nbr, $type) {
 		$expression = '+' . $nbr . ' ' . $type;
-		return date ( $this->dateShortFormat, strtotime ( $expression, strtotime ( $this->getShortTime () ) ) );
+		return date ( dateShortFormat, strtotime ( $expression, strtotime ( $this->getShortTime () ) ) );
 	}
 	function displayInt($number) {
 		return number_format ( $number, 0, '.', ' ' );

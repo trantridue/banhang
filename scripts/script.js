@@ -1,10 +1,10 @@
-function onOffButton(fieldId) {
-	if ($("#" + fieldId).val() == "ON") {
-		$("#" + fieldId).val('OFF');
+function onOffButton(fieldId,on,off) {
+	if ($("#" + fieldId).val() == on) {
+		$("#" + fieldId).val(off);
 		$("#" + fieldId).addClass('buttonOff');
 		$("#" + fieldId).removeClass('buttonOn');
 	} else {
-		$("#" + fieldId).val('ON');
+		$("#" + fieldId).val(on);
 		$("#" + fieldId).addClass('buttonOn');
 		$("#" + fieldId).removeClass('buttonOff');
 	}

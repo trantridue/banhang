@@ -1,4 +1,4 @@
-function onOffButton(fieldId,on,off) {
+function onOffButton(fieldId, on, off) {
 	if ($("#" + fieldId).val() == on) {
 		$("#" + fieldId).val(off);
 		$("#" + fieldId).addClass('buttonOff');

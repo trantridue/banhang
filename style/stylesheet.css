@@ -23,3 +23,19 @@
 	background-color: red;
 	color: white;
 }
+
+.datefield {
+	background-image: url("../images/date_ico.jpg");
+	background-position: 94px -5px;
+	background-repeat: no-repeat;
+	height: 17px;
+	width: 120px;
+}
+
+.datetimefield {
+	background-image: url("../images/time_ico.png");
+	background-position: 128px -4px;
+	background-repeat: no-repeat;
+	height: 17px;
+	width: 150px;
+}

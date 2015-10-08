@@ -12,7 +12,7 @@ $(function() {
 	});
 });
 $(function() {
-	$(".datetimefield").datetimepicker( {
+	$('.datetimefield').datetimepicker( {
 		formatTime : 'H:i:s',
 		formatDate : 'd.m.Y',
 		timepickerScrollbar : true

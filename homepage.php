@@ -12,23 +12,28 @@ if (! $fgmembersite->CheckLogin ()) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<title>Home page</title>
+<title>BANHANG_ZABUZA</title>
+<link rel="STYLESHEET" type="text/css" href="style/stylesheet.css">
 <link rel="STYLESHEET" type="text/css" href="style/fg_membersite.css">
 
 
-<link rel="STYLESHEET" type="text/css" href="style/stylesheet.css">
+<link href="style/jquery.dataTables.css" rel="stylesheet">
 
-<script type='text/javascript' src='scripts/script.js'></script>
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/jquery.dataTables.min.js"></script>
 <script src="scripts/datatables.js"></script>
 <script src="scripts/ui.js"></script>
 <script src="scripts/jquery.datetimepicker.js"></script>
+
 <script src="scripts/validator.js"></script>
 <script src="scripts/input-validator.js"></script>
+<link rel="stylesheet" href="style/jquery.datetimepicker.css">
+<link rel="stylesheet" href="style/jquery-ui.css">
 <script src="scripts/jquery-ui.js"></script>
+<script src="scripts/ajax.js"></script>
 <script src="scripts/calculator.js"></script>
 <script src="scripts/jquery.confirm.js"></script>
+<link rel="stylesheet" type="text/css" href="style/jquery.confirm.css" />
 
 </head>
 <body>

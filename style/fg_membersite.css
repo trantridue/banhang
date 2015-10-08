@@ -3,8 +3,8 @@ Registration/Login Form by html-form-guide.com
 You can customize all the aspects of the form in this style sheet
 */
 #fg_membersite {
-	margin-left:40%;
-	margin-top:80px;
+padding-left: 40%;
+padding-top: 50px;	
 }
 #fg_membersite fieldset
 {
@@ -157,7 +157,7 @@ padding-bottom:10px;
 {
     font-family : Arial, sans-serif;
     font-size: 0.9em;
-    line-height: 150%
+    line-height: 150%;
 }
 
 #fg_membersite_content h2

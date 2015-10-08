@@ -16,7 +16,7 @@ class ConfigService {
 	}
 	
 	function generateConfigurationEditForm() {
-		$nbr_column = $_SESSION ['nbr_column_edit_param'];
+		$nbr_column = number_column_config_form;
 		$counter = 0;
 		$result = $this->commonUtil->getResultByQuery ( $this->qry );
 		$html = "<table width='100%'>";

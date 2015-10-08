@@ -1,8 +1,25 @@
 @CHARSET "ISO-8859-1";
+
 /* Main div */
-
-
 .tableTdLabel {
 	font-weight: bold;
 	text-align: right;
+}
+
+.displayNone {
+	display: none;
+}
+
+.buttonOn {
+	font-weight: bold;
+	width: 50px;
+	background-color: green;
+	color: white;
+}
+
+.buttonOff {
+	font-weight: bold;
+	width: 50px;
+	background-color: red;
+	color: white;
 }

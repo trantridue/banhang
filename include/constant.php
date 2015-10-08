@@ -1,5 +1,4 @@
 <?php
-require 'constant/table_column.php';
 require 'constant/label.php';
 require 'constant/format.php';
 

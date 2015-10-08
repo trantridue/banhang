@@ -1,7 +1,7 @@
 <?php
 class CommonUtil {
 	var $connection;
-
+	
 	function CommonUtil($connection) {
 		$this->connection = $connection;
 	}
@@ -115,6 +115,65 @@ class CommonUtil {
 	}
 	function displayStrPadLeft($value) {
 		return $this->displayStrPadLeftInput ( $value, StrPadLeftLength, StrPadLeftReplace );
+	}
+	
+	function getTableStructure($table) {
+		$qry = "SHOW COLUMNS FROM " . $table;
+		$qColumnNames = mysql_query ( $qry, $this->connection );
+		$numColumns = mysql_num_rows ( $qColumnNames );
+		for($i = 0; $i < $numColumns; $i ++) {
+			$colname = mysql_fetch_row ( $qColumnNames );
+			$col [0] [] = $colname [0];
+			$col [1] [] = $colname [1];
+		}
+		return $col;
+	}
+	function getListColumnOfTable($table) {
+		$tables = $this->getTableStructure ( $table );
+		return $tables [0];
+	}
+	function initUserInformation($userId) {
+		//Init Only Personal Information
+		$str = "";
+		$table = "user";
+		$qry = "select * from " . $table . " where id = " . $userId;
+		$columns = $this->getListColumnOfTable ( $table );
+		$result = $this->getResultByQuery ( $qry );
+		$values = $result [0];
+		for($i = 0; $i < count ( $columns ); $i ++) {
+			$_SESSION ['session_user_' . $columns [$i]] = $values [$i];
+			$str = $str . "<input type='hidden' id='hidden_user_" . $columns [$i] . "' value='" . $values [$i] . "'/>";
+		}
+		return $str;
+	}
+	function generateHiddenFieldUserInformation($userId) {
+		//Init Only Personal Information
+		$str = "";
+		$table = "user";
+		$qry = "select * from " . $table . " where id = " . $userId;
+		$columns = $this->getListColumnOfTable ( $table );
+		$result = $this->getResultByQuery ( $qry );
+		$values = $result [0];
+		for($i = 0; $i < count ( $columns ); $i ++) {
+			if ($columns [$i] != 'password')
+				$str = $str . "<input type='hidden' id='hidden_user_" . $columns [$i] . "' value='" . $values [$i] . "'/>";
+		}
+		return $str;
+	}
+	function getOneResult($qry) {
+		$result = mysql_query ( $qry, $this->connection );
+		$rows = mysql_fetch_assoc ( $result );
+		if ($rows ['value'])
+			return $rows ['value'];
+		else
+			return '';
+	}
+	function isAdmin() {
+		return $_SESSION ['session_user_is_admin'] == 0 ? false : true;
+	}
+	function displayByUserRole() {
+		if (! $this->isAdmin ())
+			echo " class='displayNone' ";
 	}
 }
 ?>

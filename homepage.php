@@ -1,5 +1,6 @@
 <?PHP
-session_start ();
+ob_start();
+//session_start ();
 require_once ("./include/membersite_config.php");
 if (! $fgmembersite->CheckLogin ()) {
 	$fgmembersite->RedirectToURL ( "index.php" );
@@ -17,27 +18,34 @@ if (! $fgmembersite->CheckLogin ()) {
 
 <link rel="STYLESHEET" type="text/css" href="style/stylesheet.css">
 
-
 <script type='text/javascript' src='scripts/script.js'></script>
+<script src="scripts/jquery-1.11.1.min.js"></script>
+<script src="scripts/jquery.dataTables.min.js"></script>
+<script src="scripts/datatables.js"></script>
+<script src="scripts/ui.js"></script>
+<script src="scripts/jquery.datetimepicker.js"></script>
+<script src="scripts/validator.js"></script>
+<script src="scripts/input-validator.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+<script src="scripts/calculator.js"></script>
+<script src="scripts/jquery.confirm.js"></script>
+
 </head>
 <body>
 <div id="bodywrapper">
 <div id="header">
-<a href='logout.php'>HEADER</a>
-<?php include 'common/header.php';?> 
+<?php
+include 'common/header.php';
+?> 
 </div>
 <hr>
 
 
-<div id="body">
-BODY
-</div>
+<div id="body">BODY</div>
 <hr>
 
 
-<div id="footer">
-FOOTER
-</div>
+<div id="footer">FOOTER</div>
 </div>
 </body>
 </html>

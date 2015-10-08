@@ -46,5 +46,5 @@ for($i = 0; $i < 10; $i ++) {
 
 //echo $commonUtil->displayInt(1234567.89);
 //echo $commonUtil->displayFloat(1234567.89);
-echo $commonUtil->displayStrPadLeft(100);
+//echo $commonUtil->displayStrPadLeft(100);
 $commonUtil->commitTransaction ( $flag )?>

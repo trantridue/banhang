@@ -39,6 +39,10 @@ class ConfigService {
 				$html = $html . "<td class='tableTdText'><input type='text' class='datetimefield' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
 			} else if ($result [$i] ['type'] == 'date') {
 				$html = $html . "<td class='tableTdText'><input type='text' class='datefield' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
+			} else if ($result [$i] ['type'] == 'textarea') {
+				$html = $html . "<td class='tableTdText'>
+				<textarea id=\"".$result [$i] ['key']."\" value=".$result [$i] ['value']." onfocus=\"if (this.value == this.defaultValue) this.value = ''\" onblur=\"if (this.value == '') this.value = this.defaultValue\" rows=\"4\" cols=\"80\">".$result [$i] ['value']."</textarea>
+				</td>";
 			} else {
 				$html = $html . "<td class='tableTdText'><input type='" . $result [$i] ['type'] . "' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
 			}

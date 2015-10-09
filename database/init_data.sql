@@ -11,3 +11,4 @@ INSERT INTO `config` VALUES (5, 'sale_percent', '0', 'Phần trăm khuyến mạ
 INSERT INTO `config` VALUES (6, 'welcome_msg', 'Kính chào quý khách', 'Thông điệp ', 'text');
 INSERT INTO `config` VALUES (7, 'start_date', date_format(now(),'%Y-%m-%d'), 'Ngày mở hàng', 'date');
 INSERT INTO `config` VALUES (8, 'end_date', now(), 'Ngày đóng hàng', 'datetime');
+INSERT INTO `config` VALUES (9, 'policy', 'Chính sách cửa hàng', 'Zabuza shop policy ', 'textarea');

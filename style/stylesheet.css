@@ -17,6 +17,11 @@
 .tableTdText input[type='text'] {
 	background-color: rgb(250, 255, 189);
 }
+.tableTdText textarea {
+	background-color: rgb(250, 255, 189);
+	max-width: 300px;
+	height: 80px
+}
 
 .displayNone {
 	display: none;

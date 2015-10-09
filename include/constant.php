@@ -4,6 +4,7 @@ require 'constant/format.php';
 require 'constant/stringConstant.php';
 require 'constant/commonQuery.php';
 require 'constant/number.php';
+require 'constant/inputType.php';
 
 //DB configuration
 define('hostname', 'localhost');

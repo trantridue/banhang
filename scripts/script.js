@@ -1,4 +1,4 @@
-function onOffButton(fieldId, on, off) {
+function onOffbutton(fieldId, on, off) {
 	if ($("#" + fieldId).val() == on) {
 		$("#" + fieldId).val(off);
 		$("#" + fieldId).addClass('buttonOff');
@@ -8,4 +8,11 @@ function onOffButton(fieldId, on, off) {
 		$("#" + fieldId).addClass('buttonOn');
 		$("#" + fieldId).removeClass('buttonOff');
 	}
+}
+function onOffcheckbox(fieldId) {
+	// var currentStatus = $('#' + fieldId).is(":checked");
+	// alert(currentStatus);
+	// $('#' + fieldId).prop('checked', currentStatus);
+}
+function update() {
 }

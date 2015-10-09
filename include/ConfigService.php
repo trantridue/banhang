@@ -10,49 +10,40 @@ class ConfigService {
 		session_start ();
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );
 		for($i = 0; $i < count ( $result ); $i ++) {
-			$_SESSION [prefix_session_config.$result [$i] ['key']] = $result [$i] ['value'];
+			$_SESSION [prefix_session_config . $result [$i] ['key']] = $result [$i] ['value'];
 		}
 	}
 	
 	function generateConfigurationEditForm() {
 		$nbr_column = number_column_config_form;
 		$counter = 0;
+		
 		$on = "ON";
 		$off = "OFF";
+		$onclick = 'onOff';
+		
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );
 		$html = table_start;
 		for($i = 0; $i < count ( $result ); $i ++) {
 			if (($counter % $nbr_column) == 0) {
-				$html = $html . "<tr>";
+				$html = $html . table_tr;
 			}
-			$html = $html . "<td title='" . $result [$i] ['label'] . "' class='tableTdLabel'>" . $result [$i] ['label']  . "</td>";
-			if ($result [$i] ['type'] == 'button') {
-				$isOnOff = $result [$i] ['value'] == 0 ? $off : $on;
-				$classOnOff = $result [$i] ['value'] == 0 ? "buttonOff" : "buttonOn";
-				$html = $html . "<td class='tableTdText'>
-				<input type='" . $result [$i] ['type'] . "' id='" . $result [$i] ['key'] . "' value='" . strtoupper ( $isOnOff ) . "' 
-				onclick='onOffButton(\"" . $result [$i] ['key'] . "\",\"" . $on . "\",\"" . $off . "\");' class='" . $classOnOff . "'/>
-				</td>";
-			} else if ($result [$i] ['type'] == 'number') {
-				$html = $html . "<td class='tableTdText'><input type='" . $result [$i] ['type'] . "' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "' class='number50'/></td>";
-			} else if ($result [$i] ['type'] == 'datetime') {
-				$html = $html . "<td class='tableTdText'><input type='text' class='datetimefield' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
-			} else if ($result [$i] ['type'] == 'date') {
-				$html = $html . "<td class='tableTdText'><input type='text' class='datefield' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
-			} else if ($result [$i] ['type'] == 'textarea') {
-				$html = $html . "<td class='tableTdText'>
-				<textarea id=\"".$result [$i] ['key']."\" value=".$result [$i] ['value']." onfocus=\"if (this.value == this.defaultValue) this.value = ''\" onblur=\"if (this.value == '') this.value = this.defaultValue\" rows=\"4\" cols=\"80\">".$result [$i] ['value']."</textarea>
-				</td>";
-			} else {
-				$html = $html . "<td class='tableTdText'><input type='" . $result [$i] ['type'] . "' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
-			}
+			$title = $result [$i] ['description'];
+			$label = $result [$i] ['label'];
+			$key = $result [$i] ['key'];
+			$type = $result [$i] ['type'];
+			$value = $result [$i] ['value'];
 			
+			$html = $html . $this->commonUtil->generateTdLabel ( $title, $label );
+			$html = $html . $this->commonUtil->generateTdText ( $type, $key, $value, $onclick, $on, $off );
 			if ((($counter - $nbr_column + 1) % $nbr_column) == 0) {
-				$html = $html . "</tr>";
+				$html = $html . table_tr_closed;
 			}
 			$counter ++;
 		}
-		$html = $html . table_closed;
+		$html = $html . table_closed . hr_tag;
+		$onclick_update_method = 'updateConfig';
+		$html = $html . $this->commonUtil->generateUpdateButton ($onclick_update_method);
 		return $html;
 	}
 

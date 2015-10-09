@@ -185,5 +185,36 @@ class CommonUtil {
 		if (! $this->isAdmin ())
 			echo " class='displayNone' ";
 	}
+	function generateTdLabel($title, $label) {
+		return "<td title='" . $title . "' class='tableTdLabel'>" . $label . "</td>";
+	}
+	function generateTdText($type, $key, $value, $onclick, $on, $off) {
+		return "<td class='tableTdText'>" . $this->generateInputField ( $type, $key, $value, $onclick, $on, $off ) . table_td_closed;
+	}
+	function generateUpdateButton($onclick) {
+		return "<input type='button' value='" . label_button_update . "' onclick='" . $onclick . "();'/>";
+	}
+	function generateInputField($type, $key, $value, $onclick, $on, $off) {
+		$html = "";
+		if ($type == button) {
+			$isOnOff = $value == 0 ? $off : $on;
+			$classOnOff = $value == 0 ? "buttonOff" : "buttonOn";
+			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . strtoupper ( $isOnOff ) . "' onclick='" . $onclick . $type . "(\"" . $key . "\",\"" . $on . "\",\"" . $off . "\");' class='" . $classOnOff . "'/>";
+		} else if ($type == number) {
+			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . $value . "' class='number50'/>";
+		} else if ($type == datetime) {
+			$html = $html . "<input type='text' class='datetimefield' id='" . $key . "' value='" . $value . "'/>";
+		} else if ($type == date) {
+			$html = $html . "<input type='text' class='datefield' id='" . $key . "' value='" . $value . "'/>";
+		} else if ($type == textarea) {
+			$html = $html . "<textarea id=\"" . $key . "\" value=" . $value . " onfocus=\"if (this.value == this.defaultValue) this.value = ''\" onblur=\"if (this.value == '') this.value = this.defaultValue\" rows=\"4\" cols=\"80\">" . $value . "</textarea>";
+		} else if ($type == checkbox) {
+			$isChecked = $value == 0 ? '' : 'checked="checked"';
+			$html = $html . "<input type='" . $type . "' id='" . $key . "' " . $isChecked . " onclick='" . $onclick . $type . "(\"" . $key . "\");'/>";
+		} else {
+			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . $value . "'/>";
+		}
+		return $html;
+	}
 }
 ?>

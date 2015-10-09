@@ -1,0 +1,9 @@
+<?php 
+define('text','text');
+define('number','number');
+define('date','date');
+define('datetime','datetime');
+define('textarea','textarea');
+define('button','button');
+define('checkbox','checkbox');
+?>

@@ -156,12 +156,19 @@ class CommonUtil {
 		$values = $result [0];
 		for($i = 0; $i < count ( $columns ); $i ++) {
 			if ($columns [$i] != 'password')
-				$str = $str . "<input type='hidden' id='hidden_user_" . $columns [$i] . "' value='" . $values [$i] . "'/>";
+				$str = $str . "<input type='hidden' id='" . prefix_hidden_user . $columns [$i] . "' value='" . $values [$i] . "'/>";
 		}
 		return $str;
 	}
 	function generateHiddenFieldConfig() {
-		
+		//Init Only Personal Information
+		$str = "";
+		$result = $this->getResultByQuery ( select_all_config );
+		for($i = 0; $i < count ( $result ); $i ++) {
+			$row = $result [$i];
+			$str = $str . "<input type='hidden' id='" . prefix_hidden_session . $row ['key'] . "' value='" . $row ['value'] . "'/>";
+		}
+		return $str;
 	}
 	function getOneResult($qry) {
 		$result = mysql_query ( $qry, $this->connection );

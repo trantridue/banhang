@@ -1,5 +1,5 @@
 <?php $configService->loadConfiguration();?>
-<div id="header_hidden_field" class="displayNone">
+<div id="header_hidden_field">
 <?php 
 include 'header_hidden_field.php';
 ?>

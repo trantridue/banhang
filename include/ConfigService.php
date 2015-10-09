@@ -1,7 +1,6 @@
 <?php
 class ConfigService {
 	var $commonUtil;
-	var $qry = "select * from config";
 	
 	function ConfigService($commonUtil) {
 		$this->commonUtil = $commonUtil;
@@ -9,7 +8,7 @@ class ConfigService {
 	//	load all configuration parameters into session
 	function loadConfiguration() {
 		session_start ();
-		$result = $this->commonUtil->getResultByQuery ( $this->qry );
+		$result = $this->commonUtil->getResultByQuery ( select_all_config );
 		for($i = 0; $i < count ( $result ); $i ++) {
 			$_SESSION [$result [$i] ['key']] = $result [$i] ['value'];
 		}
@@ -20,7 +19,7 @@ class ConfigService {
 		$counter = 0;
 		$on = "ON";
 		$off = "OFF";
-		$result = $this->commonUtil->getResultByQuery ( $this->qry );
+		$result = $this->commonUtil->getResultByQuery ( select_all_config );
 		$html = table_start;
 		for($i = 0; $i < count ( $result ); $i ++) {
 			if (($counter % $nbr_column) == 0) {

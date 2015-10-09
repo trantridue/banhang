@@ -2,6 +2,7 @@
 require 'constant/label.php';
 require 'constant/format.php';
 require 'constant/stringConstant.php';
+require 'constant/commonQuery.php';
 
 //DB configuration
 define('hostname', 'localhost');

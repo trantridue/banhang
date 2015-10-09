@@ -160,6 +160,9 @@ class CommonUtil {
 		}
 		return $str;
 	}
+	function generateHiddenFieldConfig() {
+		
+	}
 	function getOneResult($qry) {
 		$result = mysql_query ( $qry, $this->connection );
 		$rows = mysql_fetch_assoc ( $result );

@@ -14,9 +14,11 @@
 .tableTdText input[type='number'] {
 	background-color: rgb(250, 255, 189);
 }
+
 .tableTdText input[type='text'] {
 	background-color: rgb(250, 255, 189);
 }
+
 .tableTdText textarea {
 	background-color: rgb(250, 255, 189);
 	max-width: 300px;
@@ -119,4 +121,13 @@
 
 .number80 {
 	width: 80px;
+}
+
+.perform_button {
+	height: 30px;
+	margin-right: 10px;
+	font-weight: bold;
+	background-color: #EBEBEB;
+	min-width: 98px;
+	float: right;
 }

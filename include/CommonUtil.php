@@ -191,14 +191,14 @@ class CommonUtil {
 	function generateTdText($type, $key, $value, $onclick, $on, $off) {
 		return "<td class='tableTdText'>" . $this->generateInputField ( $type, $key, $value, $onclick, $on, $off ) . table_td_closed;
 	}
-	function generateUpdateButton($onclick) {
-		return "<input type='button' value='" . label_button_update . "' onclick='" . $onclick . "();'/>";
+	function generateUpdateButton($onclick, $form) {
+		return "<input type='button' value='" . label_button_update . "' class='" . css_class_perform_button . "' onclick='" . $onclick . "(\"" . $form . "\");'/>";
 	}
 	function generateInputField($type, $key, $value, $onclick, $on, $off) {
 		$html = "";
 		if ($type == button) {
 			$isOnOff = $value == 0 ? $off : $on;
-			$classOnOff = $value == 0 ? "buttonOff" : "buttonOn";
+			$classOnOff = $value == 0 ? css_class_buttonOff : css_class_buttonOn;
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . strtoupper ( $isOnOff ) . "' onclick='" . $onclick . $type . "(\"" . $key . "\",\"" . $on . "\",\"" . $off . "\");' class='" . $classOnOff . "'/>";
 		} else if ($type == number) {
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . $value . "' class='number50'/>";
@@ -215,6 +215,12 @@ class CommonUtil {
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . $value . "'/>";
 		}
 		return $html;
+	}
+	function getTableColspanOpen($numColumn) {
+		return table_tr . "<td colspan='" . $numColumn . "'>";
+	}
+	function generateUpdateButtonColspan($onclick, $form, $numColumn) {
+		return $this->getTableColspanOpen ( $numColumn ) . $this->generateUpdateButton ( $onclick, $form ) . table_td_closed . table_tr_closed;
 	}
 }
 ?>

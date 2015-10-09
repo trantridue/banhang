@@ -17,13 +17,14 @@ class ConfigService {
 	function generateConfigurationEditForm() {
 		$nbr_column = number_column_config_form;
 		$counter = 0;
-		
+		$form = "update_config_form";
+		$onclick_update_method = 'updateConfig';
 		$on = "ON";
 		$off = "OFF";
 		$onclick = 'onOff';
 		
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );
-		$html = table_start;
+		$html = "<form id='" . $form . "'>" . table_start;
 		for($i = 0; $i < count ( $result ); $i ++) {
 			if (($counter % $nbr_column) == 0) {
 				$html = $html . table_tr;
@@ -41,9 +42,11 @@ class ConfigService {
 			}
 			$counter ++;
 		}
-		$html = $html . table_closed . hr_tag;
-		$onclick_update_method = 'updateConfig';
-		$html = $html . $this->commonUtil->generateUpdateButton ($onclick_update_method);
+		$html = $html;
+		
+		$html = $html . $this->commonUtil->generateUpdateButtonColspan ( $onclick_update_method, $form, $nbr_column * 2 ) . form_tag_closed;
+		$html = $html . table_closed . br_tag;
+		
 		return $html;
 	}
 

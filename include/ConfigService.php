@@ -10,7 +10,7 @@ class ConfigService {
 		session_start ();
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );
 		for($i = 0; $i < count ( $result ); $i ++) {
-			$_SESSION [$result [$i] ['key']] = $result [$i] ['value'];
+			$_SESSION [prefix_session_config.$result [$i] ['key']] = $result [$i] ['value'];
 		}
 	}
 	
@@ -25,7 +25,7 @@ class ConfigService {
 			if (($counter % $nbr_column) == 0) {
 				$html = $html . "<tr>";
 			}
-			$html = $html . "<td title='" . $result [$i] ['label'] . "' class='tableTdLabel'>" . strtoupper ( $result [$i] ['label'] ) . "</td>";
+			$html = $html . "<td title='" . $result [$i] ['label'] . "' class='tableTdLabel'>" . $result [$i] ['label']  . "</td>";
 			if ($result [$i] ['type'] == 'button') {
 				$isOnOff = $result [$i] ['value'] == 0 ? $off : $on;
 				$classOnOff = $result [$i] ['value'] == 0 ? "buttonOff" : "buttonOn";

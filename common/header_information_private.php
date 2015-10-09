@@ -1,3 +1,3 @@
 <?php
-echo "total:100";
+echo "private information here ";
 ?>

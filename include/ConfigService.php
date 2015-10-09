@@ -21,7 +21,7 @@ class ConfigService {
 		$on = "ON";
 		$off = "OFF";
 		$result = $this->commonUtil->getResultByQuery ( $this->qry );
-		$html = "<table width='100%'>";
+		$html = table_start;
 		for($i = 0; $i < count ( $result ); $i ++) {
 			if (($counter % $nbr_column) == 0) {
 				$html = $html . "<tr>";
@@ -35,7 +35,7 @@ class ConfigService {
 				onclick='onOffButton(\"" . $result [$i] ['key'] . "\",\"" . $on . "\",\"" . $off . "\");' class='" . $classOnOff . "'/>
 				</td>";
 			} else if ($result [$i] ['type'] == 'number') {
-				$html = $html . "<td class='tableTdText'><input type='" . $result [$i] ['type'] . "' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
+				$html = $html . "<td class='tableTdText'><input type='" . $result [$i] ['type'] . "' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "' class='number50'/></td>";
 			} else if ($result [$i] ['type'] == 'datetime') {
 				$html = $html . "<td class='tableTdText'><input type='text' class='datetimefield' id='" . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/></td>";
 			} else if ($result [$i] ['type'] == 'date') {
@@ -49,7 +49,7 @@ class ConfigService {
 			}
 			$counter ++;
 		}
-		$html = $html . "</table>";
+		$html = $html . table_closed;
 		return $html;
 	}
 

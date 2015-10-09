@@ -1,6 +1,5 @@
 <?PHP
-ob_start();
-//session_start ();
+ob_start ();
 require_once ("./include/membersite_config.php");
 if (! $fgmembersite->CheckLogin ()) {
 	$fgmembersite->RedirectToURL ( "index.php" );
@@ -14,10 +13,13 @@ if (! $fgmembersite->CheckLogin ()) {
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 <title>BANHANG_ZABUZA</title>
 <link rel="STYLESHEET" type="text/css" href="style/stylesheet.css">
+
+
 <link rel="STYLESHEET" type="text/css" href="style/fg_membersite.css">
 
 
 <link href="style/jquery.dataTables.css" rel="stylesheet">
+
 
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/jquery.dataTables.min.js"></script>
@@ -28,7 +30,11 @@ if (! $fgmembersite->CheckLogin ()) {
 <script src="scripts/validator.js"></script>
 <script src="scripts/input-validator.js"></script>
 <link rel="stylesheet" href="style/jquery.datetimepicker.css">
+
+
 <link rel="stylesheet" href="style/jquery-ui.css">
+
+
 <script src="scripts/jquery-ui.js"></script>
 <script src="scripts/script.js"></script>
 <script src="scripts/calculator.js"></script>
@@ -46,11 +52,15 @@ include 'common/header.php';
 <hr>
 
 
-<div id="body">BODY</div>
+<div id="body"><?php
+include 'common/body.php';
+?> </div>
 <hr>
 
 
-<div id="footer">FOOTER</div>
+<div id="footer"><?php
+include 'common/footer.php';
+?></div>
 </div>
 </body>
 </html>

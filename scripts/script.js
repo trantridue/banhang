@@ -14,5 +14,13 @@ function onOffcheckbox(fieldId) {
 	// alert(currentStatus);
 	// $('#' + fieldId).prop('checked', currentStatus);
 }
-function update() {
+function searchConfig(obj) {
+	toggleButton(obj);
+}
+function toggleButton(obj){
+	if (obj.style.backgroundColor == null || obj.style.backgroundColor == '')
+		obj.style.backgroundColor = 'violet';
+	else {
+		obj.style.backgroundColor = '';
+	}
 }

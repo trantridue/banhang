@@ -1,4 +1,3 @@
-<?php $configService->loadConfiguration();?>
 <div id="header_hidden_field">
 <?php 
 include 'header_hidden_field.php';

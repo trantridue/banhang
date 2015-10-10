@@ -1,5 +1,6 @@
-data
-<br>
+<?php
+echo $commonUtil->generateConfigurationEditForm(); 
+?>
 data
 <br>data
 <br>data

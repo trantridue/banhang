@@ -1,4 +1,4 @@
 <?php
-echo $commonUtil->generateHiddenFieldUserInformation($_SESSION['session_user_id']); 
-echo $commonUtil->generateHiddenFieldConfig(); 
+echo $commonUtil->loadConfiguration(); 
+echo $commonUtil->loadUserInformation($_SESSION['session_user_id']); 
 ?>

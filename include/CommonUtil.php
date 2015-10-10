@@ -132,7 +132,7 @@ class CommonUtil {
 		$tables = $this->getTableStructure ( $table );
 		return $tables [0];
 	}
-	function initUserInformation($userId) {
+	function loadUserInformation($userId) {
 		//Init Only Personal Information
 		$str = "";
 		$table = "user";
@@ -142,34 +142,71 @@ class CommonUtil {
 		$values = $result [0];
 		for($i = 0; $i < count ( $columns ); $i ++) {
 			$_SESSION [prefix_session_user . $columns [$i]] = $values [$i];
-			$str = $str . "<input type='hidden' id='hidden_user_" . $columns [$i] . "' value='" . $values [$i] . "'/>";
-		}
-		return $str;
-	}
-	function generateHiddenFieldUserInformation($userId) {
-		//Init Only Personal Information
-		$str = "";
-		$table = "user";
-		$qry = "select * from " . $table . " where id = " . $userId;
-		$columns = $this->getListColumnOfTable ( $table );
-		$result = $this->getResultByQuery ( $qry );
-		$values = $result [0];
-		for($i = 0; $i < count ( $columns ); $i ++) {
 			if ($columns [$i] != 'password')
 				$str = $str . "<input type='hidden' id='" . prefix_hidden_user . $columns [$i] . "' value='" . $values [$i] . "'/>";
 		}
 		return $str;
 	}
 	
-	function generateHiddenFieldConfig() {
-		//Init Only Personal Information
+	//	load all configuration parameters into session
+	function loadConfiguration() {
+		session_start ();
+		// load configuration parameter
 		$str = "";
 		$result = $this->getResultByQuery ( select_all_config );
 		for($i = 0; $i < count ( $result ); $i ++) {
-			$row = $result [$i];
-			$str = $str . "<input type='hidden' id='" . prefix_hidden_session . $row ['key'] . "' value='" . $row ['value'] . "'/>";
+			$_SESSION [prefix_session_config . $result [$i] ['key']] = $result [$i] ['value'];
+			$str = $str . "<input type='hidden' id='" . prefix_session_config . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/>";
+		}
+		// load user module
+		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $_SESSION [prefix_session_user . 'id'] . ")";
+		$result = $this->getResultByQuery ( $qry );
+		$session_user_module_key = "";
+		$session_user_module_value = "";
+		for($i = 0; $i < count ( $result ); $i ++) {
+			$session_user_module_key = $session_user_module_key . "goModule" . $result [$i] ['key'] . ";";
+			$session_user_module_value = $session_user_module_value . $result [$i] ['value'] . ";";
+			$_SESSION ['session_user_module_key'] = substr ( $session_user_module_key, 0, - 1 );
+			$_SESSION ['session_user_module_value'] = substr ( $session_user_module_value, 0, - 1 );
 		}
 		return $str;
+	}
+	function generateConfigurationEditForm() {
+		$nbr_column = number_column_config_form;
+		$counter = 0;
+		
+		$strBtnValues = label_button_search . ";" . label_button_insert . ";" . label_button_delete . ";" . label_button_update;
+		$strBtnOnclicks = "searchConfig;insertConfig;deleteConfig;updateConfig";
+		
+		$buttonList = $this->prepareButtonData ( $strBtnValues, $strBtnOnclicks );
+		
+		$on = "ON";
+		$off = "OFF";
+		$onclick = 'onOff';
+		
+		$result = $this->getResultByQuery ( select_all_config );
+		$html = table_start;
+		for($i = 0; $i < count ( $result ); $i ++) {
+			if (($counter % $nbr_column) == 0) {
+				$html = $html . table_tr;
+			}
+			$title = $result [$i] ['description'];
+			$label = $result [$i] ['label'];
+			$key = $result [$i] ['key'];
+			$type = $result [$i] ['type'];
+			$value = $result [$i] ['value'];
+			
+			$html = $html . $this->generateTdLabel ( $title, $label );
+			$html = $html . $this->generateTdText ( $type, $key, $value, $onclick, $on, $off );
+			if ((($counter - $nbr_column + 1) % $nbr_column) == 0) {
+				$html = $html . table_tr_closed;
+			}
+			$counter ++;
+		}
+		$html = $html . $this->generateButtonsColspan ( $buttonList, $nbr_column * 2 );
+		$html = $html . table_closed;
+		
+		return $html;
 	}
 	function getOneResult($qry) {
 		$result = mysql_query ( $qry, $this->connection );

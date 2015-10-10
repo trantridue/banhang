@@ -8,9 +8,21 @@ class ConfigService {
 	//	load all configuration parameters into session
 	function loadConfiguration() {
 		session_start ();
+		
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );
 		for($i = 0; $i < count ( $result ); $i ++) {
 			$_SESSION [prefix_session_config . $result [$i] ['key']] = $result [$i] ['value'];
+		}
+		// load user module
+		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $_SESSION [prefix_session_user . 'id'] . ")";
+		$result = $this->commonUtil->getResultByQuery ( $qry );
+		$session_user_module_key = "";
+		$session_user_module_value = "";
+		for($i = 0; $i < count ( $result ); $i ++) {
+			$session_user_module_key = $session_user_module_key . "goModule" . $result [$i] ['key'] . ";";
+			$session_user_module_value = $session_user_module_value . $result [$i] ['value'] . ";";
+			$_SESSION ['session_user_module_key'] = substr ( $session_user_module_key, 0, - 1 );
+			$_SESSION ['session_user_module_value'] = substr ( $session_user_module_value, 0, - 1 );
 		}
 	}
 	
@@ -19,7 +31,7 @@ class ConfigService {
 		$counter = 0;
 		$form = "update_config_form";
 		
-		$strBtnValues = label_button_search.";".label_button_insert.";".label_button_delete.";".label_button_update;
+		$strBtnValues = label_button_search . ";" . label_button_insert . ";" . label_button_delete . ";" . label_button_update;
 		$strBtnOnclicks = "searchConfig;insertConfig;deleteConfig;updateConfig";
 		
 		$buttonList = $this->commonUtil->prepareButtonData ( $strBtnValues, $strBtnOnclicks );

@@ -13,3 +13,17 @@ INSERT INTO `config` VALUES (7, 'start_date', date_format(now(),'%Y-%m-%d'), 'Ng
 INSERT INTO `config` VALUES (8, 'end_date', now(), 'Ngày đóng hàng', 'datetime','Ngày đóng shop',8);
 INSERT INTO `config` VALUES (9, 'policy', 'Chính sách cửa hàng', 'Zabuza shop policy ', 'textarea','Chính sách của cửa hàng',9);
 INSERT INTO `config` VALUES (10, 'is_maintain_mode', '1', 'Maintain mode ', 'checkbox','Maintain',10);
+
+truncate `module`;
+
+INSERT INTO `module` VALUES (1, 'config', 'CẤU HÌNH');
+INSERT INTO `module` VALUES (2, 'user', 'NHÂN VIÊN');
+INSERT INTO `module` VALUES (3, 'import', 'NHẬP HÀNG');
+INSERT INTO `module` VALUES (4, 'export', 'XUẤT HÀNG');
+
+truncate `user_module`;
+INSERT INTO `user_module` VALUES (1, 1, 1);
+INSERT INTO `user_module` VALUES (2, 1, 2);
+INSERT INTO `user_module` VALUES (3, 1, 3);
+INSERT INTO `user_module` VALUES (4, 1, 4);
+INSERT INTO `user_module` VALUES (5, 2, 4);

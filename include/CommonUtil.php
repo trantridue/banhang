@@ -141,7 +141,7 @@ class CommonUtil {
 		$result = $this->getResultByQuery ( $qry );
 		$values = $result [0];
 		for($i = 0; $i < count ( $columns ); $i ++) {
-			$_SESSION ['session_user_' . $columns [$i]] = $values [$i];
+			$_SESSION [prefix_session_user . $columns [$i]] = $values [$i];
 			$str = $str . "<input type='hidden' id='hidden_user_" . $columns [$i] . "' value='" . $values [$i] . "'/>";
 		}
 		return $str;
@@ -160,6 +160,7 @@ class CommonUtil {
 		}
 		return $str;
 	}
+	
 	function generateHiddenFieldConfig() {
 		//Init Only Personal Information
 		$str = "";
@@ -236,6 +237,7 @@ class CommonUtil {
 		
 		$arrayValues = explode ( ";", $strValues );
 		$arrayOnclicks = explode ( ";", $strOnclicks );
+		
 		$itemCounter = count ( $arrayValues );
 		$buttonList = array ();
 		for($i = 0; $i < $itemCounter; $i ++) {

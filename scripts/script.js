@@ -15,15 +15,15 @@ function onOffcheckbox(fieldId) {
 	// $('#' + fieldId).prop('checked', currentStatus);
 }
 function go(obj, action) {
-	alert(action);
+//	alert(action);
 	if (action.startsWith("Module")) {
 		toggleMenuButton(obj);
 		module = action.replace("Module", "");
-		 alert(module);
+//		 alert(module);
 		$("#body_data").load("module/" + module + "/main.php");
 	} else {
 //		eval(action + "()");
-		alert(action);
+//		alert(action);
 	}
 }
 function resetCssMenuButton(btnId) {

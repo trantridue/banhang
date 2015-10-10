@@ -160,7 +160,9 @@ class FGMembersite {
 		$sessionvar = $this->GetLoginSessionVar ();
 		
 		$_SESSION [$sessionvar] = NULL;
+		$_SESSION [session_all_field] = NULL;
 		
+		unset ( $_SESSION [session_all_field] );
 		unset ( $_SESSION [$sessionvar] );
 	}
 	
@@ -324,7 +326,7 @@ class FGMembersite {
 		
 		$_SESSION ['name_of_user'] = $row ['name'];
 		$_SESSION ['email_of_user'] = $row ['email'];
-		$_SESSION ['session_user_id'] = $row ['id'];
+		$_SESSION ['login_session_user_id'] = $row ['id'];
 		
 		return true;
 	}

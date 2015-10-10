@@ -20,6 +20,8 @@ define ( 'prefix_session_user', 'session_user_' );
 define ( 'prefix_hidden_config', 'hidden_config_' );
 define ( 'prefix_session_config', 'session_config_' );
 
+define ( 'session_all_field', 'session_all_field' );
+
 define ( 'css_class_buttonOff', 'buttonOff' );
 define ( 'css_class_buttonOn', 'buttonOn' );
 define ( 'css_class_perform_button', 'perform_button' );

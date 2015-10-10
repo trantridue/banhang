@@ -1,4 +1,6 @@
 <?php
-echo $commonUtil->loadConfiguration(); 
-echo $commonUtil->loadUserInformation($_SESSION['session_user_id']); 
+if ($_SESSION [session_all_field] == null || $_SESSION ['session_all_field'] == '') {
+	$commonUtil->initSessionParam ();
+}
+echo $commonUtil->initHiddenField ();
 ?>

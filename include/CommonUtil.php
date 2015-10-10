@@ -132,34 +132,39 @@ class CommonUtil {
 		$tables = $this->getTableStructure ( $table );
 		return $tables [0];
 	}
-	function loadUserInformation($userId) {
-		//Init Only Personal Information
+	function initHiddenField() {
 		$str = "";
-		$table = "user";
-		$qry = "select * from " . $table . " where id = " . $userId;
-		$columns = $this->getListColumnOfTable ( $table );
-		$result = $this->getResultByQuery ( $qry );
-		$values = $result [0];
-		for($i = 0; $i < count ( $columns ); $i ++) {
-			$_SESSION [prefix_session_user . $columns [$i]] = $values [$i];
-			if ($columns [$i] != 'password')
-				$str = $str . "<input type='hidden' id='" . prefix_hidden_user . $columns [$i] . "' value='" . $values [$i] . "'/>";
+		$strAllField = $_SESSION ['session_all_field'];
+		$arrayAllField = explode ( ";", $strAllField );
+		for($i = 0; $i < count ( $arrayAllField ); $i ++) {
+			$str = $str . "<input type='hidden' id='" . $arrayAllField [$i] . "' value='" . $_SESSION [$arrayAllField [$i]] . "'/>";
 		}
 		return $str;
 	}
 	
 	//	load all configuration parameters into session
-	function loadConfiguration() {
+	function initSessionParam() {
 		session_start ();
+		$strAllField = "";
+		//Init Only Personal Information
+		$table = "user";
+		$qry = "select * from " . $table . " where id = " . $_SESSION ['login_session_user_id'];
+		$columns = $this->getListColumnOfTable ( $table );
+		$result = $this->getResultByQuery ( $qry );
+		$values = $result [0];
+		for($i = 0; $i < count ( $columns ); $i ++) {
+			$_SESSION [prefix_session_user . $columns [$i]] = $values [$i];
+			$strAllField = $strAllField . prefix_session_user . $columns [$i] . ";";
+		}
 		// load configuration parameter
 		$str = "";
 		$result = $this->getResultByQuery ( select_all_config );
 		for($i = 0; $i < count ( $result ); $i ++) {
 			$_SESSION [prefix_session_config . $result [$i] ['key']] = $result [$i] ['value'];
-			$str = $str . "<input type='hidden' id='" . prefix_session_config . $result [$i] ['key'] . "' value='" . $result [$i] ['value'] . "'/>";
+			$strAllField = $strAllField . prefix_session_config . $result [$i] ['key'] . ";";
 		}
 		// load user module
-		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $_SESSION [prefix_session_user . 'id'] . ")";
+		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $_SESSION ['login_session_user_id'] . ")";
 		$result = $this->getResultByQuery ( $qry );
 		$session_user_module_key = "";
 		$session_user_module_value = "";
@@ -172,10 +177,9 @@ class CommonUtil {
 		$_SESSION ['session_user_module_id'] = substr ( $session_user_module_id, 0, - 1 );
 		$_SESSION ['session_user_module_key'] = substr ( $session_user_module_key, 0, - 1 );
 		$_SESSION ['session_user_module_value'] = substr ( $session_user_module_value, 0, - 1 );
+		$strAllField = $strAllField . "session_user_module_id" . ";" . "session_user_module_key" . ";" . session_user_module_value;
 		
-		$str = $str . "<input type='hidden' id='user_module_key" . "' value='" . $_SESSION ['session_user_module_id'] . "'/>";
-		$str = $str . "<input type='hidden' id='user_module_value" . "' value='" . $_SESSION ['session_user_module_value'] . "'/>";
-		return $str;
+		$_SESSION [session_all_field] = $strAllField;
 	}
 	function generateConfigurationEditForm() {
 		$nbr_column = number_column_config_form;

@@ -191,8 +191,15 @@ class CommonUtil {
 	function generateTdText($type, $key, $value, $onclick, $on, $off) {
 		return "<td class='tableTdText'>" . $this->generateInputField ( $type, $key, $value, $onclick, $on, $off ) . table_td_closed;
 	}
-	function generateUpdateButton($onclick, $form) {
-		return "<input type='button' value='" . label_button_update . "' class='" . css_class_perform_button . "' onclick='" . $onclick . "(\"" . $form . "\");'/>";
+	function generateButtons($buttonList) {
+		$html = "";
+		for($i = 0; $i < count ( $buttonList ); $i ++) {
+			$button = $buttonList [$i];
+			$value = $button ["value"];
+			$onclick = $button ["onclick"];
+			$html = $html . $this->generateButton ( $value, $onclick );
+		}
+		return $html;
 	}
 	function generateInputField($type, $key, $value, $onclick, $on, $off) {
 		$html = "";
@@ -219,8 +226,25 @@ class CommonUtil {
 	function getTableColspanOpen($numColumn) {
 		return table_tr . "<td colspan='" . $numColumn . "'>";
 	}
-	function generateUpdateButtonColspan($onclick, $form, $numColumn) {
-		return $this->getTableColspanOpen ( $numColumn ) . $this->generateUpdateButton ( $onclick, $form ) . table_td_closed . table_tr_closed;
+	function generateButtonsColspan($buttonList, $numColumn) {
+		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . table_td_closed . table_tr_closed;
+	}
+	function generateButton($value, $onclick) {
+		return "<input type='button' value='" . $value . "' class='perform_button' onclick='" . $onclick . "();'>";
+	}
+	function prepareButtonData($strValues, $strOnclicks) {
+		
+		$arrayValues = explode ( ";", $strValues );
+		$arrayOnclicks = explode ( ";", $strOnclicks );
+		$itemCounter = count ( $arrayValues );
+		$buttonList = array ();
+		for($i = 0; $i < $itemCounter; $i ++) {
+			$button = array ();
+			$button ['value'] = $arrayValues [$i];
+			$button ['onclick'] = $arrayOnclicks [$i];
+			$buttonList [$i] = $button;
+		}
+		return $buttonList;
 	}
 }
 ?>

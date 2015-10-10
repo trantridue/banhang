@@ -18,13 +18,18 @@ class ConfigService {
 		$nbr_column = number_column_config_form;
 		$counter = 0;
 		$form = "update_config_form";
-		$onclick_update_method = 'updateConfig';
+		
+		$strBtnValues = label_button_search.";".label_button_insert.";".label_button_delete.";".label_button_update;
+		$strBtnOnclicks = "searchConfig;insertConfig;deleteConfig;updateConfig";
+		
+		$buttonList = $this->commonUtil->prepareButtonData ( $strBtnValues, $strBtnOnclicks );
+		
 		$on = "ON";
 		$off = "OFF";
 		$onclick = 'onOff';
 		
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );
-		$html = "<form id='" . $form . "'>" . table_start;
+		$html = table_start;
 		for($i = 0; $i < count ( $result ); $i ++) {
 			if (($counter % $nbr_column) == 0) {
 				$html = $html . table_tr;
@@ -42,10 +47,8 @@ class ConfigService {
 			}
 			$counter ++;
 		}
-		$html = $html;
-		
-		$html = $html . $this->commonUtil->generateUpdateButtonColspan ( $onclick_update_method, $form, $nbr_column * 2 ) . form_tag_closed;
-		$html = $html . table_closed . br_tag;
+		$html = $html . $this->commonUtil->generateButtonsColspan ( $buttonList, $nbr_column * 2 );
+		$html = $html . table_closed;
 		
 		return $html;
 	}

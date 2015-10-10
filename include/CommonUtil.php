@@ -163,17 +163,17 @@ class CommonUtil {
 		$result = $this->getResultByQuery ( $qry );
 		$session_user_module_key = "";
 		$session_user_module_value = "";
-		$session_user_module = "";
+		$session_user_module_id = "";
 		for($i = 0; $i < count ( $result ); $i ++) {
-			$session_user_module_key = $session_user_module_key . "goModule" . $result [$i] ['key'] . ";";
-			$session_user_module = $session_user_module . $result [$i] ['key'] . ";";
+			$session_user_module_key = $session_user_module_key . "Module" . $result [$i] ['key'] . ";";
+			$session_user_module_id = $session_user_module_id . "id_btn_Module" . $result [$i] ['key'] . ";";
 			$session_user_module_value = $session_user_module_value . $result [$i] ['value'] . ";";
 		}
-		$_SESSION ['session_user_module'] = substr ( $session_user_module, 0, - 1 );
+		$_SESSION ['session_user_module_id'] = substr ( $session_user_module_id, 0, - 1 );
 		$_SESSION ['session_user_module_key'] = substr ( $session_user_module_key, 0, - 1 );
 		$_SESSION ['session_user_module_value'] = substr ( $session_user_module_value, 0, - 1 );
 		
-		$str = $str . "<input type='hidden' id='user_module_key" . "' value='" . $_SESSION ['session_user_module'] . "'/>";
+		$str = $str . "<input type='hidden' id='user_module_key" . "' value='" . $_SESSION ['session_user_module_id'] . "'/>";
 		$str = $str . "<input type='hidden' id='user_module_value" . "' value='" . $_SESSION ['session_user_module_value'] . "'/>";
 		return $str;
 	}
@@ -182,7 +182,7 @@ class CommonUtil {
 		$counter = 0;
 		
 		$strBtnValues = label_button_search . ";" . label_button_insert . ";" . label_button_delete . ";" . label_button_update;
-		$strBtnOnclicks = "searchConfig;insertConfig;deleteConfig;updateConfig";
+		$strBtnOnclicks = "actionSearchConfig;actionInsertConfig;actionDeleteConfig;actionUpdateConfig";
 		
 		$buttonList = $this->prepareButtonData ( $strBtnValues, $strBtnOnclicks );
 		
@@ -274,7 +274,7 @@ class CommonUtil {
 		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . table_td_closed . table_tr_closed;
 	}
 	function generateButton($value, $onclick) {
-		return "<input type='button' value='" . $value . "' class='perform_button' onclick='" . $onclick . "(this);' id ='id_btn_" . $onclick . "'>";
+		return "<input type='button' value='" . $value . "' class='perform_button' onclick='go" . "(this," . "\"" . $onclick . "\");' id ='id_btn_" . $onclick . "'>";
 	}
 	function prepareButtonData($strValues, $strOnclicks) {
 		

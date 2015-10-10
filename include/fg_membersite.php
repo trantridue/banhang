@@ -324,8 +324,8 @@ class FGMembersite {
 		
 		$_SESSION ['name_of_user'] = $row ['name'];
 		$_SESSION ['email_of_user'] = $row ['email'];
-
-		$this->commonUtil->initUserInformation($row ['id']);
+		$_SESSION ['session_user_id'] = $row ['id'];
+		
 		return true;
 	}
 	

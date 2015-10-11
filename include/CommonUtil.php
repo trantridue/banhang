@@ -276,8 +276,9 @@ class CommonUtil {
 				$htmlType = 'text';
 			} else if ($this->startsWith ( $arrayMysqlType [$i], 'enum' )) {
 				//				$htmlType = 'select:' . $arrayMysqlType [$i];
-				$listEnum1 = substr ( $arrayMysqlType [$i], 6, $arrayMysqlType [$i] . length - 2 );
-				$htmlType = 'select:' . $listEnum1;
+				$listEnum1 = substr ( $arrayMysqlType [$i], 5, $arrayMysqlType [$i] . length - 1 );
+//				$htmlType = 'select:' . preg_replace ( "','", ";", $listEnum1 );
+								$htmlType = 'select:' . $listEnum1;
 			} else {
 				$htmlType = $arrayMysqlType [$i];
 			}

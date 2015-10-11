@@ -22,41 +22,15 @@ function go(obj, onclick, module) {
 		var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
 		var url = "module/" + module + "/" + action + ".php?"
 				+ parseFieldsToUrlStringEncode(arrayAll);
-		// alert(url);
 		$.ajax( {
 			url : url,
 			success : function(data) {
-				alert(data);
 				window.location.href = "homepage.php?module=" + module;
 			}
 		});
 	}
 }
-function actionUpdateconfig(module, action) {
-	var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
-	var url = "module/" + module + "/" + action + ".php?"
-			+ parseFieldsToUrlStringEncode(arrayAll);
-	alert(url);
-	$.ajax( {
-		url : url,
-		success : function(data) {
-			alert(data);
-		}
-	});
-}
-function actionInsertconfig(module, action) {
-	alert(module + action + "Form");
-	var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
-	var url = "module/" + module + "/" + action + ".php?"
-			+ parseFieldsToUrlStringEncode(arrayAll);
-	alert(url);
-	$.ajax( {
-		url : url,
-		success : function(data) {
-			alert(data);
-		}
-	});
-}
+
 function parseFieldsToUrlStringEncode(arrayData) {
 	var returnUrl = "";
 	for ( var i = 0; i < arrayData[0].length; i++) {

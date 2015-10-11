@@ -151,3 +151,10 @@
 .activeButton {
 	background-color: violet;
 }
+
+.tr_head {
+	background-color: gray;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+}

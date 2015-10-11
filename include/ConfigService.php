@@ -10,8 +10,7 @@ class ConfigService {
 		$this->commonUtil = $commonUtil;
 	}
 	
-	function generateConfigurationInsertForm() {
-		$table = "config";
+	function generateConfigurationInsertForm($table) {
 		$result = $this->commonUtil->getTableStructure ( $table );
 		
 		$keys = $result [0];
@@ -30,7 +29,7 @@ class ConfigService {
 			$html = $html . table_td . $this->commonUtil->generateInputField ( $types [$i], $keys [$i], '', $this->onclick, $this->on, $this->off ) . table_td_closed;
 		}
 		$strBtnValues = label_button_insert;
-		$strBtnOnclicks = "actionInsert";
+		$strBtnOnclicks = "actionInsert".$table;
 		
 		$buttonList = $this->commonUtil->prepareButtonData ( $strBtnValues, $strBtnOnclicks );
 		$html = $html . $this->commonUtil->generateButtonsColspan ( $buttonList, count ( $keys ) );
@@ -38,6 +37,7 @@ class ConfigService {
 		
 		return $html . table_closed;
 	}
+	
 	function generateConfigurationEditForm() {
 		$nbr_column = number_column_config_form;
 		$counter = 0;

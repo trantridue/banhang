@@ -232,6 +232,8 @@ class CommonUtil {
 		} else if ($type == checkbox) {
 			$isChecked = $value == 0 ? '' : 'checked="checked"';
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' " . $isChecked . " onclick='" . $onclick . $type . "(\"" . $key . "\");'/>";
+		} else if ($this->startsWith ( $type, select )) {
+			$html = $html . "select";
 		} else {
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . $value . "'/>";
 		}
@@ -261,6 +263,35 @@ class CommonUtil {
 			$buttonList [$i] = $button;
 		}
 		return $buttonList;
+	}
+	function convertMysqlTypeToHtmlType($arrayMysqlType) {
+		$arrayHtmlType = "";
+		for($i = 0; $i < count ( $arrayMysqlType ); $i ++) {
+			$htmlType = "";
+			if ($this->startsWith ( $arrayMysqlType [$i], 'int' ) || $this->startsWith ( $arrayMysqlType [$i], 'float' ) || $this->startsWith ( $arrayMysqlType [$i], 'tiny' ) || $this->startsWith ( $arrayMysqlType [$i], 'double' )) {
+				$htmlType = 'number';
+			} else if ($this->startsWith ( $arrayMysqlType [$i], 'unsigned' )) {
+				$htmlType = 'button';
+			} else if ($this->startsWith ( $arrayMysqlType [$i], 'varchar' )) {
+				$htmlType = 'text';
+			} else if ($this->startsWith ( $arrayMysqlType [$i], 'enum' )) {
+				//				$htmlType = 'select:' . $arrayMysqlType [$i];
+				$listEnum1 = substr ( $arrayMysqlType [$i], 6, $arrayMysqlType [$i] . length - 2 );
+				$htmlType = 'select:' . $listEnum1;
+			} else {
+				$htmlType = $arrayMysqlType [$i];
+			}
+			$arrayHtmlType [$i] = $htmlType;
+		}
+		return $arrayHtmlType;
+	}
+	function startsWith($haystack, $needle) {
+		// search backwards starting from haystack length characters from the end
+		return $needle === "" || strrpos ( $haystack, $needle, - strlen ( $haystack ) ) !== FALSE;
+	}
+	function endsWith($haystack, $needle) {
+		// search forward starting from end minus needle length characters
+		return $needle === "" || (($temp = strlen ( $haystack ) - strlen ( $needle )) >= 0 && strpos ( $haystack, $needle, $temp ) !== FALSE);
 	}
 }
 ?>

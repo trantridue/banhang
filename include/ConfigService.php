@@ -7,17 +7,28 @@ class ConfigService {
 		$this->commonUtil = $commonUtil;
 	}
 	
+	function generateConfigurationInsertForm() {
+		$table = "config";
+		$result = $this->commonUtil->getTableStructure($table);
+//		print_r($result[0]);
+		print_r($result[1]);
+		echo "<br>";
+		print_r($this->commonUtil->convertMysqlTypeToHtmlType($result[1]));
+		$html = "";
+		return $html;
+	}
 	function generateConfigurationEditForm() {
 		$nbr_column = number_column_config_form;
 		$counter = 0;
 		
-		$strBtnValues = label_button_insert . ";" . label_button_delete . ";" . label_button_update;
-		$strBtnOnclicks = "actionInsert;actionDelete;actionUpdate";
+		$strBtnValues = label_button_update;
+		$strBtnOnclicks = "actionUpdate";
 		
 		$buttonList = $this->commonUtil->prepareButtonData ( $strBtnValues, $strBtnOnclicks );
 		
 		$on = "ON";
 		$off = "OFF";
+		
 		$onclick = 'onOff';
 		
 		$result = $this->commonUtil->getResultByQuery ( select_all_config );

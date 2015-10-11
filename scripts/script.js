@@ -22,10 +22,10 @@ function go(obj, onclick, module) {
 	}
 }
 function actionUpdateconfig(module, action) {
-	var arrayAll = getArrayIdDataFieldOfForm(module + "Form");
+	var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
 	var url = "module/" + module + "/" + action + ".php?"
 			+ parseFieldsToUrlStringEncode(arrayAll);
-	alert(url);
+	// alert(url);
 	$.ajax( {
 		url : url,
 		success : function(data) {

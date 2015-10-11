@@ -6,4 +6,5 @@ define('datetime','datetime');
 define('textarea','textarea');
 define('button','button');
 define('checkbox','checkbox');
+define('select','select');
 ?>

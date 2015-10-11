@@ -140,7 +140,7 @@ class CommonUtil {
 			$str = $str . "<input type='hidden' id='" . $arrayAllField [$i] . "' value='" . $_SESSION [$arrayAllField [$i]] . "'/>";
 		}
 		//init hiddenfield from constatnt
-		$str = $str . "<input type='hidden' id='constant_" . list_id . "' value='" . list_id . "'/>";
+		$str = $str . "<input type='hidden' id='" . list_id . "' value='" . list_id . "'/>";
 		return $str;
 	}
 	
@@ -211,7 +211,7 @@ class CommonUtil {
 			$button = $buttonList [$i];
 			$value = $button ["value"];
 			$onclick = $button ["onclick"];
-			$html = $html . $this->generateButtonAction ( $value, $onclick );
+			$html = $html . $this->generateButton ( $value, $onclick );
 		}
 		return $html;
 	}
@@ -240,14 +240,12 @@ class CommonUtil {
 	function getTableColspanOpen($numColumn) {
 		return table_tr . "<td colspan='" . $numColumn . "'>";
 	}
-	function getTableColspanClose() {
-		return table_td_closed . table_tr_closed;
-	}
 	function generateButtonsColspan($buttonList, $numColumn) {
-		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . $this->getTableColspanClose;
+		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . table_td_closed . table_tr_closed;
 	}
-	function generateButtonAction($value, $onclick) {
-		return "<input type='button' value='" . $value . "' class='perform_button' onclick='go" . "(this," . "\"" . $onclick . "\");' id ='id_btn_" . $onclick . "'>";
+	function generateButton($value, $onclick) {
+		$class = ($onclick == "Module" . $_SESSION ['active_module']) ? " activeButton" : "";
+		return "<input type='button' value='" . $value . "' class='perform_button" . $class . "' onclick='go" . "(this," . "\"" . $onclick . "\",\"" . $_SESSION ['active_module'] . "\");' id ='id_btn_" . $onclick . "'>";
 	}
 	function prepareButtonData($strValues, $strOnclicks) {
 		

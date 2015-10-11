@@ -25,14 +25,8 @@ function actionUpdateconfig(module, action) {
 	var arrayAll = getArrayIdDataFieldOfForm(module + "Form");
 	var url = "module/" + module + "/" + action + ".php?"
 			+ parseFieldsToUrlStringEncode(arrayAll);
-//	alert(url);
-//	 $("#body_data").html(url);
-	$.ajax( {
-		url : url,
-		success : function(data) {
-			alert(data);
-		}
-	});
+	alert(url);
+//	 $("#body_data").innerhtml(url);
 }
 function parseFieldsToUrlStringEncode(arrayData) {
 	var returnUrl = "";

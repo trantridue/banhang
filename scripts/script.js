@@ -13,10 +13,10 @@ function onOffbutton(fieldId, on, off) {
 function onOffcheckbox(fieldId) {
 }
 function go(obj, onclick, module) {
-	var reloadUrl = "homepage.php?module=" + module;
+//	alert(reloadUrl);
 	if (onclick.startsWith("Module")) {
 		module = onclick.replace("Module", "");
-		window.location.href = reloadUrl;
+		window.location.href = "homepage.php?module=" + module;;
 	} else {
 		var action = onclick.replace('action', '').toLowerCase();
 		var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
@@ -27,7 +27,7 @@ function go(obj, onclick, module) {
 			url : url,
 			success : function(data) {
 				alert(data);
-				window.location.href = reloadUrl;
+				window.location.href = "homepage.php?module=" + module;
 			}
 		});
 	}

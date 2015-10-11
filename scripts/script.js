@@ -15,15 +15,14 @@ function onOffcheckbox(fieldId) {
 	// $('#' + fieldId).prop('checked', currentStatus);
 }
 function go(obj, action) {
-//	alert(action);
 	if (action.startsWith("Module")) {
-		toggleMenuButton(obj);
 		module = action.replace("Module", "");
-//		 alert(module);
-		$("#body_data").load("module/" + module + "/main.php");
+		window.location.href = "homepage.php?module=" + module;
+//		toggleMenuButton(obj);
+//		obj.style.backgroundColor = 'violet';
 	} else {
-//		eval(action + "()");
-//		alert(action);
+		// eval(action + "()");
+		// alert(action);
 	}
 }
 function resetCssMenuButton(btnId) {
@@ -31,8 +30,9 @@ function resetCssMenuButton(btnId) {
 }
 function toggleMenuButton(obj) {
 	var objId = obj.id;
-	var user_module_key = $('#user_module_key').val();
-	var modules = user_module_key.split(";");
+	var session_user_module_key = $('#session_user_module_key').val();
+	alert(session_user_module_key);
+	var modules = session_user_module_key.split(";");
 	for ( var i = 0; i < modules.length; i++) {
 		if (modules[i] == objId) {
 			if (obj.style.backgroundColor == null

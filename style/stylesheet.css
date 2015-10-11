@@ -127,7 +127,6 @@
 	height: 30px;
 	margin-right: 10px;
 	font-weight: bold;
-	background-color: #EBEBEB;
 	min-width: 98px;
 	float: right;
 }
@@ -143,7 +142,12 @@
 	padding-bottom: 10px;
 	text-align: right;
 }
+
 #body_data {
 	float: left;
 	width: 100%;
+}
+
+.activeButton {
+	background-color: violet;
 }

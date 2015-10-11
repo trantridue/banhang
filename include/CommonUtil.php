@@ -278,7 +278,8 @@ class CommonUtil {
 		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . table_td_closed . table_tr_closed;
 	}
 	function generateButton($value, $onclick) {
-		return "<input type='button' value='" . $value . "' class='perform_button' onclick='go" . "(this," . "\"" . $onclick . "\");' id ='id_btn_" . $onclick . "'>";
+		$class = ($onclick == "Module" . $_SESSION ['active_module']) ? " activeButton" : "";
+		return "<input type='button' value='" . $value . "' class='perform_button" . $class . "' onclick='go" . "(this," . "\"" . $onclick . "\");' id ='id_btn_" . $onclick . "'>";
 	}
 	function prepareButtonData($strValues, $strOnclicks) {
 		

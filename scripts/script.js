@@ -1,3 +1,4 @@
+var seperator = ";";
 function onOffbutton(fieldId, on, off) {
 	if ($("#" + fieldId).val() == on) {
 		$("#" + fieldId).val(off);
@@ -10,39 +11,73 @@ function onOffbutton(fieldId, on, off) {
 	}
 }
 function onOffcheckbox(fieldId) {
-	// var currentStatus = $('#' + fieldId).is(":checked");
-	// alert(currentStatus);
-	// $('#' + fieldId).prop('checked', currentStatus);
 }
-function go(obj, action) {
-	if (action.startsWith("Module")) {
-		module = action.replace("Module", "");
+function go(obj, onclick, module) {
+	if (onclick.startsWith("Module")) {
+		module = onclick.replace("Module", "");
 		window.location.href = "homepage.php?module=" + module;
-//		toggleMenuButton(obj);
-//		obj.style.backgroundColor = 'violet';
 	} else {
-		// eval(action + "()");
-		// alert(action);
+		eval(onclick + module + "('" + module + "','"
+				+ onclick.replace('action', '').toLowerCase() + "')");
 	}
 }
-function resetCssMenuButton(btnId) {
-	$("#" + btnId).css('backgroundColor', '');
-}
-function toggleMenuButton(obj) {
-	var objId = obj.id;
-	var session_user_module_key = $('#session_user_module_key').val();
-	alert(session_user_module_key);
-	var modules = session_user_module_key.split(";");
-	for ( var i = 0; i < modules.length; i++) {
-		if (modules[i] == objId) {
-			if (obj.style.backgroundColor == null
-					|| obj.style.backgroundColor == '')
-				obj.style.backgroundColor = 'violet';
-			else {
-				obj.style.backgroundColor = '';
-			}
-		} else {
-			resetCssMenuButton(modules[i]);
+function actionUpdateconfig(module, action) {
+	var arrayAll = getArrayIdDataFieldOfForm(module + "Form");
+	var url = "module/" + module + "/" + action + ".php?"
+			+ parseFieldsToUrlStringEncode(arrayAll);
+//	alert(url);
+//	 $("#body_data").html(url);
+	$.ajax( {
+		url : url,
+		success : function(data) {
+			alert(data);
 		}
+	});
+}
+function parseFieldsToUrlStringEncode(arrayData) {
+	var returnUrl = "";
+	for ( var i = 0; i < arrayData[0].length; i++) {
+		key = arrayData[0][i];
+		type = arrayData[2][i];
+		value = "";
+		if (type == 'button') {
+			if (arrayData[1][i].toLowerCase() == 'on'
+					|| arrayData[1][i].toLowerCase() == 'women') {
+				value = 1;
+			} else {
+				value = 0;
+			}
+		} else if (type == 'checkbox') {
+			value = $('#' + arrayData[0][i]).is(":checked") ? 1 : 0;
+		} else {
+			value = arrayData[1][i];
+		}
+		returnUrl = returnUrl + arrayData[0][i] + "="
+				+ encodeURIComponent(value) + "&";
 	}
+	returnUrl = returnUrl + $('#constant_list_id').val() + "="
+			+ encodeURIComponent(arrayData[0].join(";"));
+
+	return returnUrl;
+}
+function getArrayIdDataFieldOfForm(formId) {
+	var $inputs = $('#' + formId + ' :input');
+	var alls = new Array();
+
+	var arrayIds = new Array();
+	var arrayValues = new Array();
+	var arrayTypes = new Array();
+
+	$inputs.each(function(index) {
+		// ignore button
+			if (!$(this).attr('id').startsWith('id_btn_')) {
+				arrayIds[index] = $(this).attr('id');
+				arrayValues[index] = $(this).attr('value');
+				arrayTypes[index] = $(this).attr('type');
+			}
+		});
+	alls[0] = arrayIds;
+	alls[1] = arrayValues;
+	alls[2] = arrayTypes;
+	return alls;
 }

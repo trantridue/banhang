@@ -25,4 +25,6 @@ define ( 'session_all_field', 'session_all_field' );
 define ( 'css_class_buttonOff', 'buttonOff' );
 define ( 'css_class_buttonOn', 'buttonOn' );
 define ( 'css_class_perform_button', 'perform_button' );
+
+define ( 'list_id', 'list_id' );
 ?>

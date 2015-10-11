@@ -139,6 +139,8 @@ class CommonUtil {
 		for($i = 0; $i < count ( $arrayAllField ); $i ++) {
 			$str = $str . "<input type='hidden' id='" . $arrayAllField [$i] . "' value='" . $_SESSION [$arrayAllField [$i]] . "'/>";
 		}
+		//init hiddenfield from constatnt
+		$str = $str . "<input type='hidden' id='constant_" . list_id . "' value='" . list_id . "'/>";
 		return $str;
 	}
 	
@@ -181,43 +183,7 @@ class CommonUtil {
 		
 		$_SESSION [session_all_field] = $strAllField;
 	}
-	function generateConfigurationEditForm() {
-		$nbr_column = number_column_config_form;
-		$counter = 0;
-		
-		$strBtnValues = label_button_search . ";" . label_button_insert . ";" . label_button_delete . ";" . label_button_update;
-		$strBtnOnclicks = "actionSearchConfig;actionInsertConfig;actionDeleteConfig;actionUpdateConfig";
-		
-		$buttonList = $this->prepareButtonData ( $strBtnValues, $strBtnOnclicks );
-		
-		$on = "ON";
-		$off = "OFF";
-		$onclick = 'onOff';
-		
-		$result = $this->getResultByQuery ( select_all_config );
-		$html = table_start;
-		for($i = 0; $i < count ( $result ); $i ++) {
-			if (($counter % $nbr_column) == 0) {
-				$html = $html . table_tr;
-			}
-			$title = $result [$i] ['description'];
-			$label = $result [$i] ['label'];
-			$key = $result [$i] ['key'];
-			$type = $result [$i] ['type'];
-			$value = $result [$i] ['value'];
-			
-			$html = $html . $this->generateTdLabel ( $title, $label );
-			$html = $html . $this->generateTdText ( $type, $key, $value, $onclick, $on, $off );
-			if ((($counter - $nbr_column + 1) % $nbr_column) == 0) {
-				$html = $html . table_tr_closed;
-			}
-			$counter ++;
-		}
-		$html = $html . $this->generateButtonsColspan ( $buttonList, $nbr_column * 2 );
-		$html = $html . table_closed;
-		
-		return $html;
-	}
+	
 	function getOneResult($qry) {
 		$result = mysql_query ( $qry, $this->connection );
 		$rows = mysql_fetch_assoc ( $result );
@@ -279,7 +245,7 @@ class CommonUtil {
 	}
 	function generateButton($value, $onclick) {
 		$class = ($onclick == "Module" . $_SESSION ['active_module']) ? " activeButton" : "";
-		return "<input type='button' value='" . $value . "' class='perform_button" . $class . "' onclick='go" . "(this," . "\"" . $onclick . "\");' id ='id_btn_" . $onclick . "'>";
+		return "<input type='button' value='" . $value . "' class='perform_button" . $class . "' onclick='go" . "(this," . "\"" . $onclick . "\",\"" . $_SESSION ['active_module'] . "\");' id ='id_btn_" . $onclick . "'>";
 	}
 	function prepareButtonData($strValues, $strOnclicks) {
 		

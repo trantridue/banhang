@@ -13,9 +13,9 @@ INSERT INTO `config` VALUES (5, 'sale_percent', '0', 'Phần trăm khuyến mạ
 INSERT INTO `config` VALUES (6, 'welcome_msg', 'Kính chào quý khách', 'Thông điệp ', 'text','Thông điệp chào mừng khách',4);
 INSERT INTO `config` VALUES (7, 'start_date', date_format(now(),'%Y-%m-%d'), 'Ngày mở hàng', 'date','Ngày khai trương shop',7);
 INSERT INTO `config` VALUES (8, 'end_date', now(), 'Ngày đóng hàng', 'datetime','Ngày đóng shop',8);
-INSERT INTO `config` VALUES (9, 'policy', 'Chính sách cửa hàng', 'Zabuza shop policy ', 'textarea','Chính sách của cửa hàng',9);
+INSERT INTO `config` VALUES (9, 'policy', 'Chính sách cửa hàng', 'Zabuza shop policy ', 'textarea','Chính sách của cửa hàng',11);
 INSERT INTO `config` VALUES (10, 'is_maintain_mode', '1', 'Maintain mode ', 'checkbox','Maintain',10);
-INSERT INTO `config` VALUES (11, 'default_module', 'export', 'The Default Module ', 'text','DEFAULT MODULE',11);
+INSERT INTO `config` VALUES (11, 'default_module', 'config', 'The Default Module ', 'text','DEFAULT MODULE',9);
 
 
 

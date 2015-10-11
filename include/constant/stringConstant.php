@@ -1,10 +1,14 @@
 <?php
-define ( 'table_start', '<table width="100%">' );
+define ( 'table_start', '<table width="100%	">' );
+define ( 'table_start_border', '<table width="100%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse">' );
 define ( 'table_closed', '</table>' );
 define ( 'table_td', '<td>' );
 define ( 'table_td_closed', '</td>' );
 define ( 'table_tr', '<tr>' );
 define ( 'table_tr_closed', '</tr>' );
+define ( 'table_th', '<thead style="font-weight:bold;text-align:center">' );
+define ( 'table_th_closed', '</thead>' );
+define ( 'table_tr_header', '<tr style="font-weight:bold;text-align:center">' );
 define ( 'hr_tag', '<hr>' );
 define ( 'div_tag', '<div>' );
 define ( 'div_tag_left', '<div style="float:left;">' );

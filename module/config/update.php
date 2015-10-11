@@ -1,4 +1,5 @@
 <?php
-//echo $_REQUEST['nbr_row_import']; 
-echo $_REQUEST[list_id]; 
+require_once ("../../include/membersite_config.php");
+$list_id = explode ( ";", $_REQUEST [list_id] );
+//print_r($list_id);
 ?>

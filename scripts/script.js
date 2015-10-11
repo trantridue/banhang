@@ -13,19 +13,43 @@ function onOffbutton(fieldId, on, off) {
 function onOffcheckbox(fieldId) {
 }
 function go(obj, onclick, module) {
+	var reloadUrl = "homepage.php?module=" + module;
 	if (onclick.startsWith("Module")) {
 		module = onclick.replace("Module", "");
-		window.location.href = "homepage.php?module=" + module;
+		window.location.href = reloadUrl;
 	} else {
-		eval(onclick + module + "('" + module + "','"
-				+ onclick.replace('action', '').toLowerCase() + "')");
+		var action = onclick.replace('action', '').toLowerCase();
+		var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
+		var url = "module/" + module + "/" + action + ".php?"
+				+ parseFieldsToUrlStringEncode(arrayAll);
+		// alert(url);
+		$.ajax( {
+			url : url,
+			success : function(data) {
+				alert(data);
+				window.location.href = reloadUrl;
+			}
+		});
 	}
 }
 function actionUpdateconfig(module, action) {
 	var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
 	var url = "module/" + module + "/" + action + ".php?"
 			+ parseFieldsToUrlStringEncode(arrayAll);
-	// alert(url);
+	alert(url);
+	$.ajax( {
+		url : url,
+		success : function(data) {
+			alert(data);
+		}
+	});
+}
+function actionInsertconfig(module, action) {
+	alert(module + action + "Form");
+	var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
+	var url = "module/" + module + "/" + action + ".php?"
+			+ parseFieldsToUrlStringEncode(arrayAll);
+	alert(url);
 	$.ajax( {
 		url : url,
 		success : function(data) {
@@ -70,8 +94,9 @@ function getArrayIdDataFieldOfForm(formId) {
 	$inputs.each(function(index) {
 		// ignore button
 			if (!$(this).attr('id').startsWith('id_btn_')) {
-				arrayIds[index] = $(this).attr('id');
-				arrayValues[index] = $(this).attr('value');
+				var idField = $(this).attr('id');
+				arrayIds[index] = idField;
+				arrayValues[index] = $('#' + idField).val();
 				arrayTypes[index] = $(this).attr('type');
 			}
 		});

@@ -1,3 +1,3 @@
 <?php
-define('number_column_config_form', 3);
+define('number_column_config_form', 4);
 ?>

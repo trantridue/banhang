@@ -26,6 +26,10 @@ class CommonUtil {
 		$qry = $this->buildInsertQry ( $table, $colums, $values );
 		return $this->executeQuery ( $qry );
 	}
+	function addRowIndex($table, $colums, $values) {
+		$qry = $this->buildInsertQryIndex ( $table, $colums, $values );
+		return $this->executeQuery ( $qry );
+	}
 	
 	function addRows($table, $colums, $values) {
 		$qry = $this->buildInsertQrys ( $table, $colums, $values );
@@ -44,6 +48,24 @@ class CommonUtil {
 		// list columns value
 		for($i = 0; $i < count ( $values ); $i ++) {
 			$qry = $qry . $values [$colums [$i]] . "','";
+		}
+		// remove two last characters ",'"
+		$qry = substr ( $qry, 0, - 2 ) . ")";
+		
+		return $qry;
+	}
+	function buildInsertQryIndex($table, $colums, $values) {
+		$qry = "insert into " . $table . "(`";
+		// list columns name
+		for($i = 0; $i < count ( $colums ); $i ++) {
+			$qry = $qry . $colums [$i] . "`,`";
+		}
+		// remove two last characters ",`"
+		$qry = substr ( $qry, 0, - 2 ) . ") values ('";
+		
+		// list columns value
+		for($i = 0; $i < count ( $values ); $i ++) {
+			$qry = $qry . $values [$i] . "','";
 		}
 		// remove two last characters ",'"
 		$qry = substr ( $qry, 0, - 2 ) . ")";
@@ -233,10 +255,19 @@ class CommonUtil {
 			$isChecked = $value == 0 ? '' : 'checked="checked"';
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' " . $isChecked . " onclick='" . $onclick . $type . "(\"" . $key . "\");'/>";
 		} else if ($this->startsWith ( $type, select )) {
-			$html = $html . "select";
+			$html = $html . $this->generateSelectDropDown ( $type, $key );
 		} else {
 			$html = $html . "<input type='" . $type . "' id='" . $key . "' value='" . $value . "'/>";
 		}
+		return $html;
+	}
+	function generateSelectDropDown($type, $key) {
+		$html = "<select id='" . $key . "'>";
+		$arrayItems = explode ( "','", substr ( $type, 8, $type . length - 1 ) ); //'select:'....'
+		for($i = 0; $i < count ( $arrayItems ); $i ++) {
+			$html = $html . "<option>" . $arrayItems [$i] . "</option>";
+		}
+		$html = $html . "</select>";
 		return $html;
 	}
 	function getTableColspanOpen($numColumn) {
@@ -268,17 +299,15 @@ class CommonUtil {
 		$arrayHtmlType = "";
 		for($i = 0; $i < count ( $arrayMysqlType ); $i ++) {
 			$htmlType = "";
-			if ($this->startsWith ( $arrayMysqlType [$i], 'int' ) || $this->startsWith ( $arrayMysqlType [$i], 'float' ) || $this->startsWith ( $arrayMysqlType [$i], 'tiny' ) || $this->startsWith ( $arrayMysqlType [$i], 'double' )) {
+			if ($this->startsWith ( $arrayMysqlType [$i], 'int' ) || $this->startsWith ( $arrayMysqlType [$i], 'float' ) || $this->startsWith ( $arrayMysqlType [$i], 'double' )) {
 				$htmlType = 'number';
-			} else if ($this->startsWith ( $arrayMysqlType [$i], 'unsigned' )) {
+			} else if ($this->startsWith ( $arrayMysqlType [$i], 'tinyint' )) {
 				$htmlType = 'button';
 			} else if ($this->startsWith ( $arrayMysqlType [$i], 'varchar' )) {
 				$htmlType = 'text';
 			} else if ($this->startsWith ( $arrayMysqlType [$i], 'enum' )) {
-				//				$htmlType = 'select:' . $arrayMysqlType [$i];
 				$listEnum1 = substr ( $arrayMysqlType [$i], 5, $arrayMysqlType [$i] . length - 1 );
-//				$htmlType = 'select:' . preg_replace ( "','", ";", $listEnum1 );
-								$htmlType = 'select:' . $listEnum1;
+				$htmlType = 'select:' . $listEnum1;
 			} else {
 				$htmlType = $arrayMysqlType [$i];
 			}
@@ -293,6 +322,9 @@ class CommonUtil {
 	function endsWith($haystack, $needle) {
 		// search forward starting from end minus needle length characters
 		return $needle === "" || (($temp = strlen ( $haystack ) - strlen ( $needle )) >= 0 && strpos ( $haystack, $needle, $temp ) !== FALSE);
+	}
+	function test() {
+		echo "aaa";
 	}
 }
 ?>

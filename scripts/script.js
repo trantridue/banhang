@@ -26,7 +26,12 @@ function actionUpdateconfig(module, action) {
 	var url = "module/" + module + "/" + action + ".php?"
 			+ parseFieldsToUrlStringEncode(arrayAll);
 	alert(url);
-//	 $("#body_data").innerhtml(url);
+	$.ajax( {
+		url : url,
+		success : function(data) {
+			alert(data);
+		}
+	});
 }
 function parseFieldsToUrlStringEncode(arrayData) {
 	var returnUrl = "";
@@ -49,7 +54,7 @@ function parseFieldsToUrlStringEncode(arrayData) {
 		returnUrl = returnUrl + arrayData[0][i] + "="
 				+ encodeURIComponent(value) + "&";
 	}
-	returnUrl = returnUrl + $('#constant_list_id').val() + "="
+	returnUrl = returnUrl + $('#list_id').val() + "="
 			+ encodeURIComponent(arrayData[0].join(";"));
 
 	return returnUrl;

@@ -245,7 +245,7 @@ class CommonUtil {
 			$button = $buttonList [$i];
 			$value = $button ["value"];
 			$onclick = $button ["onclick"];
-			$html = $html . $this->generateButton ( $value, $onclick );
+			$html = $html . $this->generateButtonAction ( $value, $onclick );
 		}
 		return $html;
 	}
@@ -274,10 +274,13 @@ class CommonUtil {
 	function getTableColspanOpen($numColumn) {
 		return table_tr . "<td colspan='" . $numColumn . "'>";
 	}
-	function generateButtonsColspan($buttonList, $numColumn) {
-		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . table_td_closed . table_tr_closed;
+	function getTableColspanClose() {
+		return table_td_closed . table_tr_closed;
 	}
-	function generateButton($value, $onclick) {
+	function generateButtonsColspan($buttonList, $numColumn) {
+		return $this->getTableColspanOpen ( $numColumn ) . $this->generateButtons ( $buttonList ) . $this->getTableColspanClose;
+	}
+	function generateButtonAction($value, $onclick) {
 		return "<input type='button' value='" . $value . "' class='perform_button' onclick='go" . "(this," . "\"" . $onclick . "\");' id ='id_btn_" . $onclick . "'>";
 	}
 	function prepareButtonData($strValues, $strOnclicks) {

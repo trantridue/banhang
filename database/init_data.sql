@@ -28,7 +28,7 @@ INSERT INTO `module` VALUES (6, 'provider', 'NHÀ CUNG CẤP');
 INSERT INTO `module` VALUES (7, 'fund', 'QUỸ');
 INSERT INTO `module` VALUES (8, 'spend', 'CHI PHÍ');
 INSERT INTO `module` VALUES (9, 'report', 'BÁO CÁO');
-INSERT INTO `module` VALUES (10, 'new', 'BÁO CÁO');
+INSERT INTO `module` VALUES (10, 'new', 'TIN TỨC');
 
 
 INSERT INTO `user_module` VALUES (1, 1, 1);
@@ -40,5 +40,6 @@ INSERT INTO `user_module` VALUES (6, 1, 6);
 INSERT INTO `user_module` VALUES (7, 1, 7);
 INSERT INTO `user_module` VALUES (8, 1, 8);
 INSERT INTO `user_module` VALUES (9, 1, 9);
+INSERT INTO `user_module` VALUES (12, 1, 10);
 INSERT INTO `user_module` VALUES (10, 2, 4);
 INSERT INTO `user_module` VALUES (11, 2, 5);

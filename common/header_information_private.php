@@ -1,3 +1,3 @@
 <?php
-echo "private information here ";
+//echo "private information here ";
 ?>

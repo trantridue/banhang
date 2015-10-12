@@ -201,6 +201,7 @@ class CommonUtil {
 		$_SESSION ['session_user_module_id'] = substr ( $session_user_module_id, 0, - 1 );
 		$_SESSION ['session_user_module_key'] = substr ( $session_user_module_key, 0, - 1 );
 		$_SESSION ['session_user_module_value'] = substr ( $session_user_module_value, 0, - 1 );
+		
 		$strAllField = $strAllField . "session_user_module_id" . ";" . "session_user_module_key" . ";" . session_user_module_value;
 		
 		$_SESSION [session_all_field] = $strAllField;
@@ -322,9 +323,6 @@ class CommonUtil {
 	function endsWith($haystack, $needle) {
 		// search forward starting from end minus needle length characters
 		return $needle === "" || (($temp = strlen ( $haystack ) - strlen ( $needle )) >= 0 && strpos ( $haystack, $needle, $temp ) !== FALSE);
-	}
-	function test() {
-		echo "aaa";
 	}
 }
 ?>

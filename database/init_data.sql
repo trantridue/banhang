@@ -23,10 +23,22 @@ INSERT INTO `module` VALUES (1, 'config', 'CẤU HÌNH');
 INSERT INTO `module` VALUES (2, 'user', 'NHÂN VIÊN');
 INSERT INTO `module` VALUES (3, 'import', 'NHẬP HÀNG');
 INSERT INTO `module` VALUES (4, 'export', 'XUẤT HÀNG');
+INSERT INTO `module` VALUES (5, 'customer', 'KHÁCH HÀNG');
+INSERT INTO `module` VALUES (6, 'provider', 'NHÀ CUNG CẤP');
+INSERT INTO `module` VALUES (7, 'fund', 'QUỸ');
+INSERT INTO `module` VALUES (8, 'spend', 'CHI PHÍ');
+INSERT INTO `module` VALUES (9, 'report', 'BÁO CÁO');
+INSERT INTO `module` VALUES (10, 'new', 'BÁO CÁO');
 
 
 INSERT INTO `user_module` VALUES (1, 1, 1);
 INSERT INTO `user_module` VALUES (2, 1, 2);
 INSERT INTO `user_module` VALUES (3, 1, 3);
 INSERT INTO `user_module` VALUES (4, 1, 4);
-INSERT INTO `user_module` VALUES (5, 2, 4);
+INSERT INTO `user_module` VALUES (5, 1, 5);
+INSERT INTO `user_module` VALUES (6, 1, 6);
+INSERT INTO `user_module` VALUES (7, 1, 7);
+INSERT INTO `user_module` VALUES (8, 1, 8);
+INSERT INTO `user_module` VALUES (9, 1, 9);
+INSERT INTO `user_module` VALUES (10, 2, 4);
+INSERT INTO `user_module` VALUES (11, 2, 5);

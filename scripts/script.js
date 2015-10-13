@@ -13,19 +13,21 @@ function onOffbutton(fieldId, on, off) {
 function onOffcheckbox(fieldId) {
 }
 function go(obj, onclick, module) {
-//	alert(reloadUrl);
 	if (onclick.startsWith("Module")) {
 		module = onclick.replace("Module", "");
-		window.location.href = "homepage.php?module=" + module;;
+		window.location.href = "homepage.php?module=" + module;
 	} else {
 		var action = onclick.replace('action', '').toLowerCase();
+		alert(module + action + "Form");
 		var arrayAll = getArrayIdDataFieldOfForm(module + action + "Form");
 		var url = "module/" + module + "/" + action + ".php?"
 				+ parseFieldsToUrlStringEncode(arrayAll);
+//		alert(url);
 		$.ajax( {
 			url : url,
 			success : function(data) {
-				window.location.href = "homepage.php?module=" + module;
+//				window.location.href = "homepage.php?module=" + module;
+			alert(data);
 			}
 		});
 	}

@@ -26,7 +26,7 @@ class ConfigService {
 		
 		$html = $html . table_tr;
 		for($i = 1; $i < count ( $keys ); $i ++) {
-			$html = $html . table_td . $this->commonUtil->generateInputField ( $types [$i], $keys [$i], '', $this->onclick, $this->on, $this->off ) . table_td_closed;
+			$html = $html . table_td . $this->commonUtil->generateInputField ( $types [$i], $table."_".$keys [$i], '', $this->onclick, $this->on, $this->off ) . table_td_closed;
 		}
 		$strBtnValues = label_button_insert;
 		$strBtnOnclicks = "actionInsert".$table;

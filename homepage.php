@@ -51,7 +51,6 @@ include 'common/header.php';
 </div>
 <hr>
 
-
 <div id="body"><?php
 include 'common/body.php';
 ?> </div>

@@ -130,12 +130,17 @@
 	min-width: 98px;
 	float: right;
 }
+
 .menuButton {
 	height: 30px;
 	margin-right: 10px;
 	font-weight: bold;
 	min-width: 98px;
 	float: right;
+}
+
+#body {
+	margin-top: 5px;
 }
 
 #body_data {
@@ -164,4 +169,19 @@
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: bold;
+}
+
+#header {
+}
+
+#header_information_private {
+	float: right;
+	width: 50%;
+	padding-bottom: 5px; 
+}
+
+#header_information_public {
+	float: left;
+	width: 50%;
+	padding-bottom: 5px;
 }

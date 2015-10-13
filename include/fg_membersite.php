@@ -34,13 +34,15 @@ class FGMembersite {
 	
 	var $error_message;
 	
-	var $commonUtil;
+	var $commonService;
+	var $util;
 	
 	//-----Initialization -------
-	function FGMembersite($commonUtil) {
+	function FGMembersite($commonService, $util) {
 		$this->sitename = 'YourWebsiteName.com';
 		$this->rand_key = '0iQx5oBk66oVZep';
-		$this->commonUtil = $commonUtil;
+		$this->commonService = $commonService;
+		$this->util = $util;
 	}
 	
 	function InitDB($host, $uname, $pwd, $database, $tablename) {
@@ -156,14 +158,7 @@ class FGMembersite {
 	
 	function LogOut() {
 		session_start ();
-		
-		$sessionvar = $this->GetLoginSessionVar ();
-		
-		$_SESSION [$sessionvar] = NULL;
-		$_SESSION [session_all_field] = NULL;
-		
-		unset ( $_SESSION [session_all_field] );
-		unset ( $_SESSION [$sessionvar] );
+		session_destroy ();
 	}
 	
 	function EmailResetPasswordLink() {
@@ -326,8 +321,8 @@ class FGMembersite {
 		
 		$_SESSION ['name_of_user'] = $row ['name'];
 		$_SESSION ['email_of_user'] = $row ['email'];
-		$_SESSION ['login_session_user_id'] = $row ['id'];
-		
+		$_SESSION ['session_id_of_user'] = $row ['id'];
+		$this->commonService->initSession ( $_SESSION ['session_id_of_user'] );
 		return true;
 	}
 	

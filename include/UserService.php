@@ -1,15 +1,12 @@
 <?php
 class UserService {
-	var $commonUtil;
-	var $connection;
+	var $commonService;
+	var $util;
 	
-	function UserService($commonUtil) {
-		$this->commonUtil = $commonUtil;
+	function UserService($commonService,$util) {
+		$this->commonService = $commonService;
+		$this->util = $util;
 	}
-	
-	function getAllUser() {
-		$qry = "select * from brand";
-		return $this->commonUtil->getResultByQuery ( $qry );
-	}
+
 }
 ?>

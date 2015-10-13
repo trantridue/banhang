@@ -81,3 +81,6 @@ function getArrayIdDataFieldOfForm(formId) {
 	alls[2] = arrayTypes;
 	return alls;
 }
+function gotoModule(module) {
+	alert(module);
+}

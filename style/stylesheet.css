@@ -130,6 +130,13 @@
 	min-width: 98px;
 	float: right;
 }
+.menuButton {
+	height: 30px;
+	margin-right: 10px;
+	font-weight: bold;
+	min-width: 98px;
+	float: right;
+}
 
 #body_data {
 	height: 500px;

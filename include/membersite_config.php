@@ -2,21 +2,28 @@
 require_once ("constant.php");
 
 require_once ("fg_membersite.php");
-require_once ("CommonUtil.php");
+// MODEL
+require_once ("model/field.php");
+// UTIL
+require_once ("Util.php");
+// SERVICE
+require_once ("CommonService.php");
 require_once ("UserService.php");
 require_once ("ConfigService.php");
+
 // Init connection
 $connection = mysql_connect ( hostname, username, password );
 // Select database 
-mysql_select_db (database, $connection );
+mysql_select_db ( database, $connection );
 // Set encode
 mysql_query ( "SET NAMES 'UTF8'", $connection );
 
-$commonUtil = new CommonUtil ($connection);
+$util = new Util ( );
+$commonService = new CommonService ( $connection, $util );
 
-$userService = new UserService ($commonUtil);
-$configService = new ConfigService ($commonUtil);
-$fgmembersite = new FGMembersite ($commonUtil);
+$userService = new UserService ( $commonService, $util );
+$configService = new ConfigService ( $commonService, $util );
+$fgmembersite = new FGMembersite ( $commonService, $util );
 
 //Provide your site name here
 $fgmembersite->SetWebsiteName ( 'trantridue.com' );

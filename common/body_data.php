@@ -1,8 +1,10 @@
+<div id="body_data_sub_menu">
 <?php
-//session_start();
-$_SESSION ['session_selected_menu'] = default_menu;
-if (isset ( $_REQUEST ['module'] )) {
-	$_SESSION ['session_selected_menu'] = $_REQUEST ['module'];
-}
+$commonService->initUserMenu ();
+?>
+</div>
+<div id="body_data_main">
+<?php
 include 'module/' . $_SESSION ['session_selected_menu'] . "/main.php";
 ?>
+</div>

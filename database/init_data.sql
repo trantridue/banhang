@@ -1,9 +1,11 @@
 ﻿-- User
 
 -- Config
-truncate table `config`;
+truncate `config`;
+truncate `module_sub_module`;
 truncate `user_module`;
 truncate `module`;
+truncate `sub_module`;
 
 INSERT INTO `config` VALUES (1, 'nbr_row_import', '10', 'Số dòng nhập hàng ', 'number','Số dòng nhập hàng mặc định',1);
 INSERT INTO `config` VALUES (2, 'nbr_row_export', '10', 'Số dòng xuất hàng ', 'number','Số dòng xuất hàng mặc định',2);
@@ -31,6 +33,11 @@ INSERT INTO `module` VALUES (9, 'report', 'BÁO CÁO');
 INSERT INTO `module` VALUES (10, 'new', 'TIN TỨC');
 
 
+INSERT INTO `sub_module` (`id`, `key`, `value`) VALUES 
+(1, 'search', 'TÌM KIẾM'),
+(2, 'insert', 'THÊM'),
+(3, 'return', 'TRẢ HÀNG');
+
 INSERT INTO `user_module` VALUES (1, 1, 1);
 INSERT INTO `user_module` VALUES (2, 1, 2);
 INSERT INTO `user_module` VALUES (3, 1, 3);
@@ -43,3 +50,36 @@ INSERT INTO `user_module` VALUES (9, 1, 9);
 INSERT INTO `user_module` VALUES (12, 1, 10);
 INSERT INTO `user_module` VALUES (10, 2, 4);
 INSERT INTO `user_module` VALUES (11, 2, 5);
+
+INSERT INTO `module_sub_module` (`sub_module_id`, `module_id`) VALUES 
+(1, 1),
+(2, 1),
+(3, 1),
+(1, 2),
+(2, 2),
+(3, 2),
+(1, 3),
+(2, 3),
+(3, 3),
+(1, 4),
+(2, 4),
+(3, 4),
+(1, 5),
+(2, 5),
+(3, 5),
+(1, 6),
+(2, 6),
+(3, 6),
+(1, 7),
+(2, 7),
+(3, 7),
+(1, 8),
+(2, 8),
+(3, 8),
+(1, 9),
+(2, 9),
+(3, 9),
+(1, 10),
+(2, 10),
+(3, 10)
+;

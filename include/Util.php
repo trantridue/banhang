@@ -49,9 +49,17 @@ class Util {
 		// search forward starting from end minus needle length characters
 		return $needle === "" || (($temp = strlen ( $haystack ) - strlen ( $needle )) >= 0 && strpos ( $haystack, $needle, $temp ) !== FALSE);
 	}
-	function generateHTMLField($field) {
-		return "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
-		class='" . $field->class . "' onclick='" . $field->onClick . "'/>";
+	function generateHTMLField($field, $idPrefix, $activeId, $activeClassName) {
+		$activeClass = ($activeId == $field->id) ? $activeClassName : "";
+		return "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
+		class='" . $field->class . " " . $activeClass . "' onclick='" . $field->onClick . "'/>";
+	}
+	
+	function setSelectedMenu() {
+		$_SESSION ['session_selected_menu'] = default_menu;
+		if (isset ( $_REQUEST ['module'] )) {
+			$_SESSION ['session_selected_menu'] = $_REQUEST ['module'];
+		}
 	}
 }
 ?>

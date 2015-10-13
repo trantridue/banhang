@@ -9,15 +9,24 @@ class CommonService {
 	}
 	function initUserMenu() {
 		$menuButtons = $_SESSION ['session_menuButtons'];
+		
 		$html = "";
+		$idPrefix = "menu_";
+		$activeClassName = "activeButtonGreen";
+		$activeId = $_SESSION ['session_selected_menu'];
+		
 		for($i = 0; $i < count ( $menuButtons ); $i ++) {
-			$html = $html . $this->util->generateHTMLField ( $menuButtons [$i] );
+			$html = $html . $this->util->generateHTMLField ( $menuButtons [$i], $idPrefix, $activeId, $activeClassName );
 		}
 		echo $html;
 	}
 	function initSession($userId) {
+		$this->initSessionMenu ( $userId );
+	}
+	
+	function initSessionMenu($userId) {
 		//Get list module by User ID
-		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $_SESSION ['session_id_of_user'] . ")";
+		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $userId . ")";
 		$result = $this->getResultByQuery ( $qry );
 		$menuButtons = array ();
 		for($i = 0; $i < count ( $result ); $i ++) {

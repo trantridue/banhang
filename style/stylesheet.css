@@ -160,8 +160,13 @@
 	width: 100%;
 }
 
-.activeButton {
+.activeButtonViolet {
 	background-color: violet;
+}
+
+.activeButtonGreen {
+	background-color: green;
+	color: white;
 }
 
 .tr_head {
@@ -172,12 +177,13 @@
 }
 
 #header {
+	
 }
 
 #header_information_private {
 	float: right;
 	width: 50%;
-	padding-bottom: 5px; 
+	padding-bottom: 5px;
 }
 
 #header_information_public {

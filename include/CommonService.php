@@ -20,6 +20,10 @@ class CommonService {
 		}
 		echo $html;
 	}
+	function initSubMenu () {
+		
+	}
+	
 	function initSession($userId) {
 		$this->initSessionMenu ( $userId );
 	}
@@ -29,21 +33,20 @@ class CommonService {
 		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $userId . ")";
 		$result = $this->getResultByQuery ( $qry );
 		$menuButtons = array ();
+		
 		for($i = 0; $i < count ( $result ); $i ++) {
 			
 			$field = new Field ( );
 			
 			$field->id = $result [$i] ['key'];
 			$field->value = $result [$i] ['value'];
-			$field->type = 'button';
+			$field->type = 'button';	
 			$field->class = 'menuButton';
 			$field->onClick = 'gotoModule("' . $result [$i] ['key'] . '")';
 			
 			$menuButtons [] = $field;
 		}
 		$_SESSION ['session_menuButtons'] = $menuButtons;
-		//get list sub Button
-		$qry = "select ";
 	}
 	
 	function getResultByQuery($qry) {

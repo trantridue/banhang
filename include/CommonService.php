@@ -42,6 +42,8 @@ class CommonService {
 			$menuButtons [] = $field;
 		}
 		$_SESSION ['session_menuButtons'] = $menuButtons;
+		//get list sub Button
+		$qry = "select ";
 	}
 	
 	function getResultByQuery($qry) {

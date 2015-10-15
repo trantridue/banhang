@@ -3,6 +3,7 @@ echo $_SESSION ['session_selected_menu'] . " : " . $_SESSION ['session_selected_
 ?>
 <?php
 $field = new Field();
+$field->class='selectClass'; 
 $field->id='menu_id'; 
 $field->type='select'; 
 $field->defaultKey='a;b;c'; 

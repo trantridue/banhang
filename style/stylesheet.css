@@ -193,14 +193,21 @@
 	padding-bottom: 5px;
 	background-color: bisque;
 }
+
 #body_data_sub_menu {
 	width: 100%;
 	float: left;
 	background-color: bisque;
 }
+
 #body_data_main {
 	width: 100%;
 	float: left;
 	background-color: #27B9B2;
 	height: 93%;
+}
+
+.selectClass {
+	width: 110px;
+	height: 22px;
 }

@@ -56,7 +56,8 @@ class Util {
 			$html = $html . "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
 		class='" . $field->class . " " . $activeClass . "' onclick='" . $field->onClick . "'/>";
 		} else if ($field->type == "select") {
-			$html = $html . "<select id='" . $idPrefix . $field->id . "' onChange='" . $field->onChange . "'>";
+			$html = $html . "<select id='" . $idPrefix . $field->id . "' 
+			onChange='" . $field->onChange . "' class='" . $field->class . "'>";
 			$arrayKeys = explode ( ";", $field->defaultKey );
 			$arrayValues = explode ( ";", $field->defaultValue );
 			for($i = 0; $i < count ( $arrayValues ); $i ++) {

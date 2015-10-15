@@ -8,6 +8,8 @@ define ( 'database', 'banhang' );
 define ( 'tablename', 'user' );
 
 // DEFAULT menu
-define ( 'default_menu', 'export' );
+define ( 'default_menu', 'config' );
+define ( 'default_submenu_key', 'search' );
+define ( 'default_submenu_value', 'TÌM KIẾM' );
 
 ?>

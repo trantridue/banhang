@@ -19,9 +19,10 @@ if (isset ( $_POST ['submitted'] )) {
 
 <!-- Form Code Start -->
 <div id='fg_membersite'>
-<form id='login' action='<?php
-echo $fgmembersite->GetSelfScript ();
-?>'
+<form id='login'
+	action='<?php
+	echo $fgmembersite->GetSelfScript ();
+	?>'
 	method='post' accept-charset='UTF-8'>
 <fieldset><legend>Login</legend> <input type='hidden' name='submitted'
 	id='submitted' value='1' />

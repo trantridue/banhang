@@ -19,7 +19,7 @@ class CommonService {
 			$html = $html . $this->util->generateHTMLField ( $menuButtons [$i], $idPrefix, $activeId, $activeClassName );
 			if ($_SESSION ['session_selected_menu'] == $menuButtons [$i]->id) {
 				$_SESSION ['session_submenu_buttons'] = $menuButtons [$i]->subMenu;
-				$_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']] = $menuButtons [$i]->activeSubMenu;
+				$_SESSION ['session_selected_sub_menu' . $_SESSION ['session_selected_menu']] = $menuButtons [$i]->activeSubMenu;
 			}
 		}
 		echo $html;
@@ -32,7 +32,11 @@ class CommonService {
 		if (isset ( $_REQUEST ['submenu'] )) {
 			$activeId = $_REQUEST ['submenu'];
 		} else {
-			$activeId = $_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']];
+			$activeId = $_SESSION ['session_selected_sub_menu' . $_SESSION ['session_selected_menu']];
+		}
+		if (count ( $subMenuButtons ) == 1) {
+			$activeId = default_submenu_key;
+			$_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']] = default_submenu_key;
 		}
 		for($i = 0; $i < count ( $subMenuButtons ); $i ++) {
 			$html = $html . $this->util->generateHTMLField ( $subMenuButtons [$i], $idPrefix, $activeId, $activeClassName );
@@ -46,13 +50,21 @@ class CommonService {
 	
 	function initSessionMenu($userId) {
 		//Get list module by User ID
-		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $userId . ")";
+		//		$qry = "select * from module where id in (select module_id from user_module where user_id = " . $userId . ")";
+		$qry = "select t1.*, REPLACE(group_concat(t3.`key`),',',';') as subKey, REPLACE(group_concat(t3.`value`),',',';') as subValue,
+				(select `key` from sub_module where id = t1.active_sub) as active_sub_menu
+				from module t1
+				left join module_sub_module t2 on t2.module_id = t1.id
+				left join sub_module t3 on t2.sub_module_id = t3.id
+				where t1.id in (select module_id from user_module where user_id =" . $userId . ")
+				group by t1.`key` order by t1.id desc";
 		$result = $this->getResultByQuery ( $qry );
 		$menuButtons = array ();
 		
 		for($i = 0; $i < count ( $result ); $i ++) {
-			$subMenuKey = "insert;update;search";
-			$subMenuValue = "THÊM;SỬA;TÌM KIẾM";
+			
+			$subMenuKey = ($result [$i] ['subKey'] == '') ? default_submenu_key : $result [$i] ['subKey'];
+			$subMenuValue = ($result [$i] ['subValue'] == '') ? default_submenu_value : $result [$i] ['subValue'];
 			
 			$field = new Field ( );
 			
@@ -61,15 +73,7 @@ class CommonService {
 			$field->type = 'button';
 			$field->class = 'menuButton';
 			$field->onClick = 'gotoModule("' . $result [$i] ['key'] . '")';
-			
-			if($result [$i] ['key']=='new') {
-				$field->activeSubMenu = 'insert';
-			} else if($result [$i] ['key']=='report') {
-				$field->activeSubMenu = 'search';
-			}else {
-				$field->activeSubMenu = 'update';
-			}
-			
+			$field->activeSubMenu = $result [$i] ['active_sub_menu'];
 			$field->subMenu = $this->buildSubMenu ( $result [$i] ['key'], $subMenuKey, $subMenuValue );
 			
 			$menuButtons [] = $field;

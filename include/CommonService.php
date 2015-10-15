@@ -69,7 +69,7 @@ class CommonService {
 			$field = new Field ( );
 			
 			$field->id = $result [$i] ['key'];
-			$field->value = $result [$i] ['value'];
+			$field->value = $result [$i] ['id'].". ".$result [$i] ['value'];
 			$field->type = 'button';
 			$field->class = 'menuButton';
 			$field->onClick = 'gotoModule("' . $result [$i] ['key'] . '")';

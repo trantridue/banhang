@@ -4,6 +4,7 @@ require_once ("constant.php");
 require_once ("fg_membersite.php");
 // MODEL
 require_once ("model/field.php");
+require_once ("model/subMenu.php");
 // UTIL
 require_once ("Util.php");
 // SERVICE

@@ -144,7 +144,7 @@
 }
 
 #body_data {
-	height: 500px;
+	height: 530px;
 	overflow: auto;
 }
 
@@ -190,4 +190,15 @@
 	float: left;
 	width: 50%;
 	padding-bottom: 5px;
+}
+#body_data_sub_menu {
+	width: 100%;
+	float: left;
+	background-color: bisque;
+}
+#body_data_main {
+	width: 100%;
+	float: left;
+	background-color: #27B9B2;
+	height: 93%;
 }

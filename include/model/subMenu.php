@@ -1,5 +1,5 @@
 <?php
-class Field {
+class SubMenu {
 	var $type;
 	var $id;
 	var $class;
@@ -9,11 +9,8 @@ class Field {
 	var $onClick;
 	var $onKeyPress;
 	var $onKeyRelease;
-	
-	var $subMenu;
-	
-	function Field() {
-		
-	}
+function SubMenu() {
+
+}
 }
 ?>

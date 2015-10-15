@@ -50,7 +50,7 @@ class Util {
 		return $needle === "" || (($temp = strlen ( $haystack ) - strlen ( $needle )) >= 0 && strpos ( $haystack, $needle, $temp ) !== FALSE);
 	}
 	function generateHTMLField($field, $idPrefix, $activeId, $activeClassName) {
-		$activeClass = ($activeId == $field->id) ? $activeClassName : "";
+		$activeClass = ($activeId == $field->id || $_SESSION ['session_selected_menu'] . "_" . $activeId == $field->id) ? $activeClassName : "";
 		return "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
 		class='" . $field->class . " " . $activeClass . "' onclick='" . $field->onClick . "'/>";
 	}
@@ -59,6 +59,12 @@ class Util {
 		$_SESSION ['session_selected_menu'] = default_menu;
 		if (isset ( $_REQUEST ['module'] )) {
 			$_SESSION ['session_selected_menu'] = $_REQUEST ['module'];
+		}
+	}
+	function setSelectedSubMenu() {
+		$_SESSION ['session_selected_sub_menu'] = $_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']];
+		if (isset ( $_REQUEST ['submenu'] )) {
+			$_SESSION ['session_selected_sub_menu'] = $_REQUEST ['submenu'];
 		}
 	}
 }

@@ -19,20 +19,23 @@ class CommonService {
 			$html = $html . $this->util->generateHTMLField ( $menuButtons [$i], $idPrefix, $activeId, $activeClassName );
 			if ($_SESSION ['session_selected_menu'] == $menuButtons [$i]->id) {
 				$_SESSION ['session_submenu_buttons'] = $menuButtons [$i]->subMenu;
+				$_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']] = $menuButtons [$i]->activeSubMenu;
 			}
 		}
 		echo $html;
 	}
 	function initSubMenu() {
-		$menuButtons = $_SESSION ['session_submenu_buttons'];
-		
+		$subMenuButtons = $_SESSION ['session_submenu_buttons'];
 		$html = "";
 		$idPrefix = "sub_menu_";
 		$activeClassName = "activeButtonViolet";
-		$activeId = $_SESSION ['session_selected_sub_menu'];
-		
-		for($i = 0; $i < count ( $menuButtons ); $i ++) {
-			$html = $html . $this->util->generateHTMLField ( $menuButtons [$i], $idPrefix, $activeId, $activeClassName );
+		if (isset ( $_REQUEST ['submenu'] )) {
+			$activeId = $_REQUEST ['submenu'];
+		} else {
+			$activeId = $_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']];
+		}
+		for($i = 0; $i < count ( $subMenuButtons ); $i ++) {
+			$html = $html . $this->util->generateHTMLField ( $subMenuButtons [$i], $idPrefix, $activeId, $activeClassName );
 		}
 		echo $html;
 	}
@@ -48,8 +51,8 @@ class CommonService {
 		$menuButtons = array ();
 		
 		for($i = 0; $i < count ( $result ); $i ++) {
-			$subMenuKey = "insert" . $i . ";update" . $i;
-			$subMenuValue = "THÊM" . ";SỬA";
+			$subMenuKey = "insert;update;search";
+			$subMenuValue = "THÊM;SỬA;TÌM KIẾM";
 			
 			$field = new Field ( );
 			
@@ -58,6 +61,14 @@ class CommonService {
 			$field->type = 'button';
 			$field->class = 'menuButton';
 			$field->onClick = 'gotoModule("' . $result [$i] ['key'] . '")';
+			
+			if($result [$i] ['key']=='new') {
+				$field->activeSubMenu = 'insert';
+			} else if($result [$i] ['key']=='report') {
+				$field->activeSubMenu = 'search';
+			}else {
+				$field->activeSubMenu = 'update';
+			}
 			
 			$field->subMenu = $this->buildSubMenu ( $result [$i] ['key'], $subMenuKey, $subMenuValue );
 			

@@ -11,6 +11,7 @@ class Field {
 	var $onKeyRelease;
 	
 	var $subMenu;
+	var $activeSubMenu;
 	
 	function Field() {
 		

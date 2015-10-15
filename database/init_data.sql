@@ -77,7 +77,6 @@ INSERT INTO `sub_module` (`id`, `key`, `value`) VALUES
 ;
 
 INSERT INTO `module_sub_module` (`module_id`, `sub_module_id`) VALUES
-(1, 1),
 (1, 5),
 (1, 6),
 (2, 1),
@@ -88,6 +87,7 @@ INSERT INTO `module_sub_module` (`module_id`, `sub_module_id`) VALUES
 (4, 1),
 (5, 1),
 (6, 1),
+(6, 3),
 (6, 4),
 (7, 1),
 (7, 3),

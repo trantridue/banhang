@@ -29,7 +29,7 @@ INSERT INTO `config` (`id`, `key`, `value`, `label`, `type`, `description`, `sor
 
 
 INSERT INTO `module` (`id`, `key`, `value`, `active_sub`) VALUES
-(1, 'config', 'CẤU HÌNH', 5),
+(1, 'config', 'CẤU HÌNH', 6),
 (2, 'user', 'NHÂN VIÊN', 1),
 (3, 'import', 'NHẬP HÀNG', 1),
 (4, 'export', 'XUẤT HÀNG', 1),

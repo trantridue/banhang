@@ -6,7 +6,7 @@ $commonService->initSubMenu ();
 
 <div id="body_data_main">
 <?php
-$formName = $_SESSION ['session_selected_menu'] . $_SESSION ['session_selected_sub_menu']; 
+$formName = $_SESSION ['session_selected_menu'] . $_SESSION ['session_selected_sub_menu']."Form"; 
 ?>
 <form id="<?php echo $formName;?>">
 <?php

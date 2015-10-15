@@ -19,7 +19,7 @@ class CommonService {
 			$html = $html . $this->util->generateHTMLField ( $menuButtons [$i], $idPrefix, $activeId, $activeClassName );
 			if ($_SESSION ['session_selected_menu'] == $menuButtons [$i]->id) {
 				$_SESSION ['session_submenu_buttons'] = $menuButtons [$i]->subMenu;
-				$_SESSION ['session_selected_sub_menu' . $_SESSION ['session_selected_menu']] = $menuButtons [$i]->activeSubMenu;
+				$_SESSION ['session_selected_sub_menu' . $_SESSION ['session_selected_menu']] = $menuButtons [$i]->activeItem;
 			}
 		}
 		echo $html;
@@ -73,7 +73,7 @@ class CommonService {
 			$field->type = 'button';
 			$field->class = 'menuButton';
 			$field->onClick = 'gotoModule("' . $result [$i] ['key'] . '")';
-			$field->activeSubMenu = $result [$i] ['active_sub_menu'];
+			$field->activeItem = $result [$i] ['active_sub_menu'];
 			$field->subMenu = $this->buildSubMenu ( $result [$i] ['key'], $subMenuKey, $subMenuValue );
 			
 			$menuButtons [] = $field;

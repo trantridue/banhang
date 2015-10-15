@@ -51,8 +51,21 @@ class Util {
 	}
 	function generateHTMLField($field, $idPrefix, $activeId, $activeClassName) {
 		$activeClass = ($activeId == $field->id || $_SESSION ['session_selected_menu'] . "_" . $activeId == $field->id) ? $activeClassName : "";
-		return "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
+		$html = "";
+		if ($field->type == "button") {
+			$html = $html . "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
 		class='" . $field->class . " " . $activeClass . "' onclick='" . $field->onClick . "'/>";
+		} else if ($field->type == "select") {
+			$html = $html . "<select id='" . $idPrefix . $field->id . "' onChange='" . $field->onChange . "'>";
+			$arrayKeys = explode ( ";", $field->defaultKey );
+			$arrayValues = explode ( ";", $field->defaultValue );
+			for($i = 0; $i < count ( $arrayValues ); $i ++) {
+				$selected = ($arrayValues [$i] == $field->activeItem) ? "selected='selected'" : "";
+				$html = $html . "<option value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
+			}
+			$html = $html . "</select>";
+		}
+		return $html;
 	}
 	
 	function setSelectedMenu() {
@@ -62,7 +75,7 @@ class Util {
 		}
 	}
 	function setSelectedSubMenu() {
-		$_SESSION ['session_selected_sub_menu'] = $_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']];
+		$_SESSION ['session_selected_sub_menu'] = $_SESSION ['session_selected_sub_menu' . $_SESSION ['session_selected_menu']];
 		if (isset ( $_REQUEST ['submenu'] )) {
 			$_SESSION ['session_selected_sub_menu'] = $_REQUEST ['submenu'];
 		}

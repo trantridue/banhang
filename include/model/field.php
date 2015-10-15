@@ -4,6 +4,7 @@ class Field {
 	var $id;
 	var $class;
 	var $value;
+	var $defaultKey;
 	var $defaultValue;
 	var $onChange;
 	var $onClick;
@@ -11,7 +12,7 @@ class Field {
 	var $onKeyRelease;
 	
 	var $subMenu;
-	var $activeSubMenu;
+	var $activeItem;
 	
 	function Field() {
 		

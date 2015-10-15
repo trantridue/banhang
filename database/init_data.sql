@@ -38,7 +38,9 @@ INSERT INTO `module` (`id`, `key`, `value`, `active_sub`) VALUES
 (7, 'fund', 'QUỸ', 1),
 (8, 'spend', 'CHI PHÍ', 3),
 (9, 'report', 'BÁO CÁO', 7),
-(10, 'new', 'TIN TỨC', 1);
+(10, 'new', 'TIN TỨC', 1),
+(11, 'upload', 'UPLOAD ẢNH', 3)
+;
 
 
 INSERT INTO `user_module` (`user_id`, `module_id`) VALUES
@@ -52,15 +54,17 @@ INSERT INTO `user_module` (`user_id`, `module_id`) VALUES
 (1, 8),
 (1, 9),
 (1, 10),
+(1, 11),
 (2, 1),
 (2, 2),
 (2, 3),
 (2, 4),
 (2, 5),
 (2, 5),
+(2, 11),
 (2, 6);
 
-INSERT INTO `sub_module` (`id`, `key`, `value`) VALUES 
+INSERT INTO `sub_module` (`id`, `key`, `value`) VALUES
 (1, 'search', 'DANH SÁCH'),
 (2, 'customer_return', 'KHÁCH HÀNG TRẢ'),
 (3, 'insert', 'THÊM'),
@@ -73,12 +77,15 @@ INSERT INTO `sub_module` (`id`, `key`, `value`) VALUES
 (10, 'report_property', 'BÁO CÁO TÀI SẢN'),
 (11, 'report_facture', 'BÁO CÁO HÓA ĐƠN'),
 (12, 'update', 'CẬP NHẬT'),
-(13, 'import_product', 'NHẬP HÀNG')
+(13, 'import_product', 'NHẬP HÀNG'),
+(14, 'refdata', 'DỮ LIỆU THAM CHIẾU'),
+(15, 'upload', 'UPLOAD')
 ;
 
 INSERT INTO `module_sub_module` (`module_id`, `sub_module_id`) VALUES
 (1, 5),
 (1, 6),
+(1, 14),
 (2, 1),
 (2, 3),
 (3, 1),
@@ -99,6 +106,7 @@ INSERT INTO `module_sub_module` (`module_id`, `sub_module_id`) VALUES
 (9, 10),
 (9, 11),
 (10, 1),
-(10, 3)
+(10, 3),
+(11, 15)
 ;
 commit;

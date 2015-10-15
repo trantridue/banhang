@@ -29,16 +29,16 @@ INSERT INTO `config` (`id`, `key`, `value`, `label`, `type`, `description`, `sor
 
 
 INSERT INTO `module` (`id`, `key`, `value`, `active_sub`) VALUES
-(1, 'config', 'CẤU HÌNH', 1),
-(2, 'user', 'NHÂN VIÊN', 2),
-(3, 'import', 'NHẬP HÀNG', 3),
-(4, 'export', 'XUẤT HÀNG', 4),
-(5, 'customer', 'KHÁCH HÀNG', 2),
-(6, 'provider', 'NHÀ CUNG CẤP', 2),
-(7, 'fund', 'QUỸ', 3),
-(8, 'spend', 'CHI PHÍ', 4),
-(9, 'report', 'BÁO CÁO', 1),
-(10, 'new', 'TIN TỨC', 2);
+(1, 'config', 'CẤU HÌNH', 5),
+(2, 'user', 'NHÂN VIÊN', 1),
+(3, 'import', 'NHẬP HÀNG', 1),
+(4, 'export', 'XUẤT HÀNG', 1),
+(5, 'customer', 'KHÁCH HÀNG', 1),
+(6, 'provider', 'NHÀ CUNG CẤP', 4),
+(7, 'fund', 'QUỸ', 1),
+(8, 'spend', 'CHI PHÍ', 3),
+(9, 'report', 'BÁO CÁO', 7),
+(10, 'new', 'TIN TỨC', 1);
 
 
 INSERT INTO `user_module` (`user_id`, `module_id`) VALUES
@@ -61,26 +61,44 @@ INSERT INTO `user_module` (`user_id`, `module_id`) VALUES
 (2, 6);
 
 INSERT INTO `sub_module` (`id`, `key`, `value`) VALUES 
-(1, 'search', 'TÌM KIẾM'),
-(2, 'update', 'SỬA'),
+(1, 'search', 'DANH SÁCH'),
+(2, 'customer_return', 'KHÁCH HÀNG TRẢ'),
 (3, 'insert', 'THÊM'),
-(4, 'return', 'TRẢ HÀNG');
+(4, 'return_provider', 'TRẢ HÀNG NHÀ CUNG CẤP'),
+(5, 'global_parameter', 'CÀI ĐẶT THAM SỐ'),
+(6, 'module_config', 'CÀI ĐẶT MODULE'),
+(7, 'report_income', 'BÁO CÁO DOANH SỐ'),
+(8, 'report_product', 'BÁO CÁO SẢN PHẨM'),
+(9, 'report_customer', 'BÁO CÁO KHÁCH HÀNG'),
+(10, 'report_property', 'BÁO CÁO TÀI SẢN'),
+(11, 'report_facture', 'BÁO CÁO HÓA ĐƠN'),
+(12, 'update', 'CẬP NHẬT'),
+(13, 'import_product', 'NHẬP HÀNG')
+;
 
 INSERT INTO `module_sub_module` (`module_id`, `sub_module_id`) VALUES
 (1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
+(1, 5),
+(1, 6),
 (2, 1),
-(2, 2),
 (2, 3),
 (3, 1),
 (3, 4),
-(3, 3),
+(3, 13),
 (4, 1),
-(4, 4),
 (5, 1),
-(5, 2),
-(5, 3)
+(6, 1),
+(6, 4),
+(7, 1),
+(7, 3),
+(8, 1),
+(8, 3),
+(9, 7),
+(9, 8),
+(9, 9),
+(9, 10),
+(9, 11),
+(10, 1),
+(10, 3)
 ;
 commit;

@@ -184,12 +184,14 @@
 	float: right;
 	width: 50%;
 	padding-bottom: 5px;
+	background-color: bisque;
 }
 
 #header_information_public {
 	float: left;
 	width: 50%;
 	padding-bottom: 5px;
+	background-color: bisque;
 }
 #body_data_sub_menu {
 	width: 100%;

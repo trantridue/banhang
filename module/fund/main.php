@@ -1,3 +1,3 @@
 <?php
-echo $_SESSION ['session_selected_menu'] . " : " . $_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']];
+echo $_SESSION ['session_selected_menu'] . " : " . $_SESSION ['session_selected_sub_menu'];
 ?>

@@ -11,8 +11,8 @@ function changMenu(id) {
 	alert(selectedItem);
 }
 function changUser(id) {
-	var selectedItem = $('#' + id).find(":selected").text();
-//	 var selectedItem=$('#' + id).find(":selected").attr("value");
+//	var selectedItem = $('#' + id).find(":selected").text();
+	 var selectedItem=$('#' + id).find(":selected").attr("value");
 	// alert(selectedItem);
 	// $("#menuDrop").html('list menu of ' + selectedItem);
 	var url = 'module/config/listmenu.php?user_id=' + encodeURIComponent(selectedItem);

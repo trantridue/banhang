@@ -9,8 +9,6 @@ class SubMenu {
 	var $onClick;
 	var $onKeyPress;
 	var $onKeyRelease;
-function SubMenu() {
-
-}
+	function SubMenu() {}
 }
 ?>

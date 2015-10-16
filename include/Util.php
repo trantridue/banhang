@@ -49,21 +49,17 @@ class Util {
 		// search forward starting from end minus needle length characters
 		return $needle === "" || (($temp = strlen ( $haystack ) - strlen ( $needle )) >= 0 && strpos ( $haystack, $needle, $temp ) !== FALSE);
 	}
-	function generateHTMLField($field, $idPrefix, $activeId, $activeClassName) {
-		$activeClass = ($activeId == $field->id || $_SESSION ['session_selected_menu'] . "_" . $activeId == $field->id) ? $activeClassName : "";
+	function generateHTMLField($field) {
 		$html = "";
 		if ($field->type == "button") {
-			$html = $html . "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
-		class='" . $field->class . " " . $activeClass . "' onclick='" . $field->onClick . "'/>";
+			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
+		class='" . $field->class . " " . $field->activeClass . "' onclick='" . $field->onClick . "'/>";
 		} else if ($field->type == "select") {
 			
-			$html = $html . "<select id='" . $idPrefix . $field->id . "' 
+			$html = $html . "<select id='" . $field->id . "' 
 			onChange='" . $field->onChange . "' class='" . $field->class . "'>";
-			$arrayKeys = explode ( ";", $field->defaultKey );
-			$arrayValues = explode ( ";", $field->defaultValue );
-//			echo count ( $arrayValues );
-//			print_r($arrayKeys)."<br>";
-//			print_r($arrayValues);
+			$arrayKeys = explode ( ";", $field->keys );
+			$arrayValues = explode ( ";", $field->values );
 			for($i = 0; $i < count ( $arrayValues ); $i ++) {
 				$selected = ($arrayKeys [$i] == $field->activeItem) ? "selected='selected'" : "";
 				$html = $html . "<option value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
@@ -85,6 +81,6 @@ class Util {
 			$_SESSION ['session_selected_sub_menu'] = $_REQUEST ['submenu'];
 		}
 	}
-	
+
 }
 ?>

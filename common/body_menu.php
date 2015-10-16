@@ -1,5 +1,5 @@
 <?php
-$util->setSelectedMenu ();
-$commonService->initUserMenu ();
-$util->setSelectedSubMenu ();
+//$util->setSelectedMenu ();
+//$commonService->initUserMenu ();
+//$util->setSelectedSubMenu ();
 ?>

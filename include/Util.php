@@ -56,12 +56,16 @@ class Util {
 			$html = $html . "<input type='" . $field->type . "' id='" . $idPrefix . $field->id . "' value='" . $field->value . "' 
 		class='" . $field->class . " " . $activeClass . "' onclick='" . $field->onClick . "'/>";
 		} else if ($field->type == "select") {
+			
 			$html = $html . "<select id='" . $idPrefix . $field->id . "' 
 			onChange='" . $field->onChange . "' class='" . $field->class . "'>";
 			$arrayKeys = explode ( ";", $field->defaultKey );
 			$arrayValues = explode ( ";", $field->defaultValue );
+//			echo count ( $arrayValues );
+//			print_r($arrayKeys)."<br>";
+//			print_r($arrayValues);
 			for($i = 0; $i < count ( $arrayValues ); $i ++) {
-				$selected = ($arrayValues [$i] == $field->activeItem) ? "selected='selected'" : "";
+				$selected = ($arrayKeys [$i] == $field->activeItem) ? "selected='selected'" : "";
 				$html = $html . "<option value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
 			}
 			$html = $html . "</select>";
@@ -81,5 +85,6 @@ class Util {
 			$_SESSION ['session_selected_sub_menu'] = $_REQUEST ['submenu'];
 		}
 	}
+	
 }
 ?>

@@ -36,7 +36,7 @@ class CommonService {
 		}
 		if (count ( $subMenuButtons ) == 1) {
 			$activeId = default_submenu_key;
-			$_SESSION ['session_selected_sub_menu'.$_SESSION ['session_selected_menu']] = default_submenu_key;
+			$_SESSION ['session_selected_sub_menu' . $_SESSION ['session_selected_menu']] = default_submenu_key;
 		}
 		for($i = 0; $i < count ( $subMenuButtons ); $i ++) {
 			$html = $html . $this->util->generateHTMLField ( $subMenuButtons [$i], $idPrefix, $activeId, $activeClassName );
@@ -46,6 +46,7 @@ class CommonService {
 	
 	function initSession($userId) {
 		$this->initSessionMenu ( $userId );
+		$this->initSessionAllUser ();
 	}
 	
 	function initSessionMenu($userId) {
@@ -69,7 +70,7 @@ class CommonService {
 			$field = new Field ( );
 			
 			$field->id = $result [$i] ['key'];
-			$field->value = $result [$i] ['id'].". ".$result [$i] ['value'];
+			$field->value = $result [$i] ['value'];
 			$field->type = 'button';
 			$field->class = 'menuButton';
 			$field->onClick = 'gotoModule("' . $result [$i] ['key'] . '")';
@@ -102,6 +103,66 @@ class CommonService {
 			$items [] = $rows;
 		}
 		return $items;
+	}
+	function getListMenuAsSelectBox() {
+		$listMenu = $_SESSION ['session_menuButtons'];
+		$defaultKey = "";
+		$defaultValue = "";
+		$total = count ( $listMenu );
+		for($i = 0; $i < $total; $i ++) {
+			$defaultKey = $defaultKey . $listMenu [$i]->id . ";";
+			$defaultValue = $defaultValue . $listMenu [$i]->value . ";";
+		}
+		$defaultKey = substr ( $defaultKey, 0, - 1 );
+		$defaultValue = substr ( $defaultValue, 0, - 1 );
+		
+		$field = new Field ( );
+		
+		$field->class = 'selectClass';
+		$field->id = 'menu_id';
+		$field->type = 'select';
+		$field->defaultKey = $defaultKey;
+		$field->defaultValue = $defaultValue;
+		$field->onChange = 'changMenu(this.id)';
+		$field->activeItem = $_SESSION ['session_selected_menu'];
+		return $this->util->generateHTMLField ( $field, 'select_', '', '' );
+	}
+	function getListUserAsSelectBox() {
+		$listUser = $_SESSION ['session_all_user'];
+		$defaultKey = "";
+		$defaultValue = "";
+		$total = count ( $listUser );
+		for($i = 0; $i < $total; $i ++) {
+			$defaultKey = $defaultKey . $listUser [$i]->id . ";";
+			$defaultValue = $defaultValue . $listUser [$i]->name . ";";
+		}
+		$defaultKey = substr ( $defaultKey, 0, - 1 );
+		$defaultValue = substr ( $defaultValue, 0, - 1 );
+		
+		$field = new Field ( );
+		
+		$field->class = 'selectClass';
+		$field->id = 'user_id';
+		$field->type = 'select';
+		$field->defaultKey = $defaultKey;
+		$field->defaultValue = $defaultValue;
+		$field->onChange = 'changUser(this.id)';
+		$field->activeItem = $_SESSION ['session_id_of_user'];
+		return $this->util->generateHTMLField ( $field, 'select_', '', '' );
+	}
+	function initSessionAllUser() {
+		$qry = "select * from user";
+		$result = $this->getResultByQuery ( $qry );
+		$users = array ();
+		
+		for($i = 0; $i < count ( $result ); $i ++) {
+			$user = new User ( );
+			
+			$user->id = $result [$i] ['id'];
+			$user->name = $result [$i] ['name'];
+			$users [] = $user;
+		}
+		$_SESSION ['session_all_user'] = $users;
 	}
 }
 ?>

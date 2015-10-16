@@ -1,9 +1,11 @@
 <?php
 class Menu {
+	
 	var $id;
-	var $name;
-	var $defaultSubMenu;
-	var $subMenus;
+	var $key;
+	var $value;
+	var $active_sub;
+	
 	function Menu(){}
 }
 ?>

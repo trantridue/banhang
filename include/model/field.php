@@ -14,18 +14,6 @@ class Field {
 	var $onKeyRelease;
 	var $activeItem;
 	
-//	function Field($id, $type, $idPrefix, $class, $activeClass, $value, $keys, $values, $onClick, $onChange) {
-//		$this->id = $id;
-//		$this->type = $type;
-//		$this->idPrefix = $idPrefix;
-//		$this->class = $class;
-//		$this->activeClass = $activeClass;
-//		$this->value = $value;
-//		$this->keys = $keys;
-//		$this->values = $values;
-//		$this->onClick = $onClick;
-//		$this->onChange = $onChange;
-//	}
 	function Field($id, $type, $class, $activeClass, $value, $onClick) {
 		$this->id = $id;
 		$this->type = $type;

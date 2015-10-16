@@ -322,7 +322,7 @@ class FGMembersite {
 		$_SESSION ['name_of_user'] = $row ['name'];
 		$_SESSION ['email_of_user'] = $row ['email'];
 		$_SESSION ['session_id_of_user'] = $row ['id'];
-//		$this->commonService->initSession ( $_SESSION ['session_id_of_user'] );
+		$this->commonService->initSession ();
 		return true;
 	}
 	

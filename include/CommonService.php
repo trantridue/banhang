@@ -7,6 +7,18 @@ class CommonService {
 		$this->connection = $connection;
 		$this->util = $util;
 	}
+	function initSession() {
+		
+	}
 	
+	function loadAllSubMenu(){
+		
+	}
+	function loadAllMenu(){
+		
+	}
+	function loadAllUser(){
+		
+	}
 }
 ?>

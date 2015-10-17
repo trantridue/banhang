@@ -1,10 +1,10 @@
 <?php
-class SubMenu {
+class SubModule {
 	var $id;
 	var $key;
 	var $value;
 	
-	function SubMenu() {
+	function SubModule() {
 	}
 }
 ?>

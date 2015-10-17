@@ -4,7 +4,10 @@ require_once ("constant.php");
 require_once ("fg_membersite.php");
 // MODEL
 require_once ("model/field.php");
-require_once ("model/subMenu.php");
+require_once ("model/subModule.php");
+require_once ("model/module.php");
+require_once ("model/moduleSubModule.php");
+require_once ("model/userModule.php");
 require_once ("model/user.php");
 // UTIL
 require_once ("Util.php");

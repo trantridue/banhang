@@ -1,21 +1,12 @@
-function gotoModule(module) {
-	window.location.href = "homepage.php?module=" + module;
+function gotoMenu(menu) {
+	window.location.href = "homepage.php?menu=" + menu;
 }
-function gotoSubModule(module, subModule) {
-	window.location.href = "homepage.php?module=" + module + "&submenu="
-			+ subModule;
+function gotoSubMenu(menu, submenu) {
+	window.location.href = "homepage.php?menu=" + menu + "&submenu="
+			+ submenu;
 }
-function changMenu(id) {
-	var selectedItem = $('#' + id).find(":selected").text();
+function changeUserMenu(id) {
 	var selectedItem = $('#' + id).find(":selected").attr("value");
-	alert(selectedItem);
-}
-function changUser(id) {
-//	var selectedItem = $('#' + id).find(":selected").text();
-	 var selectedItem=$('#' + id).find(":selected").attr("value");
-	// alert(selectedItem);
-	// $("#menuDrop").html('list menu of ' + selectedItem);
-	var url = 'module/config/listmenu.php?user_id=' + encodeURIComponent(selectedItem);
-//	alert(url);
-	$("#menuDrop").load(url);
+	var url = 'module/config/listMenuOfUser.php?user_id=' + encodeURIComponent(selectedItem);
+	$("#userMenuDropDown").load(url);
 }

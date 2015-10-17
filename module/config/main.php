@@ -2,19 +2,28 @@
 	<tr>
 		<th>User</th>
 		<th>Module</th>
+		<th>Active Module</th>
 	</tr>
 	<tr>
+
 		<td>
-		<div id="userDrop">
+		<div id="userDropDown">
+	<?php
+	echo $util->buildUserSelect ();
+	?>
+</div>
+		</td>
+		<td>
+		<div id="userMenuDropDown">
 <?php
-echo $commonService->getListUserAsSelectBox ();
+echo "sss";
 ?>
 </div>
 		</td>
 		<td>
-		<div id="menuDrop">
+		<div>
 <?php
-echo $commonService->getListMenuByUser ($_SESSION['session_id_of_user']);
+
 ?>
 </div>
 		</td>

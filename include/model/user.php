@@ -17,6 +17,8 @@ class User {
 	var $work_from;
 	var $work_to;
 	var $is_admin;
+	var $active_module;
+	var $modules;
 	
 	function User() {
 	}

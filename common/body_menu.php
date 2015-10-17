@@ -1,5 +1,3 @@
 <?php
-//$util->setSelectedMenu ();
-//$commonService->initUserMenu ();
-//$util->setSelectedSubMenu ();
+echo $util->buildMenuButton();
 ?>

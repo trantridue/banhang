@@ -194,6 +194,61 @@ function convertListModuleToSelectBoxField($modules) {
 		$field = $this->convertListModuleToSelectBoxField ( $modules );
 		return $this->generateHTMLField ( $field );
 	}
-
+	function buildModuleTableByUser($userId) {
+		$modules = $this->getListModuleOfUser ( $userId );
+		
+		$datatable_id = "datatable_module_by_user";
+		$ordercolumn = 1;
+		$ordertype = 'desc';
+		
+		echo $this->generateJSDatatableSimple($datatable_id, $ordercolumn, $ordertype);
+		echo $this->buildModuleTableDataByUser($modules,$datatable_id);
+	}
+	function buildModuleTableDataByUser($modules,$datatable_id){
+		$html = "<table id=".$datatable_id." width='100%'>".
+		"<thead>
+		<tr>
+		<td>s</td>
+		<td>ssss</td>
+		</tr>
+		</thead>
+		<tr>
+		<td>1</td>
+		<td>4</td>
+		</tr>
+		<tr>
+		<td>2</td>
+		<td>3</td>
+		</tr>
+		<tr>
+		<td>3</td>
+		<td>2</td>
+		</tr>
+		<tr>
+		<td>4</td>
+		<td>1</td>
+		</tr>
+		<tfoot>
+		<tr>
+		<th>a</th>
+		<th>w</th>
+		</tr>
+		</tfoot>
+		</table>";
+		
+		return $html;
+	}
+	
+	function generateJSDatatableSimple($datatable_id, $ordercolumn, $ordertype) {
+		echo "<script>";
+		echo "$(document).ready(function() { $('#" . $datatable_id . "').dataTable({
+				'order': [[ " . $ordercolumn . ", '" . $ordertype . "' ]], 
+				'pageLength': 10, 
+				'aLengthMenu': [[5, 10, 15, 100], ['5 Per Page', '10 Per Page', '15 Per Page', '100 Per Page']],
+				 'bPaginate': true,
+        'sDom':'fptip'
+	});});";
+		echo "</script>";
+	}
 }
 ?>

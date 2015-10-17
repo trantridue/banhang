@@ -16,7 +16,7 @@
 		<td>
 		<div id="userMenuDropDown">
 <?php
-echo "sss";
+echo $util->buildModuleSelectByUser ( $_SESSION ['session_id_of_user'] );
 ?>
 </div>
 		</td>

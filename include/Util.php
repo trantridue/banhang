@@ -238,7 +238,7 @@ class Util {
 		$table->headers = explode ( ";", "ID;KEY;NAME" );
 		$columnNames = explode ( ";", "id;key;value" );
 		$table->columnNames = $columnNames;
-		$columTypes = explode ( ";", "label;label;label" );
+		$columTypes = explode ( ";", "delete;label;label" );
 		$table->columTypes = $columTypes;
 		
 		$dataRows = array ();
@@ -328,7 +328,42 @@ class Util {
         		'sDom':'fptip'
 				});});";
 		$html = $html . "</script>";
+		$html = $html. $this->generateJsDeleteButton();		
 		return $html;
+	}
+	function generateJsDeleteButton () {
+		return "<script>
+$(document).ready(
+		function() {
+			$('.deleteIcon').click(
+					function() {
+						var elem = $(this).closest('.item');
+						var elemtxt = $(this).find(
+								'input[type=hidden],textarea,select').filter(
+								':hidden:first').val();
+						$.confirm( {
+							'title' : 'Hãy xác nhận',
+							'destroy' : 'true',
+							'message' : 'Bạn có muốn xóa không?',
+							'buttons' : {
+								'Có' : {
+									'class' : 'blue',
+									'action' : function() {
+										eval(elemtxt);
+									}
+								},
+								'Không' : {
+									'class' : 'gray',
+									'action' : function() {
+									}
+								}
+							}
+						});
+
+					});
+
+		});
+</script>";
 	}
 	function generateTdBlockLabelAndField($label, $value, $idDivValue) {
 		$html = "";

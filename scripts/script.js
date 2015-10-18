@@ -20,6 +20,9 @@ function changeMenu(id) {
 	$("#subMenuActive").load(activeMenu);
 }
 
-function deleteSubModuleFromModule(id) {
+function delete_datatable_module_by_user(id) {
+	alert(id);
+}
+function delete_datatable_sub_module_by_module(id) {
 	alert(id);
 }

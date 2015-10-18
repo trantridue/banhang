@@ -145,7 +145,8 @@ class Util {
 	}
 	function buildModuleSelect() {
 		$modules = $_SESSION ['session_modules'];
-		$field = $this->convertListModuleToSelectBoxField ( $modules );
+		$id = "all_menu";
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}
 	function convertListUserToSelectBoxField($users) {
@@ -161,7 +162,7 @@ class Util {
 		
 		$field->type = 'select';
 		$field->class = 'selectClass';
-		$field->id = 'user_id_select';
+		$field->id = 'user_select';
 		$field->value = 'user';
 		$field->onChange = 'changeUserMenu("' . $field->id . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
@@ -170,7 +171,7 @@ class Util {
 		
 		return $field;
 	}
-	function convertListModuleToSelectBoxField($modules) {
+	function convertListModuleToSelectBoxField($modules, $id ) {
 		$field = new Field ( );
 		
 		$keys = "";
@@ -184,8 +185,8 @@ class Util {
 		
 		$field->type = 'select';
 		$field->class = 'selectClass';
-		$field->id = 'user_menu_id_select';
-		$field->value = 'user_menu';
+		$field->id = $id;
+		$field->value = 'menu';
 		$field->onChange = 'changeMenu("' . $field->id . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
 		$field->values = substr ( $values, 0, - 1 );
@@ -207,8 +208,8 @@ class Util {
 		
 		$field->type = 'select';
 		$field->class = 'selectClass';
-		$field->id = 'user_sub_menu_id_select';
-		$field->value = 'user_sub_menu';
+		$field->id = 'sub_menu_select';
+		$field->value = 'sub_menu';
 		$field->onChange = 'changeSubMenu("' . $field->id . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
 		$field->values = substr ( $values, 0, - 1 );
@@ -218,7 +219,8 @@ class Util {
 	}
 	function buildModuleSelectByUser($userId) {
 		$modules = $this->getListModuleOfUser ( $userId );
-		$field = $this->convertListModuleToSelectBoxField ( $modules );
+		$id = "menu_by_user";
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}
 	function buildSubModuleSelectByModule($moduleKey) {
@@ -230,7 +232,7 @@ class Util {
 		$modules = $this->getListModuleOfUser ( $userId );
 		
 		$table = new Table ( );
-		
+
 		$table->id = "datatable_module_by_user";
 		$table->orderColumn = 0;
 		$table->orderType = "asc";
@@ -302,7 +304,7 @@ class Util {
 			$html = $html . "<tr>";
 			for($j = 0; $j < $numberColumn; $j ++) {
 				if($columnTypes[$j] == 'delete') {
-					$str = 'deleteSubModuleFromModule("'.$table->dataRows [$i]['id'].'")';
+					$str = 'delete_'.$table->id.'("'.$table->dataRows [$i]['id'].'")';
 					$html = $html . "<td title='Id : ".$table->dataRows [$i] [$table->columnNames [$j]]."'>
 					<div class='deleteIcon'><input type='hidden' value ='".$str."'></div></td>";
 				} else {

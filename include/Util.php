@@ -190,7 +190,6 @@ class Util {
 	}
 	function buildModuleSelectByUser($userId) {
 		$modules = $this->getListModuleOfUser ( $userId );
-		
 		$field = $this->convertListModuleToSelectBoxField ( $modules );
 		return $this->generateHTMLField ( $field );
 	}
@@ -202,6 +201,7 @@ class Util {
 		$table->id = "datatable_module_by_user";
 		$table->orderColumn = 0;
 		$table->orderType = "asc";
+		$table->pageLength = 5;
 		$table->headers = explode ( ";", "ID;MODULE KEY;MODULE NAME" );
 		$columnNames = explode ( ";", "id;key;value" );
 		$table->columnNames = $columnNames;
@@ -218,14 +218,19 @@ class Util {
 			$dataRows [] = $row;
 		}
 		$table->dataRows = $dataRows;
-		echo $this->generateJSDatatableSimple ( $table );
-		echo $this->buildModuleTableDataByUser ( $table );
+		$this->generateDataTableJS ( $table );
 	}
-	function buildModuleTableDataByUser($table) {
+
+	function generateDataTableJS($table) {
+		echo $this->generateJSDatatableSimple ( $table );
+		echo $this->generateDataTable ( $table );
+		
+	}
+	function generateDataTable($table){
 		$numberColumn = count ( $table->headers );
 		$numberRows = count ( $table->dataRows );
 		
-		$html = "<table id=" . $table->id . " width='100%' cellspacing='0' class='order-column'><thead><tr>";
+		$html = "<table id=" . $table->id . " width='100%' cellspacing='0' class='display order-column'><thead><tr>";
 		
 		for($i = 0; $i < $numberColumn; $i ++) {
 			$html = $html . "<td>" . $table->headers [$i] . "</td>";
@@ -244,12 +249,11 @@ class Util {
 		
 		return $html;
 	}
-	
 	function generateJSDatatableSimple($table) {
 		$html = "<script>";
 		$html = $html . "$(document).ready(function() { $('#" . $table->id . "').dataTable({
 				'order': [[ " . $table->orderColumn . ", '" . $table->orderType . "' ]], 
-				'pageLength': 10, 
+				'pageLength': ".$table->pageLength.", 
 				'destroy': true,
 				'aLengthMenu': [[5, 10, 15, 100], ['5 Per Page', '10 Per Page', '15 Per Page', '100 Per Page']],
 				'bPaginate': true,

@@ -7,6 +7,8 @@ function gotoSubMenu(menu, submenu) {
 }
 function changeUserMenu(id) {
 	var selectedItem = $('#' + id).find(":selected").attr("value");
-	var url = 'module/config/listMenuOfUser.php?user_id=' + encodeURIComponent(selectedItem);
-	$("#userMenuDropDown").load(url);
+	var listMenuOfUser = 'module/config/listMenuOfUser.php?user_id=' + encodeURIComponent(selectedItem);
+	$("#userMenuTable").load(listMenuOfUser);
+	var activeMenu = 'module/config/activeMenuOfUser.php?user_id=' + encodeURIComponent(selectedItem);
+	$("#userMenuActive").load(activeMenu);
 }

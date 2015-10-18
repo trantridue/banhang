@@ -62,7 +62,7 @@ class Util {
 			$arrayValues = explode ( ";", $field->values );
 			for($i = 0; $i < count ( $arrayValues ); $i ++) {
 				$selected = ($arrayKeys [$i] == $field->activeItem) ? "selected='selected'" : "";
-				$html = $html . "<option value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
+				$html = $html . "<option  value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
 			}
 			$html = $html . "</select>";
 		}
@@ -331,6 +331,9 @@ class Util {
 			$html = "<td class='tdLable'>".$label."</td><td><div id='".$idDivValue."'>".$value."</div></td>";
 		}
 		return $html;
+	}
+	function generateTitlePage(){
+		echo "<div class='titleModule'> &nbsp;&nbsp;&nbsp;". $_SESSION ['session_active_menu']."->".$_SESSION ['session_active_sub_menu']."</div>";
 	}
 }
 ?>

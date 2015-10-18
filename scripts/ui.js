@@ -111,6 +111,7 @@ $(document).ready(
 								':hidden:first').val();
 						$.confirm( {
 							'title' : 'Hãy xác nhận',
+							'destroy' : 'true',
 							'message' : 'Bạn có muốn xóa không?',
 							'buttons' : {
 								'Có' : {
@@ -130,6 +131,7 @@ $(document).ready(
 					});
 
 		});
+
 $(document)
 		.ready(
 				function() {

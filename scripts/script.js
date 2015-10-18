@@ -19,3 +19,7 @@ function changeMenu(id) {
 	var activeMenu = 'module/config/activeSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
 	$("#subMenuActive").load(activeMenu);
 }
+
+function deleteSubModuleFromModule(id) {
+	alert(id);
+}

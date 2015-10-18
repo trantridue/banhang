@@ -234,7 +234,7 @@ class Util {
 		$table->id = "datatable_module_by_user";
 		$table->orderColumn = 0;
 		$table->orderType = "asc";
-//		$table->pageLength = 4;
+		//		$table->pageLength = 4;
 		$table->headers = explode ( ";", "ID;KEY;NAME" );
 		$columnNames = explode ( ";", "id;key;value" );
 		$table->columnNames = $columnNames;
@@ -254,9 +254,9 @@ class Util {
 		$this->generateDataTableJS ( $table );
 	}
 	function buildSubModuleTableByModule($moduleKey) {
-//		echo $moduleKey;
-		$subModules = $this->getListSubMenuOfMenu($moduleKey);
-//		print_r($subModules);
+		//		echo $moduleKey;
+		$subModules = $this->getListSubMenuOfMenu ( $moduleKey );
+		//		print_r($subModules);
 		$table = new Table ( );
 		
 		$table->id = "datatable_sub_module_by_module";
@@ -265,7 +265,7 @@ class Util {
 		$table->headers = explode ( ";", "ID;KEY;NAME" );
 		$columnNames = explode ( ";", "id;key;value" );
 		$table->columnNames = $columnNames;
-		$columTypes = explode ( ";", "label;label;label" );
+		$columTypes = explode ( ";", "delete;link;label" );
 		$table->columTypes = $columTypes;
 		
 		$dataRows = array ();
@@ -280,15 +280,16 @@ class Util {
 		$table->dataRows = $dataRows;
 		$this->generateDataTableJS ( $table );
 	}
-
+	
 	function generateDataTableJS($table) {
 		echo $this->generateJSDatatableSimple ( $table );
 		echo $this->generateDataTable ( $table );
-		
+	
 	}
-	function generateDataTable($table){
+	function generateDataTable($table) {
 		$numberColumn = count ( $table->headers );
 		$numberRows = count ( $table->dataRows );
+		$columnTypes = $table->columTypes;
 		
 		$html = "<table id=" . $table->id . " width='100%' cellspacing='0' class='display order-column'><thead style='font-weight:bold;'><tr>";
 		
@@ -300,7 +301,13 @@ class Util {
 		for($i = 0; $i < $numberRows; $i ++) {
 			$html = $html . "<tr>";
 			for($j = 0; $j < $numberColumn; $j ++) {
-				$html = $html . "<td>" . $table->dataRows [$i] [$table->columnNames [$j]] . "</td>";
+				if($columnTypes[$j] == 'delete') {
+					$str = 'deleteSubModuleFromModule("'.$table->dataRows [$i]['id'].'")';
+					$html = $html . "<td title='Id : ".$table->dataRows [$i] [$table->columnNames [$j]]."'>
+					<div class='deleteIcon'><input type='hidden' value ='".$str."'></div></td>";
+				} else {
+					$html = $html . "<td>" . $table->dataRows [$i] [$table->columnNames [$j]] . "</td>";
+				}
 			}
 			$html = $html . "</tr>";
 		}
@@ -314,7 +321,7 @@ class Util {
 		$html = "<script>";
 		$html = $html . "$(document).ready(function() { $('#" . $table->id . "').dataTable({
 				'order': [[ " . $table->orderColumn . ", '" . $table->orderType . "' ]], 
-				'pageLength': ".$itemPerPage .", 
+				'pageLength': " . $itemPerPage . ", 
 				'destroy': true,
 				'aLengthMenu': [[5, 10, 15, 100], ['5 Per Page', '10 Per Page', '15 Per Page', '100 Per Page']],
 				'bPaginate': true,
@@ -323,17 +330,17 @@ class Util {
 		$html = $html . "</script>";
 		return $html;
 	}
-	function generateTdBlockLabelAndField($label,$value, $idDivValue) {
+	function generateTdBlockLabelAndField($label, $value, $idDivValue) {
 		$html = "";
-		if($idDivValue=='') {
-			$html = "<td class='tdLable'>".$label."</td><td>".$value."</td>";
+		if ($idDivValue == '') {
+			$html = "<td class='tdLable'>" . $label . "</td><td>" . $value . "</td>";
 		} else {
-			$html = "<td class='tdLable'>".$label."</td><td><div id='".$idDivValue."'>".$value."</div></td>";
+			$html = "<td class='tdLable'>" . $label . "</td><td><div id='" . $idDivValue . "'>" . $value . "</div></td>";
 		}
 		return $html;
 	}
-	function generateTitlePage(){
-		echo "<div class='titleModule'> &nbsp;&nbsp;&nbsp;". $_SESSION ['session_active_menu']."->".$_SESSION ['session_active_sub_menu']."</div>";
+	function generateTitlePage() {
+		echo "<div class='titleModule'> &nbsp;&nbsp;&nbsp;" . $_SESSION ['session_active_menu'] . "->" . $_SESSION ['session_active_sub_menu'] . "</div>";
 	}
 }
 ?>

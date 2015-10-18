@@ -5,10 +5,10 @@
 	</tr>
 	<tr>
 		<?php  echo $util->generateTdBlockLabelAndField('Module mặc định : ',$util->buildModuleSelectByUser ( $_SESSION ['session_id_of_user'] ),'userMenuActive'); ?>
-		<?php  echo $util->generateTdBlockLabelAndField('Sub mặc định : ',$util->buildModuleSelectByUser ( $_SESSION ['session_id_of_user'] ),'subMenuActive'); ?>
+		<?php  echo $util->generateTdBlockLabelAndField('Sub mặc định : ',$util->buildSubModuleSelectByModule ( $_SESSION ['session_active_menu'] ),'subMenuActive'); ?>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<td colspan="2" width="50%">
 		<div id="userMenuTable">
 			<?php
 			echo $util->buildModuleTableByUser ( $_SESSION ['session_id_of_user'] );

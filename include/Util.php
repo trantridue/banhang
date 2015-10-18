@@ -193,9 +193,37 @@ class Util {
 		
 		return $field;
 	}
+	function convertListSubModuleToSelectBoxField($subModules) {
+		$field = new Field ( );
+		
+		$keys = "";
+		$values = "";
+		$activeItem = "";
+		
+		for($i = 0; $i < count ( $subModules ); $i ++) {
+			$keys = $keys . $subModules [$i]->key . ";";
+			$values = $values . $subModules [$i]->value . ";";
+		}
+		
+		$field->type = 'select';
+		$field->class = 'selectClass';
+		$field->id = 'user_sub_menu_id_select';
+		$field->value = 'user_sub_menu';
+		$field->onChange = 'changeSubMenu("' . $field->id . '")';
+		$field->keys = substr ( $keys, 0, - 1 );
+		$field->values = substr ( $values, 0, - 1 );
+		$field->activeItem = $_SESSION ['session_active_sub_menu'];
+		
+		return $field;
+	}
 	function buildModuleSelectByUser($userId) {
 		$modules = $this->getListModuleOfUser ( $userId );
 		$field = $this->convertListModuleToSelectBoxField ( $modules );
+		return $this->generateHTMLField ( $field );
+	}
+	function buildSubModuleSelectByModule($moduleKey) {
+		$subModules = $this->getListSubMenuOfMenu ( $moduleKey );
+		$field = $this->convertListSubModuleToSelectBoxField ( $subModules );
 		return $this->generateHTMLField ( $field );
 	}
 	function buildModuleTableByUser($userId) {
@@ -219,6 +247,33 @@ class Util {
 			$row = array ();
 			for($j = 0; $j < count ( $columnNames ); $j ++) {
 				$row [$columnNames [$j]] = $modules [$i]->$columnNames [$j];
+			}
+			$dataRows [] = $row;
+		}
+		$table->dataRows = $dataRows;
+		$this->generateDataTableJS ( $table );
+	}
+	function buildSubModuleTableByModule($moduleKey) {
+//		echo $moduleKey;
+		$subModules = $this->getListSubMenuOfMenu($moduleKey);
+//		print_r($subModules);
+		$table = new Table ( );
+		
+		$table->id = "datatable_sub_module_by_module";
+		$table->orderColumn = 0;
+		$table->orderType = "asc";
+		$table->headers = explode ( ";", "ID;KEY;NAME" );
+		$columnNames = explode ( ";", "id;key;value" );
+		$table->columnNames = $columnNames;
+		$columTypes = explode ( ";", "label;label;label" );
+		$table->columTypes = $columTypes;
+		
+		$dataRows = array ();
+		
+		for($i = 0; $i < count ( $subModules ); $i ++) {
+			$row = array ();
+			for($j = 0; $j < count ( $columnNames ); $j ++) {
+				$row [$columnNames [$j]] = $subModules [$i]->$columnNames [$j];
 			}
 			$dataRows [] = $row;
 		}
@@ -276,9 +331,6 @@ class Util {
 			$html = "<td class='tdLable'>".$label."</td><td><div id='".$idDivValue."'>".$value."</div></td>";
 		}
 		return $html;
-	}
-	function buildSubModuleTableByModule($moduleKey) {
-		return $moduleKey;
 	}
 }
 ?>

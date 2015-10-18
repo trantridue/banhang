@@ -12,3 +12,10 @@ function changeUserMenu(id) {
 	var activeMenu = 'module/config/activeMenuOfUser.php?user_id=' + encodeURIComponent(selectedItem);
 	$("#userMenuActive").load(activeMenu);
 }
+function changeMenu(id) {
+	var selectedItem = $('#' + id).find(":selected").attr("value");
+	var listSubMenuOfMenu = 'module/config/listSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
+	$("#menuSubMenuTable").load(listSubMenuOfMenu);
+	var activeMenu = 'module/config/activeSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
+	$("#subMenuActive").load(activeMenu);
+}

@@ -143,6 +143,11 @@ class Util {
 		$field = $this->convertListUserToSelectBoxField ( $users );
 		return $this->generateHTMLField ( $field );
 	}
+	function buildModuleSelect() {
+		$modules = $_SESSION ['session_modules'];
+		$field = $this->convertListModuleToSelectBoxField ( $modules );
+		return $this->generateHTMLField ( $field );
+	}
 	function convertListUserToSelectBoxField($users) {
 		$field = new Field ( );
 		
@@ -201,8 +206,8 @@ class Util {
 		$table->id = "datatable_module_by_user";
 		$table->orderColumn = 0;
 		$table->orderType = "asc";
-		$table->pageLength = 5;
-		$table->headers = explode ( ";", "ID;MODULE KEY;MODULE NAME" );
+//		$table->pageLength = 4;
+		$table->headers = explode ( ";", "ID;KEY;NAME" );
 		$columnNames = explode ( ";", "id;key;value" );
 		$table->columnNames = $columnNames;
 		$columTypes = explode ( ";", "label;label;label" );
@@ -230,7 +235,7 @@ class Util {
 		$numberColumn = count ( $table->headers );
 		$numberRows = count ( $table->dataRows );
 		
-		$html = "<table id=" . $table->id . " width='100%' cellspacing='0' class='display order-column'><thead><tr>";
+		$html = "<table id=" . $table->id . " width='100%' cellspacing='0' class='display order-column'><thead style='font-weight:bold;'><tr>";
 		
 		for($i = 0; $i < $numberColumn; $i ++) {
 			$html = $html . "<td>" . $table->headers [$i] . "</td>";
@@ -250,10 +255,11 @@ class Util {
 		return $html;
 	}
 	function generateJSDatatableSimple($table) {
+		$itemPerPage = $table->pageLength ? $table->pageLength : default_number_item_per_page;
 		$html = "<script>";
 		$html = $html . "$(document).ready(function() { $('#" . $table->id . "').dataTable({
 				'order': [[ " . $table->orderColumn . ", '" . $table->orderType . "' ]], 
-				'pageLength': ".$table->pageLength.", 
+				'pageLength': ".$itemPerPage .", 
 				'destroy': true,
 				'aLengthMenu': [[5, 10, 15, 100], ['5 Per Page', '10 Per Page', '15 Per Page', '100 Per Page']],
 				'bPaginate': true,
@@ -261,6 +267,18 @@ class Util {
 				});});";
 		$html = $html . "</script>";
 		return $html;
+	}
+	function generateTdBlockLabelAndField($label,$value, $idDivValue) {
+		$html = "";
+		if($idDivValue=='') {
+			$html = "<td class='tdLable'>".$label."</td><td>".$value."</td>";
+		} else {
+			$html = "<td class='tdLable'>".$label."</td><td><div id='".$idDivValue."'>".$value."</div></td>";
+		}
+		return $html;
+	}
+	function buildSubModuleTableByModule($moduleKey) {
+		return $moduleKey;
 	}
 }
 ?>

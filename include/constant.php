@@ -19,4 +19,6 @@ define ( 'welcome_message', 'Xin chào ' );
 define ( 'tag_strong_open', '<strong>' );
 define ( 'tag_strong_close', '</strong>' );
 
+// DEFAUTL 
+define('default_number_item_per_page',10);
 ?>

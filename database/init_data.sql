@@ -10,7 +10,7 @@ truncate `user`;
 
 INSERT INTO `user` (`id`, `shop_id`, `name`, `email`, `phone_number`, `username`, `password`, `confirmcode`, `status`, `start_date`, `end_date`, `description`, `salary_by_hour`, `work_from`, `work_to`, `is_admin`,`active_module`) VALUES 
 (1, 1, 'Trần Trí Duệ', 'trantridue@gmail.com', '0979355285', 'admin', '4eae18cf9e54a0f62b44176d074cbe2f', 'y', 'y', '2014-01-01 10:00:00', '2020-12-31 22:00:00', 'Ông chủ', 8000, 8, 21, 1,1),
-(2, 2, 'Lê Thị Châu', 'chau@gmail.com', '0966807709', 'chau', '4eae18cf9e54a0f62b44176d074cbe2f', 'y', 'y', '2014-01-01 10:00:00', '2020-12-31 22:00:00', 'Bà Chủ', 8000, 8, 21, 0,1);
+(2, 2, 'Lê Thị Châu', 'chau@gmail.com', '0966807709', 'chau', '4eae18cf9e54a0f62b44176d074cbe2f', 'y', 'y', '2014-01-01 10:00:00', '2020-12-31 22:00:00', 'Bà Chủ', 8000, 8, 21, 0,2);
 
 
 INSERT INTO `config` (`id`, `key`, `value`, `label`, `type`, `description`, `sort_order`) VALUES

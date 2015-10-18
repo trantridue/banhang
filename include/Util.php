@@ -165,7 +165,7 @@ class Util {
 		
 		return $field;
 	}
-function convertListModuleToSelectBoxField($modules) {
+	function convertListModuleToSelectBoxField($modules) {
 		$field = new Field ( );
 		
 		$keys = "";
@@ -197,58 +197,66 @@ function convertListModuleToSelectBoxField($modules) {
 	function buildModuleTableByUser($userId) {
 		$modules = $this->getListModuleOfUser ( $userId );
 		
-		$datatable_id = "datatable_module_by_user";
-		$ordercolumn = 1;
-		$ordertype = 'desc';
+		$table = new Table ( );
 		
-		echo $this->generateJSDatatableSimple($datatable_id, $ordercolumn, $ordertype);
-		echo $this->buildModuleTableDataByUser($modules,$datatable_id);
+		$table->id = "datatable_module_by_user";
+		$table->orderColumn = 0;
+		$table->orderType = "asc";
+		$table->headers = explode ( ";", "ID;MODULE KEY;MODULE NAME" );
+		$columnNames = explode ( ";", "id;key;value" );
+		$table->columnNames = $columnNames;
+		$columTypes = explode ( ";", "label;label;label" );
+		$table->columTypes = $columTypes;
+		
+		$dataRows = array ();
+		
+		for($i = 0; $i < count ( $modules ); $i ++) {
+			$row = array ();
+			for($j = 0; $j < count ( $columnNames ); $j ++) {
+				$row [$columnNames [$j]] = $modules [$i]->$columnNames [$j];
+			}
+			$dataRows [] = $row;
+		}
+		$table->dataRows = $dataRows;
+		echo $this->generateJSDatatableSimple ( $table );
+		echo $this->buildModuleTableDataByUser ( $table );
 	}
-	function buildModuleTableDataByUser($modules,$datatable_id){
-		$html = "<table id=".$datatable_id." width='100%'>".
-		"<thead>
-		<tr>
-		<td>s</td>
-		<td>ssss</td>
-		</tr>
-		</thead>
-		<tr>
-		<td>1</td>
-		<td>4</td>
-		</tr>
-		<tr>
-		<td>2</td>
-		<td>3</td>
-		</tr>
-		<tr>
-		<td>3</td>
-		<td>2</td>
-		</tr>
-		<tr>
-		<td>4</td>
-		<td>1</td>
-		</tr>
-		<tfoot>
-		<tr>
-		<th>a</th>
-		<th>w</th>
-		</tr>
-		</tfoot>
-		</table>";
+	function buildModuleTableDataByUser($table) {
+		$numberColumn = count ( $table->headers );
+		$numberRows = count ( $table->dataRows );
+		
+		$html = "<table id=" . $table->id . " width='100%' cellspacing='0' class='order-column'><thead><tr>";
+		
+		for($i = 0; $i < $numberColumn; $i ++) {
+			$html = $html . "<td>" . $table->headers [$i] . "</td>";
+		}
+		$html = $html . "</tr></thead><tbody>";
+		
+		for($i = 0; $i < $numberRows; $i ++) {
+			$html = $html . "<tr>";
+			for($j = 0; $j < $numberColumn; $j ++) {
+				$html = $html . "<td>" . $table->dataRows [$i] [$table->columnNames [$j]] . "</td>";
+			}
+			$html = $html . "</tr>";
+		}
+		
+		$html = $html . "</tbody><tfoot><tr><th colspan='" . $numberColumn . "'></th></tr></tfoot></table>";
 		
 		return $html;
 	}
 	
-	function generateJSDatatableSimple($datatable_id, $ordercolumn, $ordertype) {
-		echo "<script>";
-		echo "$(document).ready(function() { $('#" . $datatable_id . "').dataTable({
-				'order': [[ " . $ordercolumn . ", '" . $ordertype . "' ]], 
+	function generateJSDatatableSimple($table) {
+		$html = "<script>";
+		$html = $html . "$(document).ready(function() { $('#" . $table->id . "').dataTable({
+				'order': [[ " . $table->orderColumn . ", '" . $table->orderType . "' ]], 
 				'pageLength': 10, 
+				'destroy': true,
 				'aLengthMenu': [[5, 10, 15, 100], ['5 Per Page', '10 Per Page', '15 Per Page', '100 Per Page']],
-				 'bPaginate': true,
-        'sDom':'fptip'
-	});});";
-		echo "</script>";
+				'bPaginate': true,
+        		'sDom':'fptip'
+				});});";
+		$html = $html . "</script>";
+		return $html;
 	}
 }
 ?>

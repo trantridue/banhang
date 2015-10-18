@@ -9,6 +9,8 @@ require_once ("model/module.php");
 require_once ("model/moduleSubModule.php");
 require_once ("model/userModule.php");
 require_once ("model/user.php");
+require_once ("model/table.php");
+require_once ("model/column.php");
 // UTIL
 require_once ("Util.php");
 // SERVICE

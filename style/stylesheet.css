@@ -130,7 +130,9 @@
 	min-width: 98px;
 	float: right;
 }
-
+#bodywrapper{
+	background-color: #27B9B2;
+}
 .menuButton {
 	height: 30px;
 	margin-right: 10px;
@@ -144,7 +146,7 @@
 }
 
 #body_data {
-	height: 525px;
+	height: 530px;
 	overflow: auto;
 }
 
@@ -179,7 +181,11 @@
 #header {
 	
 }
-
+#footer {
+	min-height: 30px;
+	background-color: bisque;
+	margin-top:-6px;
+}
 #header_information_private {
 	float: right;
 	width: 50%;
@@ -203,7 +209,6 @@
 #body_data_main {
 	width: 100%;
 	float: left;
-	background-color: #27B9B2;
 	height: 93%;
 	overflow: auto;
 }

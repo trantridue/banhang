@@ -171,7 +171,7 @@ class Util {
 		
 		return $field;
 	}
-	function convertListModuleToSelectBoxField($modules, $id ) {
+	function convertListModuleToSelectBoxField($modules, $id) {
 		$field = new Field ( );
 		
 		$keys = "";
@@ -232,7 +232,7 @@ class Util {
 		$modules = $this->getListModuleOfUser ( $userId );
 		
 		$table = new Table ( );
-
+		
 		$table->id = "datatable_module_by_user";
 		$table->orderColumn = 0;
 		$table->orderType = "asc";
@@ -303,10 +303,10 @@ class Util {
 		for($i = 0; $i < $numberRows; $i ++) {
 			$html = $html . "<tr>";
 			for($j = 0; $j < $numberColumn; $j ++) {
-				if($columnTypes[$j] == 'delete') {
-					$str = 'delete_'.$table->id.'("'.$table->dataRows [$i]['id'].'")';
-					$html = $html . "<td title='Id : ".$table->dataRows [$i] [$table->columnNames [$j]]."'>
-					<div class='deleteIcon'><input type='hidden' value ='".$str."'></div></td>";
+				if ($columnTypes [$j] == 'delete') {
+					$str = 'delete_' . $table->id . '("' . $table->dataRows [$i] ['id'] . '")';
+					$html = $html . "<td title='Id : " . $table->dataRows [$i] [$table->columnNames [$j]] . "'>
+					<div class='deleteIcon'><input type='hidden' value ='" . $str . "'></div></td>";
 				} else {
 					$html = $html . "<td>" . $table->dataRows [$i] [$table->columnNames [$j]] . "</td>";
 				}
@@ -330,10 +330,10 @@ class Util {
         		'sDom':'fptip'
 				});});";
 		$html = $html . "</script>";
-		$html = $html. $this->generateJsDeleteButton();		
+		$html = $html . $this->generateJsDeleteButton ();
 		return $html;
 	}
-	function generateJsDeleteButton () {
+	function generateJsDeleteButton() {
 		return "<script>
 $(document).ready(
 		function() {
@@ -366,6 +366,13 @@ $(document).ready(
 
 		});
 </script>";
+	}
+	function getModuleIdByKey($key) {
+		$modules = $_SESSION ['session_modules'];
+		for($i = 0; $i < count ( $modules ); $i ++) {
+			if ($modules [$i]->key = $key)
+				return $modules [$i]->id;
+		}
 	}
 	function generateTdBlockLabelAndField($label, $value, $idDivValue) {
 		$html = "";

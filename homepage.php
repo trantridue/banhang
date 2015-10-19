@@ -59,7 +59,6 @@ include 'common/body.php';
 <div id="footer"><?php
 include 'common/footer.php';
 ?></div>
-<hr>
 </div>
 </body>
 </html>

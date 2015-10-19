@@ -396,5 +396,8 @@ $(document).ready(
 		$field->class = 'textField';
 		return $field;
 	}
+	function getActiveModuleSubModule() {
+		return $_SESSION ['session_active_menu'] . "_" . $_SESSION ['session_active_sub_menu'];
+	}
 }
 ?>

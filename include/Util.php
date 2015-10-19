@@ -65,6 +65,9 @@ class Util {
 				$html = $html . "<option  value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
 			}
 			$html = $html . "</select>";
+		} else if ($field->type == "text") {
+			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
+			class='" . $field->class . "'/>";
 		}
 		return $html;
 	}
@@ -385,6 +388,13 @@ $(document).ready(
 	}
 	function generateTitlePage() {
 		echo "<div class='titleModule'> &nbsp;&nbsp;&nbsp;" . $_SESSION ['session_active_menu'] . "->" . $_SESSION ['session_active_sub_menu'] . "</div>";
+	}
+	function initSimpleTextField($id) {
+		$field = new Field ( );
+		$field->id = $id;
+		$field->type = 'text';
+		$field->class = 'textField';
+		return $field;
 	}
 }
 ?>

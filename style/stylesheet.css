@@ -216,6 +216,7 @@
 .selectClass {
 	width: 145px;
 	height: 22px;
+	border-radius:5px;
 }
 
 #configmodule_configForm {
@@ -257,4 +258,17 @@ table td {
 	background-image: url(../images/edit_ico.png);
 	background-repeat: no-repeat;
 	height: 18px;
+}
+.textField {
+	width: 145px;
+	height: 18px;
+	border-radius:5px;
+}
+.dataTables_filter input {
+	width: 150px;
+	border-radius:10px;
+	height: 33px;
+	background-image: url(../images/search.png);
+	background-repeat: no-repeat;
+    background-position: 115px -1px; 
 }

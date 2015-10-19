@@ -164,7 +164,7 @@ class Util {
 		$field->class = 'selectClass';
 		$field->id = 'user_select';
 		$field->value = 'user';
-		$field->onChange = 'changeUserMenu("' . $field->id . '")';
+		$field->onChange = 'changeUser("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
 		$field->values = substr ( $values, 0, - 1 );
 		$field->activeItem = $_SESSION ['session_id_of_user'];
@@ -187,7 +187,7 @@ class Util {
 		$field->class = 'selectClass';
 		$field->id = $id;
 		$field->value = 'menu';
-		$field->onChange = 'changeMenu("' . $field->id . '")';
+		$field->onChange = 'changeMenu("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
 		$field->values = substr ( $values, 0, - 1 );
 		$field->activeItem = $_SESSION ['session_active_menu'];

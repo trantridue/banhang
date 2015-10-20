@@ -1,6 +1,7 @@
 <table width="100%">
 	<tr>
 		<?php  echo $util->generateTdBlockLabelAndField('Nhân viên : ',$util->buildUserSelect (),'userDropDown'); ?>
+		<?php  echo $util->generateHiddenField('selected_user_id',''); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module key : ',$util->generateHTMLField ($util->initSimpleTextField('key_module_of_user')),''); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module : ',$util->buildModuleSelect (),'menuDropDown'); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Sub module key : ',$util->generateHTMLField ($util->initSimpleTextField('key_sub_module_of_module')),''); ?>

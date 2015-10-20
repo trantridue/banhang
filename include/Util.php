@@ -68,6 +68,8 @@ class Util {
 		} else if ($field->type == "text") {
 			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
 			class='" . $field->class . "'/>";
+		} else if ($field->type == "hidden") {
+			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "'/>";
 		}
 		return $html;
 	}
@@ -395,6 +397,13 @@ $(document).ready(
 		$field->type = 'text';
 		$field->class = 'textField';
 		return $field;
+	}
+	function generateHiddenField($id, $value) {
+		$field = new Field ( );
+		$field->id = $id;
+		$field->type = 'hidden';
+		$field->value = $value;
+		return $this->generateHTMLField($field);
 	}
 	function getActiveModuleSubModule() {
 		return $_SESSION ['session_active_menu'] . "_" . $_SESSION ['session_active_sub_menu'];

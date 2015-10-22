@@ -215,7 +215,7 @@ class Util {
 		$field->class = 'selectClass';
 		$field->id = 'sub_menu_select';
 		$field->value = 'sub_menu';
-		$field->onChange = 'changeSubMenu("' . $field->id . '")';
+		$field->onChange = 'changeSubMenu("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
 		$field->values = substr ( $values, 0, - 1 );
 		$field->activeItem = $_SESSION ['session_active_sub_menu'];
@@ -379,6 +379,13 @@ $(document).ready(
 				return $modules [$i]->id;
 		}
 	}
+	function getSubModuleIdByKey($key) {
+		$subModules = $_SESSION ['session_sub_modules'];
+		for($i = 0; $i < count ( $subModules ); $i ++) {
+			if ($subModules [$i]->key = $key)
+				return $subModules [$i]->id;
+		}
+	}
 	function generateTdBlockLabelAndField($label, $value, $idDivValue) {
 		$html = "";
 		if ($idDivValue == '') {
@@ -403,10 +410,21 @@ $(document).ready(
 		$field->id = $id;
 		$field->type = 'hidden';
 		$field->value = $value;
-		return $this->generateHTMLField($field);
+		return $this->generateHTMLField ( $field );
 	}
 	function getActiveModuleSubModule() {
 		return $_SESSION ['session_active_menu'] . "_" . $_SESSION ['session_active_sub_menu'];
+	}
+	function buildButton($id, $action, $label, $str) {
+		$field = new Field ( );
+		
+		$field->type = 'button';
+		$field->class = 'perform_button';
+		$field->onClick = $action . '("' . $str . '")';
+		$field->id = $id;
+		$field->value = $label;
+		
+		return $field;
 	}
 }
 ?>

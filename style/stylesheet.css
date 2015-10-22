@@ -272,3 +272,7 @@ table td {
 	background-repeat: no-repeat;
     background-position: 115px -1px; 
 }
+.errorField {
+	background-color: yellow;
+	border-color: red;
+}

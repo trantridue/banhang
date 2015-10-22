@@ -39,28 +39,40 @@ function changeSubMenu(id, module, submodule) {
 		if (submodule == 'module_config') {
 			var selectedItem = $('#' + id).find(":selected").attr("value");
 			$("#default_sub_menu_key").val(selectedItem);
-			/*if (id == 'all_menu') {
-				var listSubMenuOfMenu = 'module/config/listSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
-				$("#menuSubMenuTable").load(listSubMenuOfMenu);
-				var activeMenu = 'module/config/activeSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
-				$("#subMenuActive").load(activeMenu);
-				$("#selected_menu_key").val(selectedItem);
-			} else if (id == 'menu_by_user') {
-				$("#default_sub_menu_key").val(selectedItem);
-			}*/
 		}
 	}
 }
-function updateModuleUser(str){
-	
-	alert('update');
+function updateModuleUser(str) {
+	var allFieldIsValid = validateNullFields('key_module_of_user,name_module_of_user');
+	if(allFieldIsValid) {
+		alert('continue');
+	} else {
+		alert('stop');
+	}
 }
 function delete_datatable_module_by_user(id) {
-	
+
 }
 function delete_datatable_sub_module_by_module(id) {
 	alert(id);
 }
-function validateNullField(listField){
-	
+function validateNullFields(fields) {
+	var validationArray = new Array();
+	validationArray = fields.split(',');
+	var flag = true;
+	for ( var i = 0; i < validationArray.length; i++) {
+		if(!validateNullField(validationArray[i])){
+			flag = false;
+		}
+	}
+	return flag;
+}
+function validateNullField(field) {
+	var flag = ($("#" + field).val() == "") ? false : true;
+	if (!flag) {
+		$("#" + field).addClass('errorField');
+	} else {
+		$("#" + field).removeClass('errorField');
+	}
+	return flag;
 }

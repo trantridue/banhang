@@ -50,6 +50,14 @@ function updateModuleUser(str) {
 		alert('stop');
 	}
 }
+function addNewModule(str) {
+	var allFieldIsValid = validateNullFields('key_module_of_user,name_module_of_user');
+	if(allFieldIsValid) {
+		alert('continue');
+	} else {
+		alert('stop');
+	}
+}
 function delete_datatable_module_by_user(id) {
 
 }

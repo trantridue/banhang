@@ -148,9 +148,13 @@ class Util {
 		$field = $this->convertListUserToSelectBoxField ( $users );
 		return $this->generateHTMLField ( $field );
 	}
-	function buildModuleSelect() {
+	function buildModuleSelect($id) {
 		$modules = $_SESSION ['session_modules'];
-		$id = "all_menu";
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
+		return $this->generateHTMLField ( $field );
+	}
+	function buildSubModuleSelect($id) {
+		$modules = $_SESSION ['session_sub_modules'];
 		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}
@@ -222,9 +226,8 @@ class Util {
 		
 		return $field;
 	}
-	function buildModuleSelectByUser($userId) {
+	function buildModuleSelectByUser($userId,$id) {
 		$modules = $this->getListModuleOfUser ( $userId );
-		$id = "menu_by_user";
 		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}

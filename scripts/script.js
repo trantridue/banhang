@@ -11,15 +11,15 @@ function changeUser(id, module, submodule) {
 			var listMenuOfUser = 'module/config/listMenuOfUser.php?user_id='
 					+ encodeURIComponent(selectedItem) + "&menu=" + module;
 			var activeMenu = 'module/config/activeMenuOfUser.php?user_id='
-				+ encodeURIComponent(selectedItem) + "&menu=" + module;
+					+ encodeURIComponent(selectedItem) + "&menu=" + module;
 			var remainMenu = 'module/config/menuDropDownForUser.php?user_id='
 					+ encodeURIComponent(selectedItem) + "&menu=" + module;
 			$("#userMenuActive").load(activeMenu);
 			$("#userMenuTable").load(listMenuOfUser);
 			$("#menuDropDownForUser").load(remainMenu);
-			
+
 			$("#selected_user_id").val(selectedItem);
-			
+
 		}
 	}
 }
@@ -49,19 +49,25 @@ function changeSubMenu(id, module, submodule) {
 }
 function updateModuleUser(str) {
 	var allFieldIsValid = validateNullFields('key_module_of_user,name_module_of_user');
-	if(allFieldIsValid) {
+	if (allFieldIsValid) {
 		alert('continue');
 	} else {
 		alert('stop');
 	}
 }
-function addNewModule(str) {
-	var allFieldIsValid = validateNullFields('key_module_of_user,name_module_of_user');
-	if(allFieldIsValid) {
-		alert('continue');
-	} else {
-		alert('stop');
-	}
+function addModuleToUser(str) {
+	var selectedModule = $('#' + str).find(":selected").attr("value");
+	var selectedUser = $('#user_select').find(":selected").attr("value");
+	var selectedActiveModule = $('#menu_by_user').find(":selected").attr("value");
+	var addModuleToUserUrl = 'module/config/addModuleToUser.php?moduleKey='
+			+ selectedModule + "&user_id=" + selectedUser + "&active_menu=" + selectedActiveModule;
+	//if (validateNullField(str))
+		$.ajax( {
+			url : addModuleToUserUrl,
+			success : function(data) {
+				alert(data);
+			}
+		});
 }
 function delete_datatable_module_by_user(id) {
 
@@ -74,7 +80,7 @@ function validateNullFields(fields) {
 	validationArray = fields.split(',');
 	var flag = true;
 	for ( var i = 0; i < validationArray.length; i++) {
-		if(!validateNullField(validationArray[i])){
+		if (!validateNullField(validationArray[i])) {
 			flag = false;
 		}
 	}

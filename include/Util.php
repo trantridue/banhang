@@ -400,14 +400,14 @@ $(document).ready(
 	function getModuleIdByKey($key) {
 		$modules = $_SESSION ['session_modules'];
 		for($i = 0; $i < count ( $modules ); $i ++) {
-			if ($modules [$i]->key = $key)
+			if ($modules [$i]->key == $key)
 				return $modules [$i]->id;
 		}
 	}
 	function getSubModuleIdByKey($key) {
 		$subModules = $_SESSION ['session_sub_modules'];
 		for($i = 0; $i < count ( $subModules ); $i ++) {
-			if ($subModules [$i]->key = $key)
+			if ($subModules [$i]->key == $key)
 				return $subModules [$i]->id;
 		}
 	}

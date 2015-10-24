@@ -24,7 +24,7 @@
 	<td colspan="4">
 	<?php //echo $util->generateHTMLField($util->buildButton('add_module','addNewModule','THÊM MỚI MODULE','param'));
 	?>
-	<?php echo $util->generateHTMLField($util->buildButton('add_module_to_user','addModuleToUser','UPDATE USER MODULE','param'));?>
+	<?php echo $util->generateHTMLField($util->buildButton('add_module_to_user','addModuleToUser','UPDATE USER MODULE','menu_remain_for_user'));?>
 	<?php echo $util->generateHTMLField($util->buildButton('update_user_module','updateModuleUser','SỬA MODULE','param'));?>
 	</td>
 	</tr>

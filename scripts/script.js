@@ -10,11 +10,16 @@ function changeUser(id, module, submodule) {
 			var selectedItem = $('#' + id).find(":selected").attr("value");
 			var listMenuOfUser = 'module/config/listMenuOfUser.php?user_id='
 					+ encodeURIComponent(selectedItem) + "&menu=" + module;
-			$("#userMenuTable").load(listMenuOfUser);
 			var activeMenu = 'module/config/activeMenuOfUser.php?user_id='
+				+ encodeURIComponent(selectedItem) + "&menu=" + module;
+			var remainMenu = 'module/config/menuDropDownForUser.php?user_id='
 					+ encodeURIComponent(selectedItem) + "&menu=" + module;
 			$("#userMenuActive").load(activeMenu);
+			$("#userMenuTable").load(listMenuOfUser);
+			$("#menuDropDownForUser").load(remainMenu);
+			
 			$("#selected_user_id").val(selectedItem);
+			
 		}
 	}
 }

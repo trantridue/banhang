@@ -16,9 +16,9 @@
 		<?php  echo $util->generateTdBlockLabelAndField('Sub module name : ',$util->generateHTMLField ($util->initSimpleTextField('name_sub_module_of_module')),''); ?>
 	</tr>
 	<tr>
-		<?php  echo $util->generateTdBlockLabelAndField('Module for User : ',$util->buildModuleSelect ('all_menu_for_user'),'menuDropDownForUser'); ?>
+		<?php  echo $util->generateTdBlockLabelAndField('Module Remain User : ',$util->buildMenuDropDownRemainForUser ($_SESSION ['session_id_of_user'],'menu_remain_for_user'),'menuDropDownForUser'); ?>
 		<td colspan="2">
-		<?php  echo $util->generateTdBlockLabelAndField('Sub module for Module : ',$util->buildSubModuleSelect ('all_sub_menu_for_menu'),'subMenuDropDownForModule'); ?>
+		<?php  echo $util->generateTdBlockLabelAndField('Sub module for Module : ',$util->buildSubModuleSelect ('sub_menu_remain_for_menu'),'subMenuDropDownForModule'); ?>
 	</tr>
 	<tr>
 	<td colspan="4">

@@ -86,6 +86,23 @@ class Util {
 			}
 		}
 	}
+	function getListModuleNotOfUser($userId) {
+		$allModules = $_SESSION['session_modules'];
+		$modulesofuser = $this->getListModuleOfUser($userId);
+		$moduleNotOfUser = array();
+		for($i=0;$i<count($allModules);$i++) {
+			$flag = true;
+			for($j=0;$j<count($modulesofuser);$j++) {
+				if($modulesofuser[$j]->key == $allModules[$i]->key) {
+					$flag = false;
+				}
+			}
+			if ($flag) {
+				$moduleNotOfUser[] = $allModules[$i];
+			}
+		}
+		return $moduleNotOfUser;
+	}
 	function getListSubMenuOfMenu($menuKey) {
 		for($i = 0; $i < count ( $_SESSION ['session_modules'] ); $i ++) {
 			if ($_SESSION ['session_modules'] [$i]->key == $menuKey) {
@@ -228,6 +245,11 @@ class Util {
 	}
 	function buildModuleSelectByUser($userId,$id) {
 		$modules = $this->getListModuleOfUser ( $userId );
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
+		return $this->generateHTMLField ( $field );
+	}
+	function buildMenuDropDownRemainForUser($userId,$id) {
+		$modules = $this->getListModuleNotOfUser ( $userId );
 		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}

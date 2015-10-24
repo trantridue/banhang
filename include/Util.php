@@ -56,7 +56,7 @@ class Util {
 		class='" . $field->class . " " . $field->activeClass . "' onclick='" . $field->onClick . "'/>";
 		} else if ($field->type == "select") {
 			
-			$html = $html . "<select id='" . $field->id . "' 
+			$html = $html . "<select type = 'select' id='" . $field->id . "' 
 			onChange='" . $field->onChange . "' class='" . $field->class . "'>";
 			$arrayKeys = explode ( ";", $field->keys );
 			$arrayValues = explode ( ";", $field->values );

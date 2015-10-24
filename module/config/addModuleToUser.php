@@ -2,5 +2,5 @@
 ob_start();
 require_once ("../../include/membersite_config.php");
 session_start();
-echo $util->getModuleIdByKey($_REQUEST ['moduleKey']).$util->getModuleIdByKey($_REQUEST ['active_menu']).$_REQUEST ['user_id'];
+echo $_REQUEST ['user_select'].":".$util->getModuleIdByKey($_REQUEST ['menu_by_user']).":".$util->getModuleIdByKey($_REQUEST ['menu_remain_for_user']);
 ?>

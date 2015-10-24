@@ -58,16 +58,21 @@ function updateModuleUser(str) {
 function addModuleToUser(str) {
 	var selectedModule = $('#' + str).find(":selected").attr("value");
 	var selectedUser = $('#user_select').find(":selected").attr("value");
-	var selectedActiveModule = $('#menu_by_user').find(":selected").attr("value");
-	var addModuleToUserUrl = 'module/config/addModuleToUser.php?moduleKey='
-			+ selectedModule + "&user_id=" + selectedUser + "&active_menu=" + selectedActiveModule;
-	//if (validateNullField(str))
-		$.ajax( {
-			url : addModuleToUserUrl,
-			success : function(data) {
-				alert(data);
-			}
-		});
+	var selectedActiveModule = $('#menu_by_user').find(":selected").attr(
+			"value");
+	// var addModuleToUserUrl = 'module/config/addModuleToUser.php?moduleKey='
+	// + selectedModule + "&user_id=" + selectedUser + "&active_menu=" +
+	// selectedActiveModule;
+	var arrayAll = getArrayIdDataFieldOfForm("configmodule_configForm");
+	var addModuleToUserUrl = 'module/config/addModuleToUser.php?' + parseFieldsToUrlStringEncode(arrayAll);
+	alert(addModuleToUserUrl);
+	// if (validateNullField(str))
+	$.ajax( {
+		url : addModuleToUserUrl,
+		success : function(data) {
+			alert(data);
+		}
+	});
 }
 function delete_datatable_module_by_user(id) {
 
@@ -94,4 +99,52 @@ function validateNullField(field) {
 		$("#" + field).removeClass('errorField');
 	}
 	return flag;
+}
+function parseFieldsToUrlStringEncode(arrayData) {
+	var returnUrl = "";
+	for ( var i = 0; i < arrayData[0].length; i++) {
+		key = arrayData[0][i];
+		type = arrayData[2][i];
+		value = "";
+		if (type == 'button') {
+			if (arrayData[1][i].toLowerCase() == 'on'
+					|| arrayData[1][i].toLowerCase() == 'women') {
+				value = 1;
+			} else {
+				value = 0;
+			}
+		} else if (type == 'checkbox') {
+			value = $('#' + arrayData[0][i]).is(":checked") ? 1 : 0;
+		} else {
+			value = arrayData[1][i];
+		}
+		returnUrl = returnUrl + arrayData[0][i] + "="
+				+ encodeURIComponent(value) + "&";
+	}
+	returnUrl = returnUrl + "list_id="
+			+ encodeURIComponent(arrayData[0].join(";"));
+
+	return returnUrl;
+}
+function getArrayIdDataFieldOfForm(formId) {
+	var $inputs = $('#' + formId + ' :input');
+	var alls = new Array();
+
+	var arrayIds = new Array();
+	var arrayValues = new Array();
+	var arrayTypes = new Array();
+
+	$inputs.each(function(index) {
+		// ignore button
+			if ($(this).attr('type') != 'button') {
+				var idField = $(this).attr('id');
+				arrayIds[index] = idField;
+				arrayValues[index] = $('#' + idField).val();
+				arrayTypes[index] = $(this).attr('type');
+			}
+		});
+	alls[0] = arrayIds;
+	alls[1] = arrayValues;
+	alls[2] = arrayTypes;
+	return alls;
 }

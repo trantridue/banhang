@@ -1,12 +1,8 @@
 <table width="100%">
 	<tr>
 		<?php  echo $util->generateTdBlockLabelAndField('Nhân viên : ',$util->buildUserSelect (),'userDropDown'); ?>
-		<?php  echo $util->generateHiddenField('selected_user_id',$_SESSION ['session_id_of_user']); ?>
-		<?php  echo $util->generateHiddenField('default_menu_key',$_SESSION ['session_active_menu']); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module key : ',$util->generateHTMLField ($util->initSimpleTextField('key_module_of_user')),''); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module : ',$util->buildModuleSelect ('all_menu'),'menuDropDown'); ?>
-		<?php  echo $util->generateHiddenField('selected_menu_key',$_SESSION ['session_active_menu']); ?>
-		<?php  echo $util->generateHiddenField('default_sub_menu_key',$_SESSION ['session_active_sub_menu']); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Sub module key : ',$util->generateHTMLField ($util->initSimpleTextField('key_sub_module_of_module')),''); ?>
 	</tr>
 	<tr>

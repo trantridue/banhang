@@ -59,19 +59,8 @@ function updateModuleUser(str) {
 }
 function addModuleToUser(str) {
 	validateConfigModule();
-	var selectedModule = $('#' + str).find(":selected").attr("value");
-	var selectedUser = $('#user_select').find(":selected").attr("value");
-	var selectedActiveModule = $('#menu_by_user').find(":selected").attr(
-			"value");
-	
-	// var addModuleToUserUrl = 'module/config/addModuleToUser.php?moduleKey='
-	// + selectedModule + "&user_id=" + selectedUser + "&active_menu=" +
-	// selectedActiveModule;
 	var arrayAll = getArrayIdDataFieldOfForm("configmodule_configForm");
 	var addModuleToUserUrl = 'module/config/addModuleToUser.php?' + parseFieldsToUrlStringEncode(arrayAll);
-	// alert(addModuleToUserUrl);
-	// $("#body_data_sub_menu").html(addModuleToUserUrl);
-	// if (validateNullField(str))
 	$.ajax( {
 		url : addModuleToUserUrl,
 		success : function(data) {
@@ -84,7 +73,7 @@ function validateConfigModule(){
 	var isModifModule = $("#is_modify_user_module").is(":checked");
 	var isModifSubModule = $("#is_modify_module_sub_module").is(":checked");
 	if(!(isModifModule || isModifSubModule)) {
-		alert('not ok');
+		alert('Bạn muốn sửa module của user hay sub module của module?');
 		return false;
 	} else {
 		alert('ok');

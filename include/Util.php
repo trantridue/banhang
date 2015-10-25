@@ -69,6 +69,9 @@ class Util {
 		} else if ($field->type == "text") {
 			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
 			class='" . $field->class . "'/>";
+		}else if ($field->type == "checkbox") {
+			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
+			class='" . $field->class . "'/>";
 		} else if ($field->type == "hidden") {
 			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "'/>";
 		}
@@ -261,26 +264,25 @@ class Util {
 	}
 	function buildSubModuleSelectRemainForModule($moduleKey,$id) {
 		$subModules = $this->getListSubModuleNotOfModule ( $moduleKey );
-		
 		$field = $this->convertListSubModuleToSelectBoxField ( $subModules,$id);
 		return $this->generateHTMLField ( $field );
 	}
 	function getListSubModuleNotOfModule($moduleKey) {
 		$allSubModules = $_SESSION ['session_sub_modules'];
-		$modulesofuser = $this->getListModuleOfUser ( $userId );
-		$moduleNotOfUser = array ();
+		$submoduleofmodule = $this->getListSubMenuOfMenu ( $moduleKey );
+		$submoduleNotOfmodule = array ();
 		for($i = 0; $i < count ( $allSubModules ); $i ++) {
 			$flag = true;
-			for($j = 0; $j < count ( $modulesofuser ); $j ++) {
-				if ($modulesofuser [$j]->key == $allSubModules [$i]->key) {
+			for($j = 0; $j < count ( $submoduleofmodule ); $j ++) {
+				if ($submoduleofmodule [$j]->key == $allSubModules [$i]->key) {
 					$flag = false;
 				}
 			}
 			if ($flag) {
-				$moduleNotOfUser [] = $allSubModules [$i];
+				$submoduleNotOfmodule [] = $allSubModules [$i];
 			}
 		}
-		return $moduleNotOfUser;
+		return $submoduleNotOfmodule;
 	}
 	function buildModuleTableByUser($userId) {
 		$modules = $this->getListModuleOfUser ( $userId );
@@ -452,6 +454,12 @@ $(document).ready(
 		$field->id = $id;
 		$field->type = 'text';
 		$field->class = 'textField';
+		return $field;
+	}
+	function initSimpleCheckBoxField($id) {
+		$field = new Field ( );
+		$field->id = $id;
+		$field->type = 'checkbox';
 		return $field;
 	}
 	function generateHiddenField($id, $value) {

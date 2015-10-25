@@ -78,7 +78,7 @@ function addModuleToUser(str) {
 	});
 }
 function delete_datatable_module_by_user(id) {
-
+	
 }
 function delete_datatable_sub_module_by_module(id) {
 	alert(id);

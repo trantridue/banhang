@@ -13,12 +13,12 @@
 	</tr>
 	
 	<tr>
-	<td colspan="5">
-	<?php //echo $util->generateHTMLField($util->buildButton('add_module','addNewModule','THÊM MỚI MODULE','param'));
-	?>
-	<?php echo $util->generateHTMLField($util->buildButton('add_module_to_user','addModuleToUser','UPDATE USER MODULE','menu_remain_for_user'));?>
-	<?php echo $util->generateHTMLField($util->buildButton('update_user_module','updateModuleUser','SỬA MODULE','param'));?>
+	<?php  echo $util->generateTdBlockLabelAndField('SỬA MODULE? : ',$util->generateHTMLField ($util->initSimpleCheckBoxField('is_modify_user_module')),''); ?>
+	<td colspan="2">
+	<?php echo $util->generateHTMLField($util->buildButton('update_user_module','updateMenuName','SỬA TÊN','param'));?>
+	<?php echo $util->generateHTMLField($util->buildButton('add_module_to_user','addModuleToUser','SỬA MAPPING','menu_remain_for_user'));?>
 	</td>
+	<?php  echo $util->generateTdBlockLabelAndField('SỬA SUB MODULE? : ',$util->generateHTMLField ($util->initSimpleCheckBoxField('is_modify_module_sub_module')),''); ?>
 	</tr>
 	<tr>
 		<td colspan="4" width="50%">

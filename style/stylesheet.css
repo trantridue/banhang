@@ -276,3 +276,6 @@ table td {
 	background-color: yellow;
 	border-color: red;
 }
+.ui-dialog {
+	width: 500px !important;
+}

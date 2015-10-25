@@ -64,24 +64,39 @@ function addModuleToUser(str) {
 	$.ajax( {
 		url : addModuleToUserUrl,
 		success : function(data) {
-//			alert(data);
-		}
+			// alert(data);
+	}
 	});
-	
+
 }
-function validateConfigModule(){
+function validateConfigModule() {
 	var isModifModule = $("#is_modify_user_module").is(":checked");
 	var isModifSubModule = $("#is_modify_module_sub_module").is(":checked");
-	if(!(isModifModule || isModifSubModule)) {
-		alert('Bạn muốn sửa module của user hay sub module của module?');
+	if (!(isModifModule || isModifSubModule)) {
+		// alert('Bạn muốn sửa module của user hay sub module của module?');
+		displayDialog('Gán module, sub module cho nhân viên', 'Bạn phải chọn hoặc là sửa module của user hoặc là sửa sub module của module? ');
 		return false;
 	} else {
 		alert('ok');
 		return true;
 	}
 }
+function displayDialog(title, content) {
+	$("#dialog-message").prop("title", title);
+	$("#dialog-message-content").html(content);
+	$(function() {
+		$("#dialog-message").dialog( {
+			modal : true,
+			buttons : {
+				Ok : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+	});
+}
 function delete_datatable_module_by_user(id) {
-	
+
 }
 function delete_datatable_sub_module_by_module(id) {
 	alert(id);

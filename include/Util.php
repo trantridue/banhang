@@ -62,7 +62,8 @@ class Util {
 			$arrayValues = explode ( ";", $field->values );
 			for($i = 0; $i < count ( $arrayValues ); $i ++) {
 				$selected = ($arrayKeys [$i] == $field->activeItem) ? "selected='selected'" : "";
-				$html = $html . "<option  value='" . $arrayKeys [$i] . "' " . $selected . ">" . $arrayValues [$i] . "</option>";
+				$values = ($arrayValues [$i]!='') ? $arrayValues [$i] : "No Item...";
+				$html = $html . "<option  value='" . $arrayKeys [$i] . "' " . $selected . ">" . $values . "</option>";
 			}
 			$html = $html . "</select>";
 		} else if ($field->type == "text") {
@@ -87,18 +88,18 @@ class Util {
 		}
 	}
 	function getListModuleNotOfUser($userId) {
-		$allModules = $_SESSION['session_modules'];
-		$modulesofuser = $this->getListModuleOfUser($userId);
-		$moduleNotOfUser = array();
-		for($i=0;$i<count($allModules);$i++) {
+		$allModules = $_SESSION ['session_modules'];
+		$modulesofuser = $this->getListModuleOfUser ( $userId );
+		$moduleNotOfUser = array ();
+		for($i = 0; $i < count ( $allModules ); $i ++) {
 			$flag = true;
-			for($j=0;$j<count($modulesofuser);$j++) {
-				if($modulesofuser[$j]->key == $allModules[$i]->key) {
+			for($j = 0; $j < count ( $modulesofuser ); $j ++) {
+				if ($modulesofuser [$j]->key == $allModules [$i]->key) {
 					$flag = false;
 				}
 			}
 			if ($flag) {
-				$moduleNotOfUser[] = $allModules[$i];
+				$moduleNotOfUser [] = $allModules [$i];
 			}
 		}
 		return $moduleNotOfUser;
@@ -243,12 +244,12 @@ class Util {
 		
 		return $field;
 	}
-	function buildModuleSelectByUser($userId,$id) {
+	function buildModuleSelectByUser($userId, $id) {
 		$modules = $this->getListModuleOfUser ( $userId );
 		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}
-	function buildMenuDropDownRemainForUser($userId,$id) {
+	function buildMenuDropDownRemainForUser($userId, $id) {
 		$modules = $this->getListModuleNotOfUser ( $userId );
 		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );

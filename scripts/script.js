@@ -65,8 +65,8 @@ function addModuleToUser(str) {
 	// selectedActiveModule;
 	var arrayAll = getArrayIdDataFieldOfForm("configmodule_configForm");
 	var addModuleToUserUrl = 'module/config/addModuleToUser.php?' + parseFieldsToUrlStringEncode(arrayAll);
-//	alert(addModuleToUserUrl);
-//$("#body_data_sub_menu").html(addModuleToUserUrl);
+	// alert(addModuleToUserUrl);
+	// $("#body_data_sub_menu").html(addModuleToUserUrl);
 	// if (validateNullField(str))
 	$.ajax( {
 		url : addModuleToUserUrl,
@@ -137,14 +137,12 @@ function getArrayIdDataFieldOfForm(formId) {
 	var arrayTypes = new Array();
 
 	$inputs.each(function(index) {
-//		alert($(this).attr('type'));
-		// ignore button
-			if ($(this).attr('type') != 'button') {
-				var idField = $(this).attr('id');
-				arrayIds[index] = idField;
-				arrayValues[index] = $('#' + idField).val();
-				arrayTypes[index] = $(this).attr('type');
-			}
+		// if ($(this).attr('type') != 'button') {
+			var idField = $(this).attr('id');
+			arrayIds[index] = idField;
+			arrayValues[index] = $('#' + idField).val();
+			arrayTypes[index] = $(this).attr('type');
+			// }
 		});
 	alls[0] = arrayIds;
 	alls[1] = arrayValues;

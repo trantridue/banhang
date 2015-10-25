@@ -58,10 +58,12 @@ function updateModuleUser(str) {
 	}
 }
 function addModuleToUser(str) {
+	validateConfigModule();
 	var selectedModule = $('#' + str).find(":selected").attr("value");
 	var selectedUser = $('#user_select').find(":selected").attr("value");
 	var selectedActiveModule = $('#menu_by_user').find(":selected").attr(
 			"value");
+	
 	// var addModuleToUserUrl = 'module/config/addModuleToUser.php?moduleKey='
 	// + selectedModule + "&user_id=" + selectedUser + "&active_menu=" +
 	// selectedActiveModule;
@@ -73,9 +75,21 @@ function addModuleToUser(str) {
 	$.ajax( {
 		url : addModuleToUserUrl,
 		success : function(data) {
-			alert(data);
+//			alert(data);
 		}
 	});
+	
+}
+function validateConfigModule(){
+	var isModifModule = $("#is_modify_user_module").is(":checked");
+	var isModifSubModule = $("#is_modify_module_sub_module").is(":checked");
+	if(!(isModifModule || isModifSubModule)) {
+		alert('not ok');
+		return false;
+	} else {
+		alert('ok');
+		return true;
+	}
 }
 function delete_datatable_module_by_user(id) {
 	

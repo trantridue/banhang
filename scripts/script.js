@@ -73,7 +73,6 @@ function validateConfigModule() {
 	var isModifModule = $("#is_modify_user_module").is(":checked");
 	var isModifSubModule = $("#is_modify_module_sub_module").is(":checked");
 	if (!(isModifModule || isModifSubModule)) {
-		// alert('Bạn muốn sửa module của user hay sub module của module?');
 		displayDialog('Gán module, sub module cho nhân viên', 'Bạn phải chọn hoặc là sửa module của user hoặc là sửa sub module của module? ');
 		return false;
 	} else {

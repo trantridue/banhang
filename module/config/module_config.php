@@ -3,12 +3,12 @@
 		<?php  echo $util->generateTdBlockLabelAndField('Nhân viên : ',$util->buildUserSelect (),'userDropDown'); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module Remain : ',$util->buildMenuDropDownRemainForUser ($_SESSION ['session_id_of_user'],'menu_remain_for_user'),'menuDropDownForUser'); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module : ',$util->buildModuleSelect ('all_menu'),'menuDropDown'); ?>
-		<?php  echo $util->generateTdBlockLabelAndField('Sub Module Remain : ',$util->buildSubModuleSelect ('sub_menu_remain_for_menu'),'subMenuDropDownForModule'); ?>
+		<?php  echo $util->generateTdBlockLabelAndField('Sub Module Remain : ',$util->buildSubModuleSelectRemainForModule ($_SESSION ['session_active_menu'],'sub_menu_remain'),'subMenuDropDownForModule'); ?>
 	</tr>
 	<tr>
 		<?php  echo $util->generateTdBlockLabelAndField('Module mặc định : ',$util->buildModuleSelectByUser ( $_SESSION ['session_id_of_user'],'menu_by_user' ),'userMenuActive'); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Module name : ',$util->generateHTMLField ($util->initSimpleTextField('name_module_of_user')),''); ?>
-		<?php  echo $util->generateTdBlockLabelAndField('Sub mặc định : ',$util->buildSubModuleSelectByModule ( $_SESSION ['session_active_menu'] ),'subMenuActive'); ?>
+		<?php  echo $util->generateTdBlockLabelAndField('Sub mặc định : ',$util->buildSubModuleSelectByModule ( $_SESSION ['session_active_menu'],'sub_menu_select' ),'subMenuActive'); ?>
 		<?php  echo $util->generateTdBlockLabelAndField('Sub module name : ',$util->generateHTMLField ($util->initSimpleTextField('name_sub_module_of_module')),''); ?>
 	</tr>
 	

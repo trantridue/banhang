@@ -31,7 +31,9 @@ function changeMenu(id, module, submodule) {
 				var listSubMenuOfMenu = 'module/config/listSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
 				$("#menuSubMenuTable").load(listSubMenuOfMenu);
 				var activeMenu = 'module/config/activeSubMenuOfMenu.php?menu=' + encodeURIComponent(selectedItem);
+				var subModuleRemain = 'module/config/subModuleRemain.php?menu=' + encodeURIComponent(selectedItem);
 				$("#subMenuActive").load(activeMenu);
+				$("#subMenuDropDownForModule").load(subModuleRemain);
 				$("#selected_menu_key").val(selectedItem);
 			} else if (id == 'menu_by_user') {
 				$("#default_menu_key").val(selectedItem);

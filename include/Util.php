@@ -221,7 +221,7 @@ class Util {
 		
 		return $field;
 	}
-	function convertListSubModuleToSelectBoxField($subModules) {
+	function convertListSubModuleToSelectBoxField($subModules,$id) {
 		$field = new Field ( );
 		
 		$keys = "";
@@ -235,7 +235,7 @@ class Util {
 		
 		$field->type = 'select';
 		$field->class = 'selectClass';
-		$field->id = 'sub_menu_select';
+		$field->id = $id;
 		$field->value = 'sub_menu';
 		$field->onChange = 'changeSubMenu("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
@@ -254,10 +254,33 @@ class Util {
 		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
 		return $this->generateHTMLField ( $field );
 	}
-	function buildSubModuleSelectByModule($moduleKey) {
+	function buildSubModuleSelectByModule($moduleKey,$id) {
 		$subModules = $this->getListSubMenuOfMenu ( $moduleKey );
-		$field = $this->convertListSubModuleToSelectBoxField ( $subModules );
+		$field = $this->convertListSubModuleToSelectBoxField ( $subModules,$id);
 		return $this->generateHTMLField ( $field );
+	}
+	function buildSubModuleSelectRemainForModule($moduleKey,$id) {
+		$subModules = $this->getListSubModuleNotOfModule ( $moduleKey );
+		
+		$field = $this->convertListSubModuleToSelectBoxField ( $subModules,$id);
+		return $this->generateHTMLField ( $field );
+	}
+	function getListSubModuleNotOfModule($moduleKey) {
+		$allSubModules = $_SESSION ['session_sub_modules'];
+		$modulesofuser = $this->getListModuleOfUser ( $userId );
+		$moduleNotOfUser = array ();
+		for($i = 0; $i < count ( $allSubModules ); $i ++) {
+			$flag = true;
+			for($j = 0; $j < count ( $modulesofuser ); $j ++) {
+				if ($modulesofuser [$j]->key == $allSubModules [$i]->key) {
+					$flag = false;
+				}
+			}
+			if ($flag) {
+				$moduleNotOfUser [] = $allSubModules [$i];
+			}
+		}
+		return $moduleNotOfUser;
 	}
 	function buildModuleTableByUser($userId) {
 		$modules = $this->getListModuleOfUser ( $userId );

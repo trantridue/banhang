@@ -62,14 +62,14 @@ class Util {
 			$arrayValues = explode ( ";", $field->values );
 			for($i = 0; $i < count ( $arrayValues ); $i ++) {
 				$selected = ($arrayKeys [$i] == $field->activeItem) ? "selected='selected'" : "";
-				$values = ($arrayValues [$i]!='') ? $arrayValues [$i] : "No Item...";
+				$values = ($arrayValues [$i] != '') ? $arrayValues [$i] : "No Item...";
 				$html = $html . "<option  value='" . $arrayKeys [$i] . "' " . $selected . ">" . $values . "</option>";
 			}
 			$html = $html . "</select>";
 		} else if ($field->type == "text") {
 			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
 			class='" . $field->class . "'/>";
-		}else if ($field->type == "checkbox") {
+		} else if ($field->type == "checkbox") {
 			$html = $html . "<input type='" . $field->type . "' id='" . $field->id . "' value='" . $field->value . "' 
 			class='" . $field->class . "'/>";
 		} else if ($field->type == "hidden") {
@@ -90,6 +90,18 @@ class Util {
 			}
 		}
 	}
+	function getListSubMenuOfMenu($menuKey) {
+		for($i = 0; $i < count ( $_SESSION ['session_modules'] ); $i ++) {
+			if ($_SESSION ['session_modules'] [$i]->key == $menuKey) {
+				if (isset ( $_REQUEST ['submenu'] )) {
+					$_SESSION ['session_active_sub_menu'] = $_REQUEST ['submenu'];
+				} else {
+					$_SESSION ['session_active_sub_menu'] = $_SESSION ['session_modules'] [$i]->active_sub->key;
+				}
+				return $_SESSION ['session_modules'] [$i]->subModules;
+			}
+		}
+	}
 	function getListModuleNotOfUser($userId) {
 		$allModules = $_SESSION ['session_modules'];
 		$modulesofuser = $this->getListModuleOfUser ( $userId );
@@ -107,18 +119,7 @@ class Util {
 		}
 		return $moduleNotOfUser;
 	}
-	function getListSubMenuOfMenu($menuKey) {
-		for($i = 0; $i < count ( $_SESSION ['session_modules'] ); $i ++) {
-			if ($_SESSION ['session_modules'] [$i]->key == $menuKey) {
-				if (isset ( $_REQUEST ['submenu'] )) {
-					$_SESSION ['session_active_sub_menu'] = $_REQUEST ['submenu'];
-				} else {
-					$_SESSION ['session_active_sub_menu'] = $_SESSION ['session_modules'] [$i]->active_sub->key;
-				}
-				return $_SESSION ['session_modules'] [$i]->subModules;
-			}
-		}
-	}
+	
 	function buildMenuButton() {
 		$lstMenus = $this->getListModuleOfUser ( $_SESSION ['session_id_of_user'] );
 		$lstField = array ();
@@ -171,12 +172,12 @@ class Util {
 	}
 	function buildModuleSelect($id) {
 		$modules = $_SESSION ['session_modules'];
-		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id, 'menu', 'changeMenu', 'session_active_menu' );
 		return $this->generateHTMLField ( $field );
 	}
 	function buildSubModuleSelect($id) {
 		$modules = $_SESSION ['session_sub_modules'];
-		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id, 'menu', 'changeMenu', 'session_active_menu' );
 		return $this->generateHTMLField ( $field );
 	}
 	function convertListUserToSelectBoxField($users) {
@@ -201,7 +202,8 @@ class Util {
 		
 		return $field;
 	}
-	function convertListModuleToSelectBoxField($modules, $id) {
+	
+	function convertListModuleToSelectBoxField($modules, $id, $value, $onChange, $session_key) {
 		$field = new Field ( );
 		
 		$keys = "";
@@ -216,55 +218,32 @@ class Util {
 		$field->type = 'select';
 		$field->class = 'selectClass';
 		$field->id = $id;
-		$field->value = 'menu';
-		$field->onChange = 'changeMenu("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
+		$field->value = $value; //
+		$field->onChange = $onChange . '("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
 		$field->keys = substr ( $keys, 0, - 1 );
 		$field->values = substr ( $values, 0, - 1 );
-		$field->activeItem = $_SESSION ['session_active_menu'];
-		
-		return $field;
-	}
-	function convertListSubModuleToSelectBoxField($subModules,$id) {
-		$field = new Field ( );
-		
-		$keys = "";
-		$values = "";
-		$activeItem = "";
-		
-		for($i = 0; $i < count ( $subModules ); $i ++) {
-			$keys = $keys . $subModules [$i]->key . ";";
-			$values = $values . $subModules [$i]->value . ";";
-		}
-		
-		$field->type = 'select';
-		$field->class = 'selectClass';
-		$field->id = $id;
-		$field->value = 'sub_menu';
-		$field->onChange = 'changeSubMenu("' . $field->id . '","' . $_SESSION ['session_active_menu'] . '","' . $_SESSION ['session_active_sub_menu'] . '")';
-		$field->keys = substr ( $keys, 0, - 1 );
-		$field->values = substr ( $values, 0, - 1 );
-		$field->activeItem = $_SESSION ['session_active_sub_menu'];
+		$field->activeItem = $_SESSION [$session_key];
 		
 		return $field;
 	}
 	function buildModuleSelectByUser($userId, $id) {
 		$modules = $this->getListModuleOfUser ( $userId );
-		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id, 'menu', 'changeMenu', 'session_active_menu' );
 		return $this->generateHTMLField ( $field );
 	}
 	function buildMenuDropDownRemainForUser($userId, $id) {
 		$modules = $this->getListModuleNotOfUser ( $userId );
-		$field = $this->convertListModuleToSelectBoxField ( $modules, $id );
+		$field = $this->convertListModuleToSelectBoxField ( $modules, $id, 'menu', 'changeMenu', 'session_active_menu' );
 		return $this->generateHTMLField ( $field );
 	}
-	function buildSubModuleSelectByModule($moduleKey,$id) {
+	function buildSubModuleSelectByModule($moduleKey, $id) {
 		$subModules = $this->getListSubMenuOfMenu ( $moduleKey );
-		$field = $this->convertListSubModuleToSelectBoxField ( $subModules,$id);
+		$field = $this->convertListModuleToSelectBoxField ( $subModules, $id, 'sub_menu', 'changeSubMenu', 'session_active_sub_menu' );
 		return $this->generateHTMLField ( $field );
 	}
-	function buildSubModuleSelectRemainForModule($moduleKey,$id) {
+	function buildSubModuleSelectRemainForModule($moduleKey, $id) {
 		$subModules = $this->getListSubModuleNotOfModule ( $moduleKey );
-		$field = $this->convertListSubModuleToSelectBoxField ( $subModules,$id);
+		$field = $this->convertListModuleToSelectBoxField ( $subModules, $id, 'sub_menu', 'changeSubMenu', 'session_active_sub_menu' );
 		return $this->generateHTMLField ( $field );
 	}
 	function getListSubModuleNotOfModule($moduleKey) {

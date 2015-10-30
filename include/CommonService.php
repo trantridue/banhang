@@ -114,9 +114,6 @@ class CommonService {
 		$_SESSION ['session_sub_modules'] = $this->loadAllRowsFromTable ( 'sub_module', 'SubModule' );
 		$_SESSION ['session_module_sub_modules'] = $this->loadAllRowsFromTable ( 'module_sub_module', 'ModuleSubModule' );
 	}
-	//
-	
-	/// JQUERY
 	
 }
 ?>

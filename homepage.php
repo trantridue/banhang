@@ -40,6 +40,8 @@ if (! $fgmembersite->CheckLogin ()) {
 <script src="scripts/jquery.confirm.js"></script>
 <link rel="stylesheet" type="text/css" href="style/jquery.confirm.css" />
 
+<!--Modules-->
+<script src="scripts/config_module.js"></script>
 </head>
 <body>
 <div id="bodywrapper">

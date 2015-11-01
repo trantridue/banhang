@@ -462,5 +462,12 @@ $(document).ready(
 		
 		return $field;
 	}
+	function getListValuesByIds($ids){
+		$values = array ();
+		for($i = 0; $i < count ( $ids ); $i ++) {
+			$values [$ids[$i]] = $_REQUEST [$ids [$i]];
+		}
+		return $values;
+	}
 }
 ?>

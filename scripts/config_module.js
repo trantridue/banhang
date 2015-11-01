@@ -1,9 +1,3 @@
-function gotoMenu(menu) {
-	window.location.href = "homepage.php?menu=" + menu;
-}
-function gotoSubMenu(menu, submenu) {
-	window.location.href = "homepage.php?menu=" + menu + "&submenu=" + submenu;
-}
 function changeUser(id, module, submodule) {
 	if (module == 'config') {
 		if (submodule == 'module_config') {
@@ -49,51 +43,34 @@ function changeSubMenu(id, module, submodule) {
 		}
 	}
 }
-function updateModuleUser(str) {
-	var allFieldIsValid = validateNullFields('key_module_of_user,name_module_of_user');
-	if (allFieldIsValid) {
-		alert('continue');
-	} else {
-		alert('stop');
-	}
-}
-function addModuleToUser(str) {
-	validateConfigModule();
-	var arrayAll = getArrayIdDataFieldOfForm("configmodule_configForm");
-	var addModuleToUserUrl = 'module/config/addModuleToUser.php?' + parseFieldsToUrlStringEncode(arrayAll);
-	$.ajax( {
-		url : addModuleToUserUrl,
-		success : function(data) {
-			// alert(data);
-	}
-	});
 
+function addModuleToUser(str) {
+	if (validateConfigModule()) {
+		var arrayAll = getArrayIdDataFieldOfForm("configmodule_configForm");
+		var addModuleToUserUrl = 'module/config/addModuleUser.php?' + parseFieldsToUrlStringEncode(arrayAll);
+		// alert(addModuleToUserUrl);
+		$.ajax( {
+			url : addModuleToUserUrl,
+			success : function(data) {
+				displayDialog('Update User Module, Sub Module', data);
+			}
+		});
+	} else {
+		
+	}
 }
 function validateConfigModule() {
 	var isModifModule = $("#is_modify_user_module").is(":checked");
 	var isModifSubModule = $("#is_modify_module_sub_module").is(":checked");
 	if (!(isModifModule || isModifSubModule)) {
-		displayDialog('Gán module, sub module cho nhân viên', 'Bạn phải chọn hoặc là sửa module của user hoặc là sửa sub module của module? ');
+		displayDialog('Gán module, sub module cho nhân viên',
+				'Bạn phải chọn hoặc là sửa module của user hoặc là sửa sub module của module? ');
 		return false;
 	} else {
-		alert('ok');
 		return true;
 	}
 }
-function displayDialog(title, content) {
-	$("#dialog-message").prop("title", title);
-	$("#dialog-message-content").html(content);
-	$(function() {
-		$("#dialog-message").dialog( {
-			modal : true,
-			buttons : {
-				Ok : function() {
-					$(this).dialog("close");
-				}
-			}
-		});
-	});
-}
+
 function delete_datatable_module_by_user(id) {
 
 }

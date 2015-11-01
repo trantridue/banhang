@@ -48,7 +48,6 @@ function addModuleToUser(str) {
 	if (validateConfigModule()) {
 		var arrayAll = getArrayIdDataFieldOfForm("configmodule_configForm");
 		var addModuleToUserUrl = 'module/config/addModuleUser.php?' + parseFieldsToUrlStringEncode(arrayAll);
-		// alert(addModuleToUserUrl);
 		$.ajax( {
 			url : addModuleToUserUrl,
 			success : function(data) {
@@ -56,7 +55,7 @@ function addModuleToUser(str) {
 			}
 		});
 	} else {
-		
+
 	}
 }
 function validateConfigModule() {
@@ -66,6 +65,8 @@ function validateConfigModule() {
 		displayDialog('Gán module, sub module cho nhân viên',
 				'Bạn phải chọn hoặc là sửa module của user hoặc là sửa sub module của module? ');
 		return false;
+	} else if (isModifModule) {
+		return validateNullFields('user_select;menu_remain_for_user;menu_by_user');
 	} else {
 		return true;
 	}
@@ -79,7 +80,7 @@ function delete_datatable_sub_module_by_module(id) {
 }
 function validateNullFields(fields) {
 	var validationArray = new Array();
-	validationArray = fields.split(',');
+	validationArray = fields.split(';');
 	var flag = true;
 	for ( var i = 0; i < validationArray.length; i++) {
 		if (!validateNullField(validationArray[i])) {

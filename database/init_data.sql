@@ -1,5 +1,5 @@
 ﻿-- User
-
+use banhang;
 -- Config
 truncate `config`;
 truncate `module_sub_module`;

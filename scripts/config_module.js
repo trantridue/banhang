@@ -52,6 +52,11 @@ function addModuleToUser(str) {
 			url : addModuleToUserUrl,
 			success : function(data) {
 				displayDialog('Update User Module, Sub Module', data);
+				if(data==1){
+					var remainMenu = 'module/config/menuDropDownForUser.php?user_id='
+						+ encodeURIComponent(selectedItem) + "&menu=config";
+				$("#menuDropDownForUser").load(remainMenu);
+				}
 			}
 		});
 	} else {
@@ -67,6 +72,8 @@ function validateConfigModule() {
 		return false;
 	} else if (isModifModule) {
 		return validateNullFields('user_select;menu_remain_for_user;menu_by_user');
+	} else if (isModifSubModule) {
+		return validateNullFields('all_menu;sub_menu_select;sub_menu_remain');
 	} else {
 		return true;
 	}
